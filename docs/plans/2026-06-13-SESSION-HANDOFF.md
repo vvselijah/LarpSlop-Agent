@@ -86,6 +86,22 @@ memory learning. 6. GitHub push when Elijah gives the repo URL.
 - 🔁 **refresh.py validation** run to diagnose the 06/12 `LastResult 0x800710E0` — check `ig-dashboard/data/refresh.log` for the result.
 - ⏳ **PENDING ELIJAH:** (1) approve the **auto-clip** + **audience-sim** PLANs → I build the engines; (2) the scheduled-task fix above; (3) the **private repo URL** for the GitHub push; (4) a true full restart for the research keys.
 
+## ⏩ UPDATE 5 — auto-clip engine FOUNDATION built + tested (not just planned)
+"Keep going" pass — built and validated the auto-clip pipeline end-to-end on the sample `source.mp4` (365s).
+Committed `cbc0851` on branch `session/2026-06-13-capabilities`.
+- ✅ `auto-clip/transcribe.py` — faster-whisper word-level → JSON. TESTED: 77 seg / 1182 words, 11.8× realtime CPU.
+- ✅ `auto-clip/highlight.py` — LLM moment selector (Anthropic API or local Ollama) → ranked clips. Built; demo selection in `auto-clip/data/audio.highlights.json` (5 clips, hand-picked since no LLM key wired yet).
+- ✅ `auto-clip/reframe.py` — cut + 9:16 + H.264 via FFmpeg. TESTED: 5 real clips in `auto-clip/out/` (1080×1920, valid). `source.mp4` was already 9:16 (passthrough); center-crop path exists for wider sources.
+- Artifacts (`auto-clip/data/`, `out/`, `*.mp4`) gitignored; `log()` made Windows cp1252-safe.
+- REMAINING (per PLAN / needs Elijah): face-TRACKING reframe (v1 = center-crop), an LLM key or local Ollama to AUTOMATE highlight selection (demo was hand-picked), GPU torch-cu128 for speed, caption-engine wiring for burned-in captions. A real 16:9 YouTube/podcast source will exercise the crop+track path (the vertical sample only needed cutting).
+
+## ⏩ UPDATE 6 — Elijah actions + approvals
+- ✅ **Scheduled-task repoint DONE** (Elijah ran the snippet): action = `Daily Agent Refresh.bat`, LogonType Interactive, StartWhenAvailable True, DisallowOnBattery False. The 06/12 `0x800710E0` was a logon-context failure — resolved.
+- ⚠️ **Research keys STILL 401** after Elijah's "restart" — the Claude PROCESS didn't terminate (conversation + keys both persisted). Needs a TRUE full quit (tray Quit / Task Manager end-process), not a window close. Non-blocking. If a true quit STILL 401s, re-check/re-issue the key VALUES.
+- ✅ **Both PLANs APPROVED** (auto-clip + audience-sim) — usefulness deferred to my honest call: auto-clip = confident yes (foundation already works); **audience-sim = worth the cheap Phase-0 spike but UNPROVEN for IG — treat as R&D until the backtest shows correlation.**
+- **BUILD QUEUE:** finish auto-clip (LLM-key/Ollama auto-highlight, caption wiring, face-track, optional GPU) + audience-sim Phase 0 (`pip install camel-oasis`, seed ~100 personas, spike on one past reel, backtest vs the 300-post history).
+- **GitHub:** ready to push branch `session/2026-06-13-capabilities` (commits 861ec89 + cbc0851). Awaiting Elijah's empty-private-repo URL.
+
 ## Current state (what's live)
 - **Deep-research stack is LIVE** — `exa`, `tavily`, `firecrawl` MCPs all connected (confirmed
   post-restart). Keys in Windows env vars (valid; Firecrawl had 1025 credits). Use them.
