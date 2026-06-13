@@ -1,0 +1,10 @@
+# auto-clip engine deps (the hub's FIRST third-party-dependency engine — see the PLAN).
+# Recommended: a git-ignored local .venv here:  py -m venv .venv ; .venv\Scripts\pip install -r requirements.txt
+# faster-whisper is already installed machine-wide, so transcribe.py runs without this for now.
+
+faster-whisper>=1.2.0          # local word-level transcription (CTranslate2). GPU: pair with torch cu128 + cuDNN9.
+
+# --- added in later phases (not needed for the transcribe foundation) ---
+# anthropic>=0.40.0            # highlight.py — LLM moment selector (or route via local Ollama)
+# opencv-python>=4.10          # reframe.py — face/subject detection for 9:16 auto-reframe
+# mediapipe>=0.10              # reframe.py — lightweight face tracking (alt to opencv DNN)

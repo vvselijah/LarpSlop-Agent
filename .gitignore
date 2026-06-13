@@ -22,6 +22,9 @@ intel/gdelt_5d.json
 intel/radar-report.md
 intel/trend-report.md
 team/stats.md
+# auto-clip generated artifacts: transcripts/highlights are regenerable, clips are large
+auto-clip/data/
+auto-clip/out/
 
 # --- Large media (110MB+ of May-14 TikTok analysis inputs) ---
 *.mp4
@@ -33,8 +36,8 @@ frames/
 # --- Archive / raw transcripts / obsolete one-offs ---
 Ai agent team handoff.md
 tiktok-analysis.md
-transcript.txt
-transcribe.py
+/transcript.txt
+/transcribe.py
 compass_artifact_*.md
 connect-instagram.ps1
 FINISH-SETUP.md
