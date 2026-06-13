@@ -55,7 +55,9 @@ Adapted from https://github.com/clarity-digital-development/tworkflow → lives 
 - **Video understanding:** `video-intake` (TwelveLabs), `video-analyzer`, `gemini-video`, `frame-by-frame-video`
 - **Research:** `deep-research` skill; **Docs:** docx/pdf/pptx/xlsx skills
 - **Desktop/web control:** computer-use MCP, Claude-in-Chrome (never DOM-tools on developers.facebook.com — it hangs)
-- **Scheduling:** Windows Task Scheduler ("IG Dashboard Daily Refresh", 7:00 AM) + cron/scheduled-task tools
+- **Scheduling:** Windows Task Scheduler ("IG Dashboard Daily Refresh", 7:00 AM, now chained via `Daily Agent Refresh.bat`) + cron/scheduled-task tools
+- **Content ops (new 2026-06-13):** `carousel-builder` skill (idea/proven-reel → saveable carousel + thread, drafts to vault) · `comment-triage` skill (draft→approve→reply on IG comments, never auto-sends)
+- **Queued PLANs (awaiting Elijah approval):** `auto-clip` long-video→shorts engine (`docs/plans/2026-06-13-auto-clip-pipeline.md`) · `audience-sim` OASIS pre-publish hook-ranker (`docs/plans/2026-06-13-audience-sim-pipeline.md`)
 
 ## Folder map
 

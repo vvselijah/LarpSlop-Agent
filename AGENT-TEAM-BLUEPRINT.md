@@ -108,3 +108,23 @@ Primary sources (Meta/TikTok/Whop/beehiiv/Metricool official docs) anchor every 
 verdict. Workflow-pattern findings (files-over-plugins, Cowork timing, setup hours) are
 blog-quality anecdotes — directionally useful, not benchmarks. Ten claims were killed in
 adversarial verification and are listed above so nobody re-imports them as facts.
+
+## 2026-06-13 — capability decisions, round 2 (research-backed)
+
+Full detail + sources: `docs/plans/2026-06-13-capabilities-research-plan.md`,
+`docs/plans/2026-06-13-simulation-composio-research.md`, `docs/plans/2026-06-13-playwright-mcp-verdict.md`.
+
+- **Built today → ✅:** `carousel-builder` skill (saveable carousels/threads, drafts to vault) ·
+  `comment-triage` skill (comment-only, draft→approve→reply, never auto-sends).
+- **Build next — PLANs drafted, awaiting Elijah approval:**
+  - `auto-clip` long-video→shorts engine (`docs/plans/2026-06-13-auto-clip-pipeline.md`) — reuses ~70% of the
+    existing hub + `abc wrap` suite; the torch-cu128 GPU fix gates transcribe/encode speed.
+  - `audience-sim` pre-publish hook-ranker on **camel-ai/OASIS** (Apache-2.0) (`docs/plans/2026-06-13-audience-sim-pipeline.md`) —
+    proof-first: 2-3h spike → 300-post backtest → wire into `weekly-content-plan`. Pairs with Higgsfield (OASIS gates hook, Higgsfield gates edit).
+- **Tier A intel (free, zero token risk):** schedule `business_discovery` competitor pulls; add **Apify**
+  pay-per-result for comment TEXT / TikTok / YouTube (scrapes via Apify proxies — never touches his IG token).
+- **Tier B — add when trigger fires:** **Composio** (SCOPED only — Notion/Calendar/Sheets on the free tier;
+  NEVER route IG/Meta tokens through its cloud vault; self-host is Enterprise-only).
+- **Tier C — skip:** **BettaFish/MiroFish** (China public-opinion analysis, GPL/AGPL, overlap owned tools);
+  **Playwright MCP** (overlaps the wired Claude-in-Chrome + Firecrawl; only headless-unattended jobs would justify it);
+  **Bright Data** (enterprise-priced vs Apify for the same data).
