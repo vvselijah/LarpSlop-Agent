@@ -4,6 +4,14 @@
 > experiments. Newest first. Humans may edit/prune freely. Keep entries short:
 > one finding, one line of evidence, one implication.
 
+## 2026-06-13 — business-ops + productivity research (round 3) + a throttle lesson
+
+- **Scheduling:** Metricool stays the cross-platform pick — but its MCP needs the **Advanced ~$54/mo** plan (blueprint said "any plan" — stale), and IG licensed-audio auto-publish is now **partially** unlocked (needs Facebook-Login auth; trending-sound catalog may be narrow). TikTok still MUST go through an audited client (never a self-built MCP). Full report: `docs/plans/2026-06-13-business-ops-productivity-research.md`.
+- **Course platform:** migrate Archetype Index → **Whop** (verified: official `@whop/mcp` + native Courses + lowest fees, no monthly). Skool only if it's community-first. Tie-breaker O3 in the report.
+- **Payments/CRM/newsletter:** **Stripe official MCP** (restricted key in env var — NOT Composio's cloud vault); sponsor CRM = a **vault `sponsors/` folder**, no SaaS; **beehiiv** MCP is read-only V1 + Send API is Enterprise-beta (later/at-launch).
+- **Productivity:** nothing new to buy — reuse `auto-clip/transcribe.py` + the vault + the 7AM scheduled task for podcast→notes + a daily briefing.
+- **THROTTLE LESSON:** even a single 5-agent workflow partial-throttled (3/4 research agents rate-limited) when Anthropic was load-shedding. Recovered per protocol: did NOT relaunch the fan-out; spot-verified the load-bearing claims with direct WebSearch instead. Reinforces: keep research fan-outs small, and verify-don't-relaunch on a throttle.
+
 ## 2026-06-13 — capability research round 2 (audience-sim / Composio / Playwright)
 
 - **Pre-publish audience simulation is viable & novel:** camel-ai/OASIS (Apache-2.0, local) is the pick — a QUALITATIVE hook-ranker seeded from his audience that PAIRS with Higgsfield (OASIS gates the hook, Higgsfield gates the edit). Caveat: simulates X/Reddit not IG, ~30% RMSE → must backtest vs the 300-post history before trusting. PLAN: `docs/plans/2026-06-13-audience-sim-pipeline.md`.
