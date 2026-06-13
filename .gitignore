@@ -1,0 +1,51 @@
+# AI Agent Team — .gitignore  (scope: FRAMEWORK ONLY)
+# Personal vault, private analytics data, large media, and secrets are excluded.
+# IMPORTANT: gitignore comments must be on their OWN line — a trailing "# ..."
+# after a pattern becomes part of the pattern and silently breaks it.
+
+# --- Secrets (this tree is OneDrive-synced; never commit credentials) ---
+.env
+**/.env
+*.key
+*.pem
+.claude/settings.local.json
+
+# --- Personal / private content (not part of the shareable framework) ---
+obsidian/
+here/
+fromtheinside/
+
+# --- Private generated data (analytics, competitor/trend pulls, live numbers) ---
+ig-dashboard/data/
+intel/data/
+intel/gdelt_5d.json
+intel/radar-report.md
+intel/trend-report.md
+team/stats.md
+
+# --- Large media (110MB+ of May-14 TikTok analysis inputs) ---
+*.mp4
+*.wav
+*.mov
+*.mkv
+frames/
+
+# --- Archive / raw transcripts / obsolete one-offs ---
+Ai agent team handoff.md
+tiktok-analysis.md
+transcript.txt
+transcribe.py
+compass_artifact_*.md
+connect-instagram.ps1
+FINISH-SETUP.md
+
+# --- Tooling / OS junk ---
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log

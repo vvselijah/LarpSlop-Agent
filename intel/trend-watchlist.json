@@ -1,0 +1,26 @@
+{
+  "_readme": "Virality radar watchlist. ELIJAH edits freely. Per niche: 'wikipedia' = exact English Wikipedia article titles to track daily pageviews (precise velocity on known topics); 'gdelt' = phrases to track in global news volume; 'hn_keywords' = words that flag relevant Hacker News front-page stories (software/AI). Keep wikipedia titles EXACT (they must match real article names, e.g. 'Large language model'). A title that returns no data is logged in trend-report.md.",
+  "niches": {
+    "ai-software": {
+      "wikipedia": ["Artificial intelligence", "Large language model", "OpenAI", "Anthropic", "Generative artificial intelligence", "AI agent"],
+      "gdelt": ["AI agent", "AI startup"],
+      "hn_keywords": ["ai", "llm", "agent", "gpt", "claude", "model", "open source", "launch"]
+    },
+    "money-finance": {
+      "wikipedia": ["Bitcoin", "Federal Reserve", "Stock market", "Recession"],
+      "gdelt": ["interest rates", "stock market"],
+      "hn_keywords": ["startup", "funding", "ipo", "acquisition", "valuation"]
+    },
+    "pop-culture-events": {
+      "_note": "Pop culture moves too fast for a fixed list — add specific names/events/shows you want to track (exact Wikipedia titles). A 'Wikipedia top-views discovery' feed is a planned radar enhancement (see HANDOFF next-steps) that will surface breakouts you didn't name in advance.",
+      "wikipedia": [],
+      "gdelt": [],
+      "hn_keywords": []
+    },
+    "new-parent": {
+      "wikipedia": ["Infant", "Parenting", "Sudden infant death syndrome"],
+      "gdelt": ["child safety online"],
+      "hn_keywords": ["parenting", "child", "kids", "safety"]
+    }
+  }
+}

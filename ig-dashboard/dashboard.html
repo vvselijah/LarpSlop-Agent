@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@elijahaifl — Content Command Center</title>
+<script src="vendor/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0b0e14; --panel:#131722; --panel2:#1a1f2e; --border:#252b3d;
+    --text:#e8ecf4; --muted:#8b93a7; --accent:#7c5cff; --accent2:#00d4aa;
+    --gold:#ffb648; --red:#ff5470; --blue:#46a6ff; --pink:#ff6ec7;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px}
+  header{display:flex;align-items:center;gap:16px;padding:18px 28px;border-bottom:1px solid var(--border);
+    background:linear-gradient(135deg,#131722 0%,#1a1330 100%);position:sticky;top:0;z-index:50;flex-wrap:wrap}
+  header img{width:52px;height:52px;border-radius:50%;border:2px solid var(--accent)}
+  header .who h1{font-size:19px}
+  header .who .sub{color:var(--muted);font-size:12px}
+  .spacer{flex:1}
+  .tokwarn{background:#3a2030;border:1px solid var(--red);color:#ffb3c2;padding:6px 12px;border-radius:8px;font-size:12px}
+  .stamp{color:var(--muted);font-size:11px;text-align:right}
+  nav{display:flex;gap:4px;padding:10px 28px 0;border-bottom:1px solid var(--border);background:var(--bg);
+    position:sticky;top:89px;z-index:40;flex-wrap:wrap}
+  nav button{background:none;border:none;color:var(--muted);font-size:14px;font-weight:600;padding:10px 18px;
+    cursor:pointer;border-bottom:2px solid transparent;border-radius:8px 8px 0 0}
+  nav button:hover{color:var(--text);background:var(--panel)}
+  nav button.active{color:var(--accent);border-bottom-color:var(--accent)}
+  .controls{display:flex;gap:10px;align-items:center;padding:14px 28px;flex-wrap:wrap}
+  .seg{display:flex;background:var(--panel);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+  .seg button{background:none;border:none;color:var(--muted);padding:7px 14px;cursor:pointer;font-weight:600;font-size:13px}
+  .seg button.active{background:var(--accent);color:#fff}
+  select,input[type=text]{background:var(--panel);border:1px solid var(--border);color:var(--text);
+    padding:7px 12px;border-radius:10px;font-size:13px;outline:none}
+  main{padding:8px 28px 60px;max-width:1500px;margin:0 auto}
+  .grid{display:grid;gap:14px}
+  .kpis{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));margin-bottom:14px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px}
+  .kpi .lbl{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+  .kpi .val{font-size:26px;font-weight:700;margin-top:4px}
+  .kpi .delta{font-size:12px;margin-top:2px}
+  .up{color:var(--accent2)} .down{color:var(--red)}
+  .charts2{grid-template-columns:1fr 1fr}
+  @media(max-width:1000px){.charts2{grid-template-columns:1fr}}
+  .card h3{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+  .funnel{display:flex;flex-direction:column;gap:8px}
+  .funnel .stage{display:flex;align-items:center;gap:10px}
+  .funnel .bar{height:34px;border-radius:8px;display:flex;align-items:center;padding:0 12px;font-weight:700;
+    min-width:130px;white-space:nowrap;font-size:13px}
+  .funnel .conv{color:var(--muted);font-size:12px}
+  table{width:100%;border-collapse:collapse}
+  th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.05em;text-align:right;
+    padding:8px 10px;cursor:pointer;user-select:none;white-space:nowrap;position:sticky;top:0;background:var(--panel)}
+  th:first-child{text-align:left}
+  th.sorted{color:var(--accent)}
+  td{padding:9px 10px;border-top:1px solid var(--border);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+  td:first-child{text-align:left;max-width:380px;overflow:hidden;text-overflow:ellipsis}
+  tr.post:hover{background:var(--panel2);cursor:pointer}
+  .chip{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:600;margin-right:6px}
+  .thumb{width:34px;height:34px;border-radius:6px;object-fit:cover;vertical-align:middle;margin-right:9px;background:var(--panel2)}
+  .heat{display:grid;grid-template-columns:50px repeat(8,1fr);gap:3px;font-size:11px}
+  .heat .cell{height:30px;border-radius:5px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600}
+  .heat .axis{color:var(--muted);display:flex;align-items:center;justify-content:center}
+  .ranklist .item{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--border);cursor:pointer}
+  .ranklist .item:hover{background:var(--panel2)}
+  .ranklist .cap{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px}
+  .ranklist .met{font-weight:700;font-variant-numeric:tabular-nums}
+  .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+  .modal{background:var(--panel);border:1px solid var(--border);border-radius:16px;max-width:680px;width:100%;
+    max-height:88vh;overflow-y:auto;padding:24px}
+  .modal .close{float:right;background:var(--panel2);border:1px solid var(--border);color:var(--text);
+    border-radius:8px;padding:4px 12px;cursor:pointer}
+  .modal .statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:16px 0}
+  .modal .stat{background:var(--panel2);border-radius:10px;padding:10px}
+  .modal .stat .lbl{color:var(--muted);font-size:10px;text-transform:uppercase}
+  .modal .stat .val{font-size:18px;font-weight:700}
+  .modal .caption{color:var(--muted);font-size:13px;line-height:1.5;white-space:pre-wrap;margin-top:10px;
+    max-height:200px;overflow-y:auto;border-top:1px solid var(--border);padding-top:10px}
+  .modal a{color:var(--blue)}
+  .cmp{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:900px){.cmp{grid-template-columns:1fr}}
+  .cmp .side h4{margin-bottom:10px;font-size:15px}
+  .cmp .row{display:flex;justify-content:space-between;padding:7px 0;border-top:1px solid var(--border)}
+  .cmp .row .l{color:var(--muted)}
+  .winner{color:var(--accent2);font-weight:700}
+  .empty{color:var(--muted);text-align:center;padding:50px 20px;line-height:1.7}
+  .note{color:var(--muted);font-size:11px;margin-top:8px;line-height:1.5}
+  .mt{margin-top:14px}
+  canvas{max-height:280px}
+</style>
+</head>
+<body>
+<header>
+  <img id="avatar" alt="" onerror="this.style.display='none'">
+  <div class="who">
+    <h1 id="acctName">Loading…</h1>
+    <div class="sub" id="acctSub"></div>
+  </div>
+  <div class="spacer"></div>
+  <div id="tokwarn" class="tokwarn" style="display:none"></div>
+  <div class="stamp" id="stamp"></div>
+</header>
+
+<nav id="tabs">
+  <button data-tab="overview" class="active">Overview</button>
+  <button data-tab="posts">Posts</button>
+  <button data-tab="strategy">Strategy</button>
+  <button data-tab="compare">Compare</button>
+</nav>
+
+<div class="controls">
+  <div class="seg" id="rangeSeg">
+    <button data-days="7">7D</button>
+    <button data-days="30" class="active">30D</button>
+    <button data-days="90">90D</button>
+    <button data-days="365">1Y</button>
+    <button data-days="99999">All</button>
+  </div>
+  <select id="catFilter"><option value="">All categories</option></select>
+  <select id="typeFilter">
+    <option value="">All formats</option>
+    <option value="REELS">Reels</option>
+    <option value="FEED">Feed posts</option>
+  </select>
+  <input type="text" id="search" placeholder="Search captions…" style="min-width:220px">
+</div>
+
+<main>
+  <section id="tab-overview">
+    <div class="grid kpis" id="kpiRow"></div>
+    <div class="grid charts2">
+      <div class="card"><h3>Daily account performance</h3><canvas id="chDaily"></canvas>
+        <div class="note">Reach, profile visits &amp; bio-link taps per day. History accrues each refresh — Meta only serves ~30 days back, but this dashboard never forgets.</div></div>
+      <div class="card"><h3>The funnel (selected period)</h3><div class="funnel" id="funnel"></div>
+        <div class="note" id="funnelNote"></div></div>
+      <div class="card"><h3>Post engagement over time</h3><canvas id="chPostsTime"></canvas></div>
+      <div class="card"><h3>Followers</h3><canvas id="chFollowers"></canvas>
+        <div class="note">Snapshot taken on every refresh — the longer you run the dashboard, the richer this gets.</div></div>
+    </div>
+  </section>
+
+  <section id="tab-posts" style="display:none">
+    <div class="card" style="overflow-x:auto">
+      <div style="max-height:65vh;overflow-y:auto">
+      <table id="postTable">
+        <thead><tr>
+          <th data-k="caption">Post</th><th data-k="category">Category</th><th data-k="ts">Date</th>
+          <th data-k="views">Views</th><th data-k="reach">Reach</th><th data-k="likes">Likes</th>
+          <th data-k="comments">Cmts</th><th data-k="saved">Saves</th><th data-k="shares">Shares</th>
+          <th data-k="er" class="sorted">ER %</th><th data-k="save_rate">Save %</th><th data-k="share_rate">Share %</th>
+        </tr></thead>
+        <tbody id="postRows"></tbody>
+      </table>
+      </div>
+      <div class="note" id="postCount"></div>
+    </div>
+  </section>
+
+  <section id="tab-strategy" style="display:none">
+    <div class="grid charts2">
+      <div class="card"><h3>Category performance — avg engagement rate</h3><canvas id="chCats"></canvas></div>
+      <div class="card"><h3>Category volume vs results</h3><canvas id="chCatScatter"></canvas>
+        <div class="note">Bubble = category. X: posts published, Y: avg ER, size: total reach. Top-left = undersupplied winners — post more of those.</div></div>
+      <div class="card"><h3>Best time to post — avg ER by day &amp; time</h3><div class="heat" id="heat"></div>
+        <div class="note">Darker purple = higher average engagement rate (min. 1 post per cell).</div></div>
+      <div class="card"><h3>Views vs engagement (every post)</h3><canvas id="chScatter"></canvas>
+        <div class="note">Top-right = bangers. High views + low ER = hook worked, content didn't hold. Click pattern, not points.</div></div>
+      <div class="card"><h3>🏆 Top 10 by engagement rate</h3><div class="ranklist" id="topList"></div></div>
+      <div class="card"><h3>🧊 Bottom 10 by engagement rate</h3><div class="ranklist" id="bottomList"></div></div>
+      <div class="card"><h3>💾 Most saved (audience found it valuable)</h3><div class="ranklist" id="saveList"></div></div>
+      <div class="card"><h3>📤 Most shared (audience spread it)</h3><div class="ranklist" id="shareList"></div></div>
+    </div>
+  </section>
+
+  <section id="tab-compare" style="display:none">
+    <div class="card" style="margin-bottom:14px">
+      <h3>Compare any two slices</h3>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div>A: <select id="cmpRangeA"></select> <select id="cmpCatA"></select></div>
+        <div>B: <select id="cmpRangeB"></select> <select id="cmpCatB"></select></div>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="card side"><h4 id="cmpTitleA"></h4><div id="cmpStatsA"></div></div>
+      <div class="card side"><h4 id="cmpTitleB"></h4><div id="cmpStatsB"></div></div>
+    </div>
+    <div class="card mt"><h3>Verdict</h3><div id="cmpVerdict" style="line-height:1.8"></div></div>
+  </section>
+</main>
+
+<div class="modal-bg" id="modalBg" onclick="if(event.target===this)this.style.display='none'">
+  <div class="modal" id="modalBody"></div>
+</div>
+
+<script src="data/data.js"></script>
+<script>
+const D = window.DASHBOARD_DATA;
+const $ = id => document.getElementById(id);
+const fmt = n => n==null ? '—' : n>=1e6 ? (n/1e6).toFixed(1)+'M' : n>=1e4 ? Math.round(n/1e3)+'K' : n.toLocaleString();
+const pct = n => n==null ? '—' : (n*100).toFixed(1)+'%';
+const CATCOLORS = ['#7c5cff','#00d4aa','#ffb648','#ff5470','#46a6ff','#ff6ec7','#9dff70','#ff9f43','#a0a8c0'];
+Chart.defaults.color = '#8b93a7'; Chart.defaults.borderColor = '#252b3d';
+
+let state = {days:30, cat:'', type:'', q:'', sortK:'er', sortDir:-1, tab:'overview'};
+let charts = {};
+
+// ----- normalize posts -----
+const POSTS = (D.posts||[]).map(p => {
+  const ins = p.insights||{};
+  const reach = ins.reach||0;
+  const inter = ins.total_interactions ?? ((p.like_count||0)+(p.comments_count||0)+(ins.saved||0)+(ins.shares||0));
+  const ts = new Date(p.timestamp);
+  return {
+    id:p.id, caption:(p.caption||'(no caption)'), category:p.category||'Other',
+    type:p.media_product_type||p.media_type, permalink:p.permalink,
+    thumb:p.thumbnail_url||p.media_url||'', ts, tsv:ts.getTime(),
+    views:ins.views||0, reach, likes:p.like_count||0, comments:p.comments_count||0,
+    saved:ins.saved||0, shares:ins.shares||0, interactions:inter,
+    er: reach? inter/reach : null, save_rate: reach? (ins.saved||0)/reach : null,
+    share_rate: reach? (ins.shares||0)/reach : null,
+    watch: ins.ig_reels_avg_watch_time!=null ? ins.ig_reels_avg_watch_time/1000 : null,
+    dow:ts.getDay(), hour:ts.getHours(),
+  };
+});
+const catColor = c => CATCOLORS[(D.categories||[]).indexOf(c)%CATCOLORS.length] || '#a0a8c0';
+
+function filtered(days=state.days, cat=state.cat){
+  const cutoff = Date.now() - days*864e5;
+  return POSTS.filter(p => p.tsv>=cutoff
+    && (!cat || p.category===cat)
+    && (!state.type || (state.type==='REELS' ? p.type==='REELS' : p.type!=='REELS'))
+    && (!state.q || p.caption.toLowerCase().includes(state.q)));
+}
+function dailyInRange(days=state.days){
+  const cutoff = new Date(Date.now()-days*864e5).toISOString().slice(0,10);
+  return Object.entries(D.daily||{}).filter(([d])=>d>=cutoff).sort((a,b)=>a[0]<b[0]?-1:1);
+}
+const sum = (arr,k) => arr.reduce((s,x)=>s+(x[k]||0),0);
+const avg = (arr,k) => {const v=arr.map(x=>x[k]).filter(x=>x!=null); return v.length? v.reduce((a,b)=>a+b,0)/v.length : null};
+
+// ----- header -----
+(function(){
+  const a = D.account||{};
+  $('acctName').textContent = '@'+(a.username||'?')+' — Content Command Center';
+  $('acctSub').textContent = `${fmt(a.followers_count)} followers · ${fmt(a.media_count)} posts · tracking last ${POSTS.length}`;
+  if(a.profile_picture_url) $('avatar').src = a.profile_picture_url;
+  $('stamp').innerHTML = 'Data: '+new Date(D.generated_at).toLocaleString()+'<br>Token to '+D.token_expires;
+  if(D.token_status!=='ok'){ $('tokwarn').style.display='block';
+    $('tokwarn').textContent = D.token_status==='expired' ? '⚠ Token EXPIRED — renew per HANDOFF §4, then refresh' : '⚠ Last refresh failed — showing cached data'; }
+  else if((new Date(D.token_expires)-Date.now())/864e5 < 10){ $('tokwarn').style.display='block';
+    $('tokwarn').textContent = '⚠ Token expires soon ('+D.token_expires+') — renew per HANDOFF §4'; }
+  const cf=$('catFilter');
+  (D.categories||[]).forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;cf.appendChild(o);});
+})();
+
+// ----- tabs & controls -----
+$('tabs').addEventListener('click', e=>{
+  if(!e.target.dataset.tab) return;
+  state.tab=e.target.dataset.tab;
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('active',b===e.target));
+  ['overview','posts','strategy','compare'].forEach(t=>$('tab-'+t).style.display = t===state.tab?'':'none');
+  render();
+});
+$('rangeSeg').addEventListener('click', e=>{
+  if(!e.target.dataset.days) return;
+  state.days=+e.target.dataset.days;
+  document.querySelectorAll('#rangeSeg button').forEach(b=>b.classList.toggle('active',b===e.target));
+  render();
+});
+$('catFilter').onchange = e=>{state.cat=e.target.value;render();};
+$('typeFilter').onchange = e=>{state.type=e.target.value;render();};
+$('search').oninput = e=>{state.q=e.target.value.toLowerCase();render();};
+
+function mkChart(id, cfg){ if(charts[id]) charts[id].destroy(); charts[id]=new Chart($(id),cfg); }
+
+// ----- OVERVIEW -----
+function renderOverview(){
+  const ps = filtered(), daily = dailyInRange();
+  const prevPs = (()=>{ const c2=Date.now()-2*state.days*864e5, c1=Date.now()-state.days*864e5;
+    return POSTS.filter(p=>p.tsv>=c2&&p.tsv<c1&&(!state.cat||p.category===state.cat)); })();
+  const dReach=sum(daily.map(d=>d[1]),'reach'), dPV=sum(daily.map(d=>d[1]),'profile_views'), dWC=sum(daily.map(d=>d[1]),'website_clicks');
+  const kpis = [
+    ['Posts published', ps.length, prevPs.length],
+    ['Total views', sum(ps,'views'), sum(prevPs,'views')],
+    ['Avg ER', avg(ps,'er'), avg(prevPs,'er'), true],
+    ['Saves', sum(ps,'saved'), sum(prevPs,'saved')],
+    ['Shares', sum(ps,'shares'), sum(prevPs,'shares')],
+    ['Acct reach/day*', daily.length? Math.round(dReach/daily.length):null],
+    ['Profile visits*', dPV||null],
+    ['Bio-link taps*', dWC||null],
+  ];
+  $('kpiRow').innerHTML = kpis.map(([l,v,prev,isPct])=>{
+    let delta='';
+    if(prev!=null&&prev!==0&&v!=null){const ch=(v-prev)/prev;
+      delta=`<div class="delta ${ch>=0?'up':'down'}">${ch>=0?'▲':'▼'} ${(Math.abs(ch)*100).toFixed(0)}% vs prior</div>`;}
+    return `<div class="card kpi"><div class="lbl">${l}</div><div class="val">${isPct?pct(v):fmt(v)}</div>${delta}</div>`;
+  }).join('');
+
+  mkChart('chDaily',{type:'line',data:{labels:daily.map(d=>d[0].slice(5)),datasets:[
+    {label:'Reach',data:daily.map(d=>d[1].reach),borderColor:'#7c5cff',tension:.3,pointRadius:0,yAxisID:'y'},
+    {label:'Profile visits',data:daily.map(d=>d[1].profile_views),borderColor:'#00d4aa',tension:.3,pointRadius:0,yAxisID:'y1'},
+    {label:'Link taps',data:daily.map(d=>d[1].website_clicks),borderColor:'#ffb648',tension:.3,pointRadius:0,yAxisID:'y1'}]},
+    options:{interaction:{mode:'index',intersect:false},scales:{y:{position:'left'},y1:{position:'right',grid:{display:false}}}}});
+
+  const f=[['Accounts reached',dReach,'#7c5cff'],['Profile visits',dPV,'#00d4aa'],['Bio-link taps',dWC,'#ffb648']];
+  $('funnel').innerHTML = f.map((s,i)=>{
+    const w = f[0][1]? Math.max(8,(s[1]/f[0][1])**.45*100):8;
+    const conv = i? (f[i-1][1]? ' '+(s[1]/f[i-1][1]*100).toFixed(1)+'% of prev':'') : '';
+    return `<div class="stage"><div class="bar" style="width:${w}%;background:${s[2]};color:#0b0e14">${s[0]}: ${fmt(s[1])}</div><div class="conv">${conv}</div></div>`;
+  }).join('');
+  $('funnelNote').textContent = `*Account-level metrics cover the ${daily.length} day(s) of stored history in this period.`;
+
+  const sorted=[...ps].sort((a,b)=>a.tsv-b.tsv);
+  mkChart('chPostsTime',{type:'bar',data:{labels:sorted.map(p=>p.ts.toLocaleDateString(undefined,{month:'short',day:'numeric'})),
+    datasets:[{label:'Views',data:sorted.map(p=>p.views),backgroundColor:sorted.map(p=>catColor(p.category)),yAxisID:'y'},
+      {label:'ER %',type:'line',data:sorted.map(p=>p.er!=null?+(p.er*100).toFixed(2):null),borderColor:'#ff6ec7',tension:.3,pointRadius:2,yAxisID:'y1'}]},
+    options:{scales:{y:{position:'left'},y1:{position:'right',grid:{display:false}}},
+      onClick:(e,el)=>{if(el.length)showPost(sorted[el[0].index].id);}}});
+
+  const snaps=Object.entries(D.follower_snapshots||{}).sort((a,b)=>a[0]<b[0]?-1:1);
+  mkChart('chFollowers',{type:'line',data:{labels:snaps.map(s=>s[0]),datasets:[{label:'Followers',
+    data:snaps.map(s=>s[1]),borderColor:'#00d4aa',backgroundColor:'rgba(0,212,170,.1)',fill:true,tension:.3}]},
+    options:{scales:{y:{ticks:{callback:v=>fmt(v)}}}}});
+}
+
+// ----- POSTS -----
+function renderPosts(){
+  const ps=[...filtered()].sort((a,b)=>{
+    const k=state.sortK, av=k==='ts'?a.tsv:(k==='caption'||k==='category')?a[k]:a[k]??-1,
+          bv=k==='ts'?b.tsv:(k==='caption'||k==='category')?b[k]:b[k]??-1;
+    return (av<bv?-1:av>bv?1:0)*state.sortDir;});
+  $('postRows').innerHTML = ps.map(p=>`<tr class="post" onclick="showPost('${p.id}')">
+    <td><img class="thumb" src="${p.thumb}" onerror="this.style.visibility='hidden'">${p.caption.slice(0,55)}</td>
+    <td><span class="chip" style="background:${catColor(p.category)}22;color:${catColor(p.category)}">${p.category}</span></td>
+    <td>${p.ts.toLocaleDateString()}</td><td>${fmt(p.views)}</td><td>${fmt(p.reach)}</td>
+    <td>${fmt(p.likes)}</td><td>${fmt(p.comments)}</td><td>${fmt(p.saved)}</td><td>${fmt(p.shares)}</td>
+    <td><b>${pct(p.er)}</b></td><td>${pct(p.save_rate)}</td><td>${pct(p.share_rate)}</td></tr>`).join('');
+  $('postCount').textContent = `${ps.length} posts in view · click any column to sort · click a row for the full breakdown`;
+  document.querySelectorAll('#postTable th').forEach(th=>{
+    th.classList.toggle('sorted',th.dataset.k===state.sortK);
+    th.onclick=()=>{ if(state.sortK===th.dataset.k) state.sortDir*=-1; else {state.sortK=th.dataset.k;state.sortDir=-1;} renderPosts(); };
+  });
+}
+
+window.showPost = id => {
+  const p=POSTS.find(x=>x.id===id); if(!p)return;
+  const days=Math.max(1,Math.round((Date.now()-p.tsv)/864e5));
+  $('modalBody').innerHTML = `<button class="close" onclick="modalBg.style.display='none'">✕ close</button>
+    <span class="chip" style="background:${catColor(p.category)}22;color:${catColor(p.category)}">${p.category}</span>
+    <span class="chip" style="background:#252b3d;color:#8b93a7">${p.type}</span>
+    <span class="chip" style="background:#252b3d;color:#8b93a7">${p.ts.toLocaleString()} · ${days}d ago</span>
+    <div class="statgrid">
+      ${[['Views',fmt(p.views)],['Reach',fmt(p.reach)],['Likes',fmt(p.likes)],['Comments',fmt(p.comments)],
+        ['Saves',fmt(p.saved)],['Shares',fmt(p.shares)],['Interactions',fmt(p.interactions)],
+        ['ER',pct(p.er)],['Save rate',pct(p.save_rate)],['Share rate',pct(p.share_rate)],
+        ['Views/reach',p.reach?(p.views/p.reach).toFixed(2)+'×':'—'],
+        ['Avg watch',p.watch!=null?p.watch.toFixed(1)+'s':'—']].map(([l,v])=>
+        `<div class="stat"><div class="lbl">${l}</div><div class="val">${v}</div></div>`).join('')}
+    </div>
+    <a href="${p.permalink}" target="_blank">Open on Instagram ↗</a>
+    <div class="caption">${p.caption.replace(/</g,'&lt;')}</div>`;
+  $('modalBg').style.display='flex';
+};
+
+// ----- STRATEGY -----
+function renderStrategy(){
+  const ps=filtered();
+  const byCat={}; ps.forEach(p=>(byCat[p.category]=byCat[p.category]||[]).push(p));
+  const cats=Object.entries(byCat).sort((a,b)=>(avg(b[1],'er')||0)-(avg(a[1],'er')||0));
+
+  mkChart('chCats',{type:'bar',data:{labels:cats.map(c=>c[0]+` (${c[1].length})`),datasets:[
+    {label:'Avg ER %',data:cats.map(c=>+((avg(c[1],'er')||0)*100).toFixed(2)),backgroundColor:cats.map(c=>catColor(c[0]))}]},
+    options:{indexAxis:'y',plugins:{legend:{display:false}}}});
+
+  mkChart('chCatScatter',{type:'bubble',data:{datasets:cats.map(c=>({label:c[0],
+    data:[{x:c[1].length,y:+((avg(c[1],'er')||0)*100).toFixed(2),r:Math.max(5,Math.sqrt(sum(c[1],'reach'))/22)}],
+    backgroundColor:catColor(c[0])+'cc'}))},
+    options:{scales:{x:{title:{display:true,text:'posts published'}},y:{title:{display:true,text:'avg ER %'}}}}});
+
+  // heatmap: day x 3h-block
+  const DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const cells={}; ps.forEach(p=>{const k=p.dow+'-'+Math.floor(p.hour/3);(cells[k]=cells[k]||[]).push(p.er||0);});
+  const vals=Object.values(cells).map(v=>v.reduce((a,b)=>a+b,0)/v.length), max=Math.max(...vals,0.001);
+  let h='<div></div>'+[...Array(8)].map((_,b)=>`<div class="axis">${b*3}–${b*3+3}</div>`).join('');
+  DOW.forEach((d,dow)=>{ h+=`<div class="axis">${d}</div>`;
+    for(let b=0;b<8;b++){const v=cells[dow+'-'+b];
+      if(!v){h+='<div class="cell" style="background:#161a26"></div>';continue;}
+      const m=v.reduce((a,c)=>a+c,0)/v.length, op=.15+.85*(m/max);
+      h+=`<div class="cell" style="background:rgba(124,92,255,${op.toFixed(2)})" title="${v.length} posts, avg ER ${(m*100).toFixed(1)}%">${(m*100).toFixed(1)}</div>`;}});
+  $('heat').innerHTML=h;
+
+  mkChart('chScatter',{type:'scatter',data:{datasets:[{label:'posts',
+    data:ps.filter(p=>p.er!=null).map(p=>({x:p.views,y:+(p.er*100).toFixed(2)})),
+    backgroundColor:ps.filter(p=>p.er!=null).map(p=>catColor(p.category)+'bb'),pointRadius:5}]},
+    options:{plugins:{legend:{display:false}},scales:{x:{type:'logarithmic',title:{display:true,text:'views (log)'}},
+      y:{title:{display:true,text:'ER %'}}}}});
+
+  const rank=(key,el,fmtv)=>{
+    const eligible=ps.filter(p=>p[key]!=null&&p.reach>50);
+    const top=el==='bottomList'?[...eligible].sort((a,b)=>a[key]-b[key]).slice(0,10):[...eligible].sort((a,b)=>b[key]-a[key]).slice(0,10);
+    $(el).innerHTML=top.map(p=>`<div class="item" onclick="showPost('${p.id}')">
+      <img class="thumb" src="${p.thumb}" onerror="this.style.visibility='hidden'">
+      <div class="cap">${p.caption.slice(0,60)}<br><span style="color:${catColor(p.category)};font-size:11px">${p.category}</span></div>
+      <div class="met">${fmtv(p[key])}</div></div>`).join('')||'<div class="empty">no data yet</div>';
+  };
+  rank('er','topList',pct); rank('er','bottomList',pct); rank('saved','saveList',fmt); rank('shares','shareList',fmt);
+}
+
+// ----- COMPARE -----
+const CMPRANGES=[['Last 7 days',7],['Last 30 days',30],['Last 90 days',90],['Last year',365],['All tracked',99999]];
+function initCompare(){
+  ['cmpRangeA','cmpRangeB'].forEach(id=>{$(id).innerHTML=CMPRANGES.map((r,i)=>`<option value="${r[1]}">${r[0]}</option>`).join('');});
+  $('cmpRangeA').value=30; $('cmpRangeB').value=90;
+  ['cmpCatA','cmpCatB'].forEach(id=>{$(id).innerHTML='<option value="">All categories</option>'+
+    (D.categories||[]).map(c=>`<option>${c}</option>`).join('');});
+  ['cmpRangeA','cmpRangeB','cmpCatA','cmpCatB'].forEach(id=>$(id).onchange=renderCompare);
+}
+function sliceStats(ps){
+  return {n:ps.length, views:sum(ps,'views'), reach:sum(ps,'reach'), er:avg(ps,'er'),
+    saves:sum(ps,'saved'), shares:sum(ps,'shares'), save_rate:avg(ps,'save_rate'), share_rate:avg(ps,'share_rate'),
+    vpd:ps.length?sum(ps,'views')/ps.length:0};
+}
+function renderCompare(){
+  const A=filtered(+$('cmpRangeA').value,$('cmpCatA').value), B=filtered(+$('cmpRangeB').value,$('cmpCatB').value);
+  const sA=sliceStats(A), sB=sliceStats(B);
+  const label=(r,c)=>CMPRANGES.find(x=>x[1]==r)[0]+(c?' · '+c:' · all categories');
+  $('cmpTitleA').textContent='A — '+label($('cmpRangeA').value,$('cmpCatA').value);
+  $('cmpTitleB').textContent='B — '+label($('cmpRangeB').value,$('cmpCatB').value);
+  const rows=[['Posts','n',fmt],['Total views','views',fmt],['Avg views/post','vpd',v=>fmt(Math.round(v))],
+    ['Total reach','reach',fmt],['Avg ER','er',pct],['Saves','saves',fmt],['Shares','shares',fmt],
+    ['Avg save rate','save_rate',pct],['Avg share rate','share_rate',pct]];
+  const html=(s,o)=>rows.map(([l,k,f])=>{const win=s[k]!=null&&o[k]!=null&&s[k]>o[k];
+    return `<div class="row"><span class="l">${l}</span><span class="${win?'winner':''}">${f(s[k])}</span></div>`}).join('');
+  $('cmpStatsA').innerHTML=html(sA,sB); $('cmpStatsB').innerHTML=html(sB,sA);
+  let verdict=[];
+  if(sA.er!=null&&sB.er!=null){const d=((sA.er-sB.er)/(sB.er||1))*100;
+    verdict.push(`<b>Engagement:</b> slice ${d>=0?'A':'B'} wins on avg ER by ${Math.abs(d).toFixed(0)}% (${pct(sA.er)} vs ${pct(sB.er)}).`);}
+  if(sA.n&&sB.n){const a=sA.views/sA.n,b=sB.views/sB.n,d=((a-b)/(b||1))*100;
+    verdict.push(`<b>Distribution:</b> slice ${d>=0?'A':'B'} averages ${Math.abs(d).toFixed(0)}% more views per post.`);}
+  const sr=(sA.save_rate||0)-(sB.save_rate||0);
+  if(sA.save_rate!=null&&sB.save_rate!=null) verdict.push(`<b>Value signal:</b> slice ${sr>=0?'A':'B'} earns saves at a higher rate — the algorithm's favorite signal.`);
+  $('cmpVerdict').innerHTML=verdict.join('<br>')||'Pick two slices with posts in them.';
+}
+
+// ----- master render -----
+function render(){
+  if(state.tab==='overview')renderOverview();
+  else if(state.tab==='posts')renderPosts();
+  else if(state.tab==='strategy')renderStrategy();
+  else renderCompare();
+}
+if(!POSTS.length){
+  document.querySelector('main').innerHTML='<div class="empty">No data yet.<br>Run <b>Open Dashboard.bat</b> (or <code>python refresh.py</code>) to pull your posts.</div>';
+}else{ initCompare(); render(); }
+</script>
+</body>
+</html>

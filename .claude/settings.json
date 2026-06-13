@@ -1,0 +1,15 @@
+{
+  "$comment": "Project-shared settings (portable; travels with the hub). Personal permissions live in settings.local.json. The hook below is the mechanical half of Tanner's tworkflow 40% context rule (docs/workflow/07-context-hygiene.md): it injects a one-line nudge the first time context usage crosses 40% (and again each +10% band), so a long session reminds the agent to checkpoint. Fail-silent; needs `python` on PATH. Remove this hooks block to disable.",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/.claude/skills/context-checkpoint/scripts/context_hook.py\""
+          }
+        ]
+      }
+    ]
+  }
+}

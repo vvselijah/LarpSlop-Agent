@@ -1,0 +1,7 @@
+{
+  "_readme": "Niche -> Instagram usernames for competitor-radar.py. ELIJAH: edit freely. Accounts MUST be public Business/Creator accounts (personal accounts return 'Invalid user id' and are skipped + logged in radar-report.md). All handles below were live-verified 2026-06-12. Add YOUR actual niche competitors — these are placeholders.",
+  "money-finance": ["hormozi", "garyvee", "gpstephan"],
+  "ai-entrepreneur": ["thejustinwelsh"],
+  "motivation": ["edmylett", "thegoodquote"],
+  "new-parent": ["takingcarababies", "babylist"]
+}
