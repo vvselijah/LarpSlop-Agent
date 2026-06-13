@@ -100,7 +100,7 @@ Committed `cbc0851` on branch `session/2026-06-13-capabilities`.
 - ⚠️ **Research keys STILL 401** after Elijah's "restart" — the Claude PROCESS didn't terminate (conversation + keys both persisted). Needs a TRUE full quit (tray Quit / Task Manager end-process), not a window close. Non-blocking. If a true quit STILL 401s, re-check/re-issue the key VALUES.
 - ✅ **Both PLANs APPROVED** (auto-clip + audience-sim) — usefulness deferred to my honest call: auto-clip = confident yes (foundation already works); **audience-sim = worth the cheap Phase-0 spike but UNPROVEN for IG — treat as R&D until the backtest shows correlation.**
 - **BUILD QUEUE:** finish auto-clip (LLM-key/Ollama auto-highlight, caption wiring, face-track, optional GPU) + audience-sim Phase 0 (`pip install camel-oasis`, seed ~100 personas, spike on one past reel, backtest vs the 300-post history).
-- **GitHub:** ready to push branch `session/2026-06-13-capabilities` (commits 861ec89 + cbc0851). Awaiting Elijah's empty-private-repo URL.
+- **GitHub:** ✅ PUSHED → https://github.com/vvselijah/LarpSlop-Agent (`main` @ 299a496, private, framework-only, 66 files). Remaining (Elijah): add Tanner as collaborator + set the About blurb/topics.
 
 ## Current state (what's live)
 - **Deep-research stack is LIVE** — `exa`, `tavily`, `firecrawl` MCPs all connected (confirmed
