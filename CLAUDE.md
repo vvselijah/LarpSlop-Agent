@@ -56,8 +56,9 @@ Adapted from https://github.com/clarity-digital-development/tworkflow → lives 
 - **Research:** `deep-research` skill; **Docs:** docx/pdf/pptx/xlsx skills
 - **Desktop/web control:** computer-use MCP, Claude-in-Chrome (never DOM-tools on developers.facebook.com — it hangs)
 - **Scheduling:** Windows Task Scheduler ("IG Dashboard Daily Refresh", 7:00 AM, now chained via `Daily Agent Refresh.bat`) + cron/scheduled-task tools
-- **Content ops (new 2026-06-13):** `carousel-builder` skill (idea/proven-reel → saveable carousel + thread, drafts to vault) · `comment-triage` skill (draft→approve→reply on IG comments, never auto-sends)
-- **Queued PLANs (awaiting Elijah approval):** `auto-clip` long-video→shorts engine (`docs/plans/2026-06-13-auto-clip-pipeline.md`) · `audience-sim` OASIS pre-publish hook-ranker (`docs/plans/2026-06-13-audience-sim-pipeline.md`)
+- **Content ops (new 2026-06-13):** `carousel-builder` skill (idea/proven-reel → saveable carousel + thread, drafts to vault) · `comment-triage` skill (draft→approve→reply on IG comments, never auto-sends) · `auto-clip` skill + engine (long video → ranked 9:16 shorts; Claude IS the highlight brain via `--provider agent`, no API key/Ollama; stops at `out/`, never publishes)
+- **auto-clip status:** interactive pipeline LIVE + tested (transcribe → agent-highlight → reframe, 6/6 valid 1080×1920 clips). Remaining: face-track reframe (v2), caption-engine wiring, GPU torch-cu128 (Elijah-gated multi-GB), `Daily Agent Refresh.bat` wiring.
+- **Approved PLAN not yet built:** `audience-sim` OASIS pre-publish hook-ranker (`docs/plans/2026-06-13-audience-sim-pipeline.md`) — approved as a cheap Phase-0 R&D spike; UNPROVEN for IG until backtested vs the 300-post history.
 
 ## Folder map
 

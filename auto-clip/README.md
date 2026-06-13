@@ -5,10 +5,12 @@ Turns one long video (10–30 min YouTube, 1–2 hr podcast/interview) into rank
 genuinely-missing pieces. Full design + caveats: `docs/plans/2026-06-13-auto-clip-pipeline.md`.
 
 ## Status (2026-06-13)
-- ✅ **`transcribe.py`** — local word-level transcription (faster-whisper). **Built + tested.**
-- ⏳ `highlight.py` — LLM moment selector → ranked `{start,end,title,hook,score}` (per PLAN; needs an LLM key or local Ollama).
-- ⏳ `reframe.py` — face/subject-aware 9:16 auto-reframe (OpenCV/MediaPipe track → FFmpeg crop or the existing PodcastEdit transform).
-- ⏳ `sim`/orchestrator + `Daily Agent Refresh.bat` wiring — after the above validate.
+- ✅ **`transcribe.py`** — local word-level transcription (faster-whisper). **Built + tested** (77 seg / 1182 words, ~12x realtime CPU).
+- ✅ **`highlight.py`** — moment selector → ranked `{rank,start,end,title,hook,score,reason}`. **Built + tested.** Three providers:
+  `anthropic` (needs `ANTHROPIC_API_KEY`), `ollama` (local), and **`agent`** — the Claude Code agent IS the selector, **no key/install needed** (the default for interactive runs; see the `auto-clip` skill).
+- ✅ **`reframe.py`** — 9:16 cut + reframe. **Built + tested** (6/6 clips, 1080×1920 H.264/AAC). Already-9:16 → trim+encode; wider → center-crop (v1). **Face/subject-tracking reframe is the v2 enhancement.**
+- ✅ **`auto-clip` skill** (`.claude/skills/auto-clip/`) — orchestrates the full interactive pipeline (transcribe → agent-highlight → reframe → manifest).
+- ⏳ **Remaining:** face-track reframe (v2, OpenCV/MediaPipe), caption-engine wiring (burn captions), GPU torch-cu128 (Elijah-gated multi-GB; near-instant transcribe + `h264_nvenc`), `Daily Agent Refresh.bat` wiring (on-demand first).
 
 ## The 3 new pieces (everything else is reused)
 1. **Transcribe** (done) — word-level JSON the caption-engine + highlight selector consume.

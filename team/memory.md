@@ -4,6 +4,20 @@
 > experiments. Newest first. Humans may edit/prune freely. Keep entries short:
 > one finding, one line of evidence, one implication.
 
+## 2026-06-13 — auto-clip "brain" completed: Claude IS the highlight selector
+
+- **The missing "brain" is solved without any new dependency:** `highlight.py` gained a `--provider agent`
+  path where the Claude Code agent makes the editorial clip selection (two-step: emit a brief → agent writes
+  `picks.json` → Python does the deterministic seg→time mapping/sort). No `ANTHROPIC_API_KEY`, no Ollama (not
+  installed), no install. Evidence: ran transcribe → agent-highlight → reframe end-to-end on `source.mp4` →
+  6/6 valid 1080×1920 H.264/AAC clips. Implication: auto-clip is **usable interactively today** via the new
+  `auto-clip` skill; the anthropic/ollama providers are only for unattended/scheduled runs.
+- **Pattern worth reusing:** for a "local agent hub," the cheapest, highest-quality LLM step is often the agent
+  itself — wire a `--provider agent` mode instead of requiring a paid key or a multi-GB local model.
+- **Research keys (Exa/Tavily/Firecrawl) 401 is NOT a bad-key problem:** they're valid at User scope (len
+  36/57/35) but absent from the Claude *process* env (INSTAGRAM token IS present). The MCP servers spawned with
+  empty keys. Fix = a true full quit + relaunch of the desktop app (not a window close). Do NOT re-issue them.
+
 ## 2026-06-13 — business-ops + productivity research (round 3) + a throttle lesson
 
 - **Scheduling:** Metricool stays the cross-platform pick — but its MCP needs the **Advanced ~$54/mo** plan (blueprint said "any plan" — stale), and IG licensed-audio auto-publish is now **partially** unlocked (needs Facebook-Login auth; trending-sound catalog may be narrow). TikTok still MUST go through an audited client (never a self-built MCP). Full report: `docs/plans/2026-06-13-business-ops-productivity-research.md`.

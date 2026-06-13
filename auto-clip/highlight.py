@@ -1,21 +1,31 @@
 """
-auto-clip/highlight.py -- the LLM "moment selector": rank transcript spans into standalone shorts.
+auto-clip/highlight.py -- the "moment selector": rank transcript spans into standalone shorts.
 
-Reads a transcribe.py JSON, asks an LLM to pick the best ~20-60s self-contained clips
-(strong hook + ONE complete idea), snaps each window to clean segment boundaries, sorts by
-score, and writes a ranked highlights JSON that reframe.py + the caption-engine consume.
-This is the engine's core "brain" -- the piece that did NOT already exist in the hub / abc wrap.
+Reads a transcribe.py JSON, picks the best ~20-60s self-contained clips (strong hook + ONE
+complete idea), snaps each window to clean segment boundaries, sorts by score, and writes a
+ranked highlights JSON that reframe.py + the caption-engine consume. This is the engine's core
+"brain" -- the piece that did NOT already exist in the hub / abc wrap.
 
-Default provider is the Anthropic API (needs ANTHROPIC_API_KEY). --provider ollama routes to a
-local model (http://localhost:11434) for zero-cost / fully-offline runs.
+Providers (how the selection gets made):
+  anthropic  (default)  -- Anthropic API, needs ANTHROPIC_API_KEY in env.
+  ollama                -- local model at http://localhost:11434 (zero-cost / fully offline).
+  agent                 -- NO key, NO install: the Claude Code agent IS the selector. Runs in two
+                           steps so the deterministic seg->time mapping stays in Python:
+                             1) python highlight.py <transcript> --provider agent
+                                -> writes data/<stem>.agent-prompt.json and stops.
+                             2) the agent reads that, writes data/<stem>.picks.json, then re-run:
+                                python highlight.py <transcript> --provider agent --from-picks data/<stem>.picks.json
+                                -> validates/sorts/writes the final highlights JSON.
+                           The `auto-clip` skill drives this loop automatically; use it for
+                           interactive runs through Claude Code (no API key or Ollama needed).
 
 Usage:
-  python highlight.py data/<stem>.transcript.json [--n 5] [--model claude-sonnet-4-6] [--provider anthropic|ollama]
+  python highlight.py data/<stem>.transcript.json [--n 5] [--model ...]
+                      [--provider anthropic|ollama|agent] [--from-picks <picks.json>]
 Writes:
   data/<stem>.highlights.json   [{rank,start,end,duration,title,hook,score,reason}]
 """
 import json
-import os
 import re
 import sys
 from datetime import datetime
@@ -40,6 +50,12 @@ SYSTEM = (
     "Favor concrete payoffs (numbers, secrets, bold claims). Return STRICT JSON only, no prose."
 )
 
+# The exact pick schema both the LLM providers and the agent provider must emit.
+PICK_SCHEMA = (
+    '{"start_seg": <int index>, "end_seg": <int index, inclusive>, "title": <str>, '
+    '"hook": <the opening line>, "score": <0-100 short-form potential>, "reason": <one sentence>}'
+)
+
 
 def build_prompt(segments, n):
     lines = [f"[{i}] {s['start']:.1f}-{s['end']:.1f}  {s['text']}" for i, s in enumerate(segments)]
@@ -47,9 +63,8 @@ def build_prompt(segments, n):
         "Transcript segments (index, start-end seconds, text):\n"
         + "\n".join(lines)
         + f"\n\nReturn the top {n} clips as a JSON array. Each item: "
-        '{"start_seg": <int index>, "end_seg": <int index, inclusive>, "title": <str>, '
-        '"hook": <the opening line>, "score": <0-100 short-form potential>, "reason": <one sentence>}. '
-        "start_seg/end_seg index into the list above. JSON array only."
+        + PICK_SCHEMA
+        + ". start_seg/end_seg index into the list above. JSON array only."
     )
 
 
@@ -82,10 +97,54 @@ def extract_json(text):
     return json.loads(m.group(0)) if m else json.loads(text)
 
 
+def write_highlights(picks, segments, media, out_dir):
+    """Map agent/LLM picks (segment indices) -> clean clip windows, sort by score, rank, write."""
+    clips = []
+    for p in picks:
+        a = max(0, min(int(p["start_seg"]), len(segments) - 1))
+        b = max(a, min(int(p["end_seg"]), len(segments) - 1))
+        start, end = segments[a]["start"], segments[b]["end"]
+        clips.append({
+            "start": round(start, 2), "end": round(end, 2), "duration": round(end - start, 1),
+            "title": p.get("title", "").strip(), "hook": p.get("hook", "").strip(),
+            "score": int(p.get("score", 0)), "reason": p.get("reason", "").strip(),
+        })
+    clips.sort(key=lambda c: c["score"], reverse=True)
+    for i, c in enumerate(clips, 1):
+        c["rank"] = i
+    out_path = out_dir / (Path(media).stem + ".highlights.json")
+    out_path.write_text(json.dumps(clips, ensure_ascii=False, indent=2), encoding="utf-8")
+    return out_path, clips
+
+
+def emit_agent_prompt(tpath, data, n, prompt):
+    """Write a self-contained brief the Claude Code agent uses to make the selection (no API key)."""
+    stem = Path(data["media"]).stem
+    picks_out = tpath.parent / f"{stem}.picks.json"
+    bundle = {
+        "instructions": (
+            "AGENT MODE - you are the moment selector for auto-clip. Read SYSTEM + prompt below, "
+            f"pick the top {n} self-contained clips, and WRITE your picks as a JSON array to "
+            f"picks_out. Each pick is exactly: {PICK_SCHEMA}. start_seg/end_seg index into the "
+            "numbered segments inside prompt. Then re-run: "
+            f"python highlight.py {tpath.name} --provider agent --from-picks {picks_out.name}"
+        ),
+        "n": n,
+        "system": SYSTEM,
+        "prompt": prompt,
+        "picks_out": str(picks_out),
+        "highlights_out": str(tpath.parent / f"{stem}.highlights.json"),
+    }
+    apath = tpath.parent / f"{stem}.agent-prompt.json"
+    apath.write_text(json.dumps(bundle, ensure_ascii=False, indent=2), encoding="utf-8")
+    return apath, picks_out
+
+
 def main():
     args = sys.argv[1:]
     if not args or args[0].startswith("--"):
-        log("FATAL: usage: python highlight.py data/<stem>.transcript.json [--n 5] [--provider anthropic|ollama]")
+        log("FATAL: usage: python highlight.py data/<stem>.transcript.json [--n 5] "
+            "[--provider anthropic|ollama|agent] [--from-picks <picks.json>]")
         sys.exit(1)
 
     tpath = Path(args[0]).resolve()
@@ -107,30 +166,33 @@ def main():
         sys.exit(1)
 
     prompt = build_prompt(segments, n)
+
+    # --- agent provider: the Claude Code agent is the selector (no key, no install) ---
+    if provider == "agent":
+        from_picks = opt("--from-picks", None)
+        if from_picks:
+            picks = json.loads(Path(from_picks).resolve().read_text(encoding="utf-8"))
+            out_path, clips = write_highlights(picks, segments, data["media"], tpath.parent)
+            log(f"wrote {out_path}  ({len(clips)} clips from agent picks)")
+            for c in clips:
+                log(f"  #{c['rank']} [{c['score']}] {c['start']:.0f}-{c['end']:.0f}s ({c['duration']:.0f}s)  {c['title']}")
+            return
+        apath, picks_out = emit_agent_prompt(tpath, data, n, prompt)
+        log(f"AGENT MODE -- wrote brief {apath}")
+        log(f"  next: agent selects -> writes {picks_out.name} -> re-run with --from-picks {picks_out.name}")
+        return
+
+    # --- automated providers (unattended / scheduled runs) ---
     log(f"selecting top {n} clips via {provider}/{model} over {len(segments)} segments ...")
     try:
         raw = call_anthropic(model, prompt) if provider == "anthropic" else call_ollama(model, prompt)
     except Exception as e:
-        log(f"FATAL: LLM call failed ({e}). anthropic -> set ANTHROPIC_API_KEY; ollama -> run `ollama serve`.")
+        log(f"FATAL: LLM call failed ({e}). anthropic -> set ANTHROPIC_API_KEY; "
+            "ollama -> run `ollama serve`; or use --provider agent (no key needed).")
         sys.exit(1)
 
     picks = extract_json(raw)
-    clips = []
-    for p in picks:
-        a = max(0, min(int(p["start_seg"]), len(segments) - 1))
-        b = max(a, min(int(p["end_seg"]), len(segments) - 1))
-        start, end = segments[a]["start"], segments[b]["end"]
-        clips.append({
-            "start": round(start, 2), "end": round(end, 2), "duration": round(end - start, 1),
-            "title": p.get("title", "").strip(), "hook": p.get("hook", "").strip(),
-            "score": int(p.get("score", 0)), "reason": p.get("reason", "").strip(),
-        })
-    clips.sort(key=lambda c: c["score"], reverse=True)
-    for i, c in enumerate(clips, 1):
-        c["rank"] = i
-
-    out_path = tpath.parent / (Path(data["media"]).stem + ".highlights.json")
-    out_path.write_text(json.dumps(clips, ensure_ascii=False, indent=2), encoding="utf-8")
+    out_path, clips = write_highlights(picks, segments, data["media"], tpath.parent)
     log(f"wrote {out_path}  ({len(clips)} clips)")
     for c in clips:
         log(f"  #{c['rank']} [{c['score']}] {c['start']:.0f}-{c['end']:.0f}s ({c['duration']:.0f}s)  {c['title']}")
