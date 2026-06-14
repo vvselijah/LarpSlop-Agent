@@ -4,6 +4,14 @@
 > experiments. Newest first. Humans may edit/prune freely. Keep entries short:
 > one finding, one line of evidence, one implication.
 
+## 2026-06-14 — overnight autonomous research+build program (6 builds + 30-candidate research)
+
+- **Autonomous overnight loops run throttle-free at ≤5 concurrent agents, ONE workflow/agent at a time.** Evidence: 6 research waves (~7 agents each) + 6 build subagents ran clean over hours, zero throttling. Implication: pace via background-task completions (not bursts); keep the orchestrator's context lean by delegating + writing all state to disk (the tracker survives compaction).
+- **The hub was scoring on the WRONG signal.** Built `ig-dashboard/metrics2026.py` — the 2026 IG metric contract (skip>share>like>save>comment rates, skip-gated, graded vs his own 300-post distribution). `watchtime_ideator`, `intel/viral-radar`, and the `content-intel-2026` skill all consume it. Implication: rank on rates, not raw likes/views.
+- **Data finding (act on it):** Motivation/Life is his MOST-posted niche (94×) but LOWEST watch-time hold (8.3s); AI/Tech holds best (17.5s); Money/Finance is a skip-rate risk (rides reach, not depth). Implication: rebalance toward AI/Tech + lean-in arbitrage (Child Safety/Faith), tighten Money/Finance retention.
+- **Subagents excel at safe ADDITIVE builds** (stdlib/curl, read-only, test, local-commit) — 6/6 shipped clean. Implication: delegate builds to save orchestrator context; keep them additive (never edit production engines unsupervised).
+- **Security (rule-3 violation):** sibling `..\abc wrap\.mcp.json` has a hardcoded plaintext `GEMINI_API_KEY` — rotate + move to env var.
+
 ## 2026-06-13 — auto-clip "brain" completed: Claude IS the highlight selector
 
 - **The missing "brain" is solved without any new dependency:** `highlight.py` gained a `--provider agent`
