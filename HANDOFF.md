@@ -8,6 +8,7 @@
 
 > ⚠ **This whole tree is inside OneDrive (cloud-synced). NEVER put secrets in files — use `setx` (Windows env vars).**
 > **New session: read this file first, then the workspace `CLAUDE.md`, then the vault's `CLAUDE.md`.**
+> ⏩ **LATEST VERIFIED SNAPSHOT (2026-06-13): `SESSION-COMPACT-2026-06-13.md` (repo root)** — read it before this file; it audits actual state (auto-clip "brain" done + committed `7e0b9a5`, unpushed) and supersedes the long baton `docs/plans/2026-06-13-SESSION-HANDOFF.md`.
 
 ---
 

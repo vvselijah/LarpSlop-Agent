@@ -1,5 +1,9 @@
 # SESSION HANDOFF — 2026-06-13 (the long one)
 
+> ⏩ **SUPERSEDED for current state by `SESSION-COMPACT-2026-06-13.md` (repo root)** — that doc audits the
+> verified state (auto-clip "brain" done + committed `7e0b9a5`, unpushed; research-key 401 diagnosed). Read
+> it first; this long baton remains the historical detail (Workflows 1–3, UPDATE 1–6).
+
 **Read this first on resume**, then the master `HANDOFF.md` and workspace `CLAUDE.md`.
 This is the baton for everything built in the 2026-06-13 session.
 
