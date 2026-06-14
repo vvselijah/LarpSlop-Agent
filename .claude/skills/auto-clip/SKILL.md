@@ -46,12 +46,18 @@ The engine **stops at files in `out/`** and prints a manifest — it NEVER publi
      (OpenCV/MediaPipe → smoothed crop track); flag it when a wide source would clip a speaker off-center.
    - Swap `--encoder h264_nvenc` only after the GPU (torch cu128) is enabled.
 
-5. **Report the manifest** to Elijah: per clip — rank, file, title, hook, duration. These are review files in
+5. **Caption (recommended) — burn word-timed captions:**
+   `python caption.py data/<stem>.transcript.json data/<stem>.highlights.json [--group 3] [--marginv 620] [--no-caps]`
+   → writes `out/<clip>_cap.mp4` (pure FFmpeg/libass: big bold, lower-third, ~3 words/group; originals kept).
+   Needs the transcript's word-level `words[]`. For the premium animated house style instead, use the
+   `caption-engine` skill (Remotion, heavier); see `viral-shortform-2026` for hook/caption polish.
+
+6. **Report the manifest** to Elijah: per clip — rank, file, title, hook, duration. These are review files in
    `out/`, NOT posted. Offer the obvious next steps (below) but do not act on them without his go-ahead.
 
 ## Next layer (offer, don't auto-run)
-- **Captions:** wire the word-level transcript into the `caption-engine` skill (signature Punchy Bold Animated)
-  to burn karaoke captions onto each clip. See also `viral-shortform-2026` for hook/caption polish.
+- **Captions:** built-in via `caption.py` (step 5, pure-FFmpeg). For the premium animated house style instead,
+  wire the word-level transcript into the `caption-engine` skill; see `viral-shortform-2026` for polish.
 - **B-roll / platform export:** `broll-inserter` + `platform-exporter` for finishing.
 - **Carousel cross-format:** feed a top clip's transcript to the `carousel-builder` skill for a saveable swipe post.
 

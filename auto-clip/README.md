@@ -9,8 +9,9 @@ genuinely-missing pieces. Full design + caveats: `docs/plans/2026-06-13-auto-cli
 - ✅ **`highlight.py`** — moment selector → ranked `{rank,start,end,title,hook,score,reason}`. **Built + tested.** Three providers:
   `anthropic` (needs `ANTHROPIC_API_KEY`), `ollama` (local), and **`agent`** — the Claude Code agent IS the selector, **no key/install needed** (the default for interactive runs; see the `auto-clip` skill).
 - ✅ **`reframe.py`** — 9:16 cut + reframe. **Built + tested** (6/6 clips, 1080×1920 H.264/AAC). Already-9:16 → trim+encode; wider → center-crop (v1). **Face/subject-tracking reframe is the v2 enhancement.**
-- ✅ **`auto-clip` skill** (`.claude/skills/auto-clip/`) — orchestrates the full interactive pipeline (transcribe → agent-highlight → reframe → manifest).
-- ⏳ **Remaining:** face-track reframe (v2, OpenCV/MediaPipe), caption-engine wiring (burn captions), GPU torch-cu128 (Elijah-gated multi-GB; near-instant transcribe + `h264_nvenc`), `Daily Agent Refresh.bat` wiring (on-demand first).
+- ✅ **`caption.py`** — burn word-timed captions (pure FFmpeg/libass; big bold, lower-third, ~3 words/group, all-caps). **Built + tested** (6/6 `_cap.mp4`; captions verified on-frame). Premium animated house style via `caption-engine` is the optional alternative.
+- ✅ **`auto-clip` skill** (`.claude/skills/auto-clip/`) — orchestrates the full interactive pipeline (transcribe → agent-highlight → reframe → **caption** → manifest).
+- ⏳ **Remaining:** face-track reframe (v2, OpenCV/MediaPipe), GPU torch-cu128 (Elijah-gated multi-GB; near-instant transcribe + `h264_nvenc`), `Daily Agent Refresh.bat` wiring (on-demand first).
 
 ## The 3 new pieces (everything else is reused)
 1. **Transcribe** (done) — word-level JSON the caption-engine + highlight selector consume.
