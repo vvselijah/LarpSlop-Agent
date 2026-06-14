@@ -49,11 +49,11 @@ The engine **stops at files in `out/`** and prints a manifest — it NEVER publi
      transcript). v2 = **LR-ASD active-speaker AUTO-switch / multicam** (see `docs/plans/2026-06-14-interview-clip-enhancements-research.md`).
    - Swap `--encoder h264_nvenc` only after the GPU (torch cu128) is enabled.
 
-5. **Caption (recommended) — burn word-timed captions:**
-   `python caption.py data/<stem>.transcript.json data/<stem>.highlights.json [--group 3] [--marginv 620] [--no-caps]`
-   → writes `out/<clip>_cap.mp4` (pure FFmpeg/libass: big bold, lower-third, ~3 words/group; originals kept).
-   Needs the transcript's word-level `words[]`. For the premium animated house style instead, use the
-   `caption-engine` skill (Remotion, heavier); see `viral-shortform-2026` for hook/caption polish.
+5. **Caption (recommended) — burn word-timed captions + clean audio:**
+   `python caption.py data/<stem>.transcript.json data/<stem>.highlights.json [--style word-pop|block] [--no-clean-audio]`
+   → writes `out/<clip>_cap.mp4`. Default = **word-pop** (karaoke: the spoken word highlighted) + **audio cleanup**
+   (loudnorm/afftdn — the biggest amateur-vs-pro tell). Needs the transcript's word-level `words[]`. For the
+   premium animated house style instead, use the `caption-engine` skill (Remotion, heavier); see `viral-shortform-2026`.
 
 6. **Report the manifest** to Elijah: per clip — rank, file, title, hook, duration. These are review files in
    `out/`, NOT posted. Offer the obvious next steps (below) but do not act on them without his go-ahead.

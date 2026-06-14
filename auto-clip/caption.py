@@ -2,17 +2,23 @@
 auto-clip/caption.py -- burn word-timed captions onto the 9:16 clips (pure FFmpeg/libass, no Remotion).
 
 Reads the word-level transcript + the highlights, slices the words for each clip's time window, offsets
-them to the clip's own 0-based timeline, builds a styled ASS subtitle (punchy: big bold, thick outline,
-lower-third, ~3 words per group with a quick fade), and burns it onto the matching rendered clip. Pure
-FFmpeg/libass keeps us off Remotion's ~10GB/bundle disk blowup (per the auto-clip PLAN). Stops at out/.
+them to the clip's 0-based timeline, builds a styled ASS subtitle, and burns it onto the matching
+rendered clip. Pure FFmpeg/libass keeps us off Remotion's ~10GB/bundle disk blowup. Stops at out/.
 
-Clips are matched by GLOB (out/*_clip<NN>.mp4), because reframe.py names them with the SOURCE-video stem
-while the transcript/highlights use the audio stem -- the highlights rank is the reliable link.
+Styles:
+  word-pop (default) -- karaoke: ~3 words on screen, the CURRENTLY-SPOKEN word highlighted (bright colour).
+  block              -- the older look: a word-group shown together with a quick fade.
+
+Also does **audio cleanup** on the final render (loudnorm + gentle afftdn) -- the biggest amateur-vs-pro
+tell -- on by default; pass --no-clean-audio to copy the audio untouched.
+
+Clips are matched by GLOB (out/*_clip<NN>.mp4): reframe.py names them with the SOURCE stem while the
+transcript/highlights use the audio stem -- the highlights rank is the reliable link.
 
 Usage:
   python caption.py data/<stem>.transcript.json data/<stem>.highlights.json
-                    [--in out] [--group 3] [--fontsize 96] [--marginv 620]
-                    [--font Arial] [--no-caps] [--encoder libx264]
+                    [--in out] [--style word-pop|block] [--group 3] [--fontsize 96] [--marginv 620]
+                    [--font Arial] [--hi 00FFFF] [--no-caps] [--no-clean-audio] [--encoder libx264]
 Writes:
   out/<clip-stem>_cap.mp4   (one per existing out/*_clip<NN>.mp4; originals untouched)
 """
@@ -38,20 +44,14 @@ def ass_time(t):
     t = max(0.0, t)
     h = int(t // 3600)
     m = int((t % 3600) // 60)
-    s = t % 60
-    return f"{h}:{m:02d}:{s:05.2f}"  # H:MM:SS.cc
+    return f"{h}:{m:02d}:{t % 60:05.2f}"  # H:MM:SS.cc
 
 
 def ass_header(font, fontsize, marginv):
-    # Alignment 2 = bottom-center; MarginV lifts it into the lower third (above the IG UI).
-    # Colours are &HAABBGGRR: white fill, black outline. Bold on, thick outline + shadow for punch.
+    # Alignment 2 = bottom-center; MarginV lifts it into the lower third. &HAABBGGRR colours.
     return (
-        "[Script Info]\n"
-        "ScriptType: v4.00+\n"
-        "PlayResX: 1080\n"
-        "PlayResY: 1920\n"
-        "WrapStyle: 2\n"
-        "ScaledBorderAndShadow: yes\n\n"
+        "[Script Info]\nScriptType: v4.00+\nPlayResX: 1080\nPlayResY: 1920\n"
+        "WrapStyle: 2\nScaledBorderAndShadow: yes\n\n"
         "[V4+ Styles]\n"
         "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, "
         "Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, "
@@ -67,29 +67,51 @@ def esc(text):
     return text.replace("\\", "\\\\").replace("{", "(").replace("}", ")").replace("\n", " ").strip()
 
 
-def build_ass(words, group, font, fontsize, marginv, caps):
-    """words: [{word,start_off,end_off}] already offset to clip-0. Returns ASS file text."""
+def _word(w, caps):
+    s = w["word"].strip()
+    return esc(s.upper() if caps else s)
+
+
+def build_block(words, group, caps):
     groups = [words[i:i + group] for i in range(0, len(words), group)]
-    out = [ass_header(font, fontsize, marginv)]
+    rows = []
     for gi, grp in enumerate(groups):
-        txt = " ".join(w["word"].strip() for w in grp).strip()
+        txt = " ".join(_word(w, caps) for w in grp).strip()
         if not txt:
             continue
-        if caps:
-            txt = txt.upper()
         start = grp[0]["start_off"]
         end = groups[gi + 1][0]["start_off"] if gi + 1 < len(groups) else grp[-1]["end_off"]
-        end = max(end, start + 0.3)
-        out.append(
-            f"Dialogue: 0,{ass_time(start)},{ass_time(end)},Default,,0,0,0,,"
-            f"{{\\fad(50,30)}}{esc(txt)}\n"
-        )
+        rows.append((start, max(end, start + 0.3), "{\\fad(50,30)}" + txt))
+    return rows
+
+
+def build_wordpop(words, group, caps, hi):
+    """~`group` words on screen; the active (currently-spoken) word recoloured. Continuous, no reflow gaps."""
+    groups = [words[i:i + group] for i in range(0, len(words), group)]
+    flat = [(gi, wi, grp, w) for gi, grp in enumerate(groups) for wi, w in enumerate(grp)]
+    rows = []
+    for k, (gi, wi, grp, w) in enumerate(flat):
+        start = w["start_off"]
+        end = flat[k + 1][3]["start_off"] if k + 1 < len(flat) else w["end_off"]
+        parts = []
+        for j, gw in enumerate(grp):
+            tok = _word(gw, caps)
+            parts.append(f"{{\\c&H{hi}&}}{tok}{{\\r}}" if j == wi else tok)
+        fade = "{\\fad(60,0)}" if wi == 0 else ""
+        rows.append((start, max(end, start + 0.12), fade + " ".join(parts)))
+    return rows
+
+
+def build_ass(words, group, font, fontsize, marginv, caps, style, hi):
+    rows = build_wordpop(words, group, caps, hi) if style == "word-pop" else build_block(words, group, caps)
+    out = [ass_header(font, fontsize, marginv)]
+    for (start, end, text) in rows:
+        out.append(f"Dialogue: 0,{ass_time(start)},{ass_time(end)},Default,,0,0,0,,{text}\n")
     return "".join(out)
 
 
 def find_clip(out_dir, rank):
-    hits = sorted(glob.glob(str(out_dir / f"*_clip{rank:02d}.mp4")))
-    hits = [h for h in hits if not h.endswith("_cap.mp4")]
+    hits = sorted(h for h in glob.glob(str(out_dir / f"*_clip{rank:02d}.mp4")) if not h.endswith("_cap.mp4"))
     return Path(hits[0]) if hits else None
 
 
@@ -97,11 +119,10 @@ def main():
     args = sys.argv[1:]
     if len(args) < 2:
         log("FATAL: usage: python caption.py data/<stem>.transcript.json data/<stem>.highlights.json "
-            "[--in out] [--group 3] [--fontsize 96] [--marginv 620] [--font Arial] [--no-caps]")
+            "[--style word-pop|block] [--group 3] [--marginv 620] [--hi 00FFFF] [--no-caps] [--no-clean-audio]")
         sys.exit(1)
 
-    tpath = Path(args[0]).resolve()
-    hpath = Path(args[1]).resolve()
+    tpath, hpath = Path(args[0]).resolve(), Path(args[1]).resolve()
     for p in (tpath, hpath):
         if not p.exists():
             log(f"FATAL: not found: {p}")
@@ -111,11 +132,14 @@ def main():
         return args[args.index(flag) + 1] if flag in args else d
 
     out_dir = BASE / opt("--in", "out")
+    style = opt("--style", "word-pop")
     group = int(opt("--group", "3"))
     fontsize = int(opt("--fontsize", "96"))
     marginv = int(opt("--marginv", "620"))
     font = opt("--font", "Arial")
+    hi = opt("--hi", "00FFFF")                       # active-word colour, ASS BBGGRR (yellow)
     caps = "--no-caps" not in args
+    clean_audio = "--no-clean-audio" not in args
     encoder = opt("--encoder", "libx264")
 
     tdata = json.loads(tpath.read_text(encoding="utf-8"))
@@ -125,14 +149,18 @@ def main():
         sys.exit(1)
     clips = json.loads(hpath.read_text(encoding="utf-8"))
 
+    if clean_audio:
+        audio = ["-af", "loudnorm=I=-16:TP=-1.5:LRA=11,afftdn=nf=-20", "-c:a", "aac", "-b:a", "160k"]
+    else:
+        audio = ["-c:a", "copy"]
+
     done = 0
     for c in clips:
         rank, cs, ce = c["rank"], float(c["start"]), float(c["end"])
         src = find_clip(out_dir, rank)
         if not src:
-            log(f"clip #{rank}: no rendered out/*_clip{rank:02d}.mp4 -- run reframe.py first; skipping")
+            log(f"clip #{rank}: no rendered out/*_clip{rank:02d}.mp4 -- run reframe/facetrack first; skipping")
             continue
-        # slice words in [cs, ce), offset to clip-0
         ws = []
         for w in words_all:
             st = float(w["start"])
@@ -142,17 +170,14 @@ def main():
             log(f"clip #{rank}: no words in [{cs:.0f},{ce:.0f}]s; skipping")
             continue
 
-        ass_text = build_ass(ws, group, font, fontsize, marginv, caps)
         ass_path = out_dir / f"{src.stem}.ass"
-        ass_path.write_text(ass_text, encoding="utf-8")
-
+        ass_path.write_text(build_ass(ws, group, font, fontsize, marginv, caps, style, hi), encoding="utf-8")
         dst = out_dir / f"{src.stem}_cap.mp4"
         # cwd=out_dir + relative paths sidesteps libass's Windows colon-escaping pain.
-        cmd = [
-            "ffmpeg", "-y", "-i", src.name, "-vf", f"ass={ass_path.name}",
-            "-c:v", encoder, "-preset", "veryfast", "-crf", "20", "-c:a", "copy", dst.name,
-        ]
-        log(f"clip #{rank}: burning {len(ws)} words -> {dst.name}")
+        cmd = ["ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-i", src.name,
+               "-vf", f"ass={ass_path.name}", "-c:v", encoder, "-preset", "veryfast", "-crf", "20"] \
+            + audio + ["-movflags", "+faststart", dst.name]
+        log(f"clip #{rank}: {style} captions, {len(ws)} words, clean_audio={clean_audio} -> {dst.name}")
         r = subprocess.run(cmd, cwd=str(out_dir), capture_output=True, text=True)
         if r.returncode != 0:
             tail = r.stderr.strip().splitlines()[-1] if r.stderr.strip() else "unknown error"
