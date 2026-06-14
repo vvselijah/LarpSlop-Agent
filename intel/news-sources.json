@@ -1,0 +1,23 @@
+{
+  "_readme": "News radar source allowlist. ELIJAH edits freely. This is the 'fact-based, non-political' guarantee: it lives in SOURCE SELECTION (primary-source + government feeds are inherently fact-first), not in any single API. Per niche: 'rss' = keyless RSS 2.0 / Atom feed URLs (parsed with stdlib xml.etree); 'gdelt_query' = optional GDELT DOC 2.0 artlist query string (English-only; SUPPLEMENT/discovery, often slow/flaky and skipped gracefully); 'keywords' = relevance terms that boost a story's score for this niche; 'exclude' = substrings (case-insensitive) that DROP a story (political/hype noise). A dead/unparseable feed is logged in news-report.md, never poisons the digest. Add/remove feeds freely; the engine validates each one.",
+  "niches": {
+    "ai-software": {
+      "rss": [
+        "https://huggingface.co/blog/feed.xml",
+        "https://export.arxiv.org/api/query?search_query=cat:cs.AI&sortBy=submittedDate&sortOrder=descending&max_results=15",
+        "https://export.arxiv.org/api/query?search_query=cat:cs.LG&sortBy=submittedDate&sortOrder=descending&max_results=15"
+      ],
+      "gdelt_query": "(\"AI agent\" OR \"open source model\" OR \"large language model\") sourcelang:english",
+      "keywords": ["ai", "model", "llm", "agent", "open source", "open-source", "gpt", "claude", "gemini", "llama", "inference", "fine-tune", "fine-tuning", "transformer", "dataset", "benchmark", "reasoning", "multimodal", "neural", "diffusion", "training", "release", "launch"],
+      "exclude": ["election", "senator", "congress", "parliament", "president trump", "white house", "lawsuit alleges", "indicted", "impeach", "g7 summit", "ceasefire", "war crimes"]
+    },
+    "money-finance": {
+      "rss": [
+        "https://www.federalreserve.gov/feeds/press_all.xml"
+      ],
+      "gdelt_query": "(\"interest rates\" OR \"inflation\" OR \"stock market\" OR \"federal reserve\") sourcelang:english",
+      "keywords": ["interest rate", "rate cut", "rate hike", "inflation", "fed", "federal reserve", "fomc", "treasury", "bond", "yield", "recession", "gdp", "jobs report", "unemployment", "earnings", "ipo", "bitcoin", "crypto", "stock market", "s&p", "nasdaq", "dividend", "savings", "mortgage"],
+      "exclude": ["election", "senator", "congressional hearing", "campaign", "indicted", "impeach", "sanctions on", "war"]
+    }
+  }
+}
