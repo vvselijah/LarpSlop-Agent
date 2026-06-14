@@ -41,9 +41,12 @@ The engine **stops at files in `out/`** and prints a manifest — it NEVER publi
 4. **Reframe + cut** to 9:16 and deliver:
    `python reframe.py <video> data/<stem>.highlights.json [--encoder libx264]`
    → writes `out/<stem>_clip<NN>.mp4` (1080×1920, H.264, AAC) + `out/<stem>.manifest.json`.
-   - If the source is already ~9:16 it trims + encodes. If it's wider (16:9 podcast/YouTube) it **center-crops**
-     to 9:16 — that's the v1 fallback. **Face/subject-tracking reframe is the documented v2 enhancement**
-     (OpenCV/MediaPipe → smoothed crop track); flag it when a wide source would clip a speaker off-center.
+   - If the source is already ~9:16, `reframe.py` trims + encodes; if it's a single-subject wide shot it center-crops.
+   - **For a WIDE / 16:9 multi-person source (interview/podcast), use `facetrack.py` instead** — it follows ONE
+     chosen speaker (OpenCV Haar lock-and-hold; FFmpeg `sendcmd` crop, audio kept):
+     `python facetrack.py <video> --start S --end E --target largest|left|right --name <clipNN>` → `out/<name>_track.mp4`.
+     Run it per-highlight with the speaker featured in that clip (pick `--target` by glancing at a frame + the
+     transcript). v2 = **LR-ASD active-speaker AUTO-switch / multicam** (see `docs/plans/2026-06-14-interview-clip-enhancements-research.md`).
    - Swap `--encoder h264_nvenc` only after the GPU (torch cu128) is enabled.
 
 5. **Caption (recommended) — burn word-timed captions:**

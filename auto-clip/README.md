@@ -8,10 +8,11 @@ genuinely-missing pieces. Full design + caveats: `docs/plans/2026-06-13-auto-cli
 - ✅ **`transcribe.py`** — local word-level transcription (faster-whisper). **Built + tested** (77 seg / 1182 words, ~12x realtime CPU).
 - ✅ **`highlight.py`** — moment selector → ranked `{rank,start,end,title,hook,score,reason}`. **Built + tested.** Three providers:
   `anthropic` (needs `ANTHROPIC_API_KEY`), `ollama` (local), and **`agent`** — the Claude Code agent IS the selector, **no key/install needed** (the default for interactive runs; see the `auto-clip` skill).
-- ✅ **`reframe.py`** — 9:16 cut + reframe. **Built + tested** (6/6 clips, 1080×1920 H.264/AAC). Already-9:16 → trim+encode; wider → center-crop (v1). **Face/subject-tracking reframe is the v2 enhancement.**
+- ✅ **`reframe.py`** — simple 9:16 cut + reframe. **Built + tested** (6/6 clips, 1080×1920 H.264/AAC). Already-9:16 → trim+encode; single-subject wide → center-crop.
+- ✅ **`facetrack.py`** — face-tracking 9:16 reframe for WIDE/multi-person sources (interviews). OpenCV Haar (frontal+profile, bundled — no download) **detection only**; locks onto one chosen speaker (largest/left/right, lock-and-hold through profile turns); FFmpeg `sendcmd` crop (audio kept). **Built + tested** on the Elijah/Derwin interview — both speakers, framing verified on-frame. v2 = LR-ASD active-speaker auto-switch.
 - ✅ **`caption.py`** — burn word-timed captions (pure FFmpeg/libass; big bold, lower-third, ~3 words/group, all-caps). **Built + tested** (6/6 `_cap.mp4`; captions verified on-frame). Premium animated house style via `caption-engine` is the optional alternative.
 - ✅ **`auto-clip` skill** (`.claude/skills/auto-clip/`) — orchestrates the full interactive pipeline (transcribe → agent-highlight → reframe → **caption** → manifest).
-- ⏳ **Remaining:** face-track reframe (v2, OpenCV/MediaPipe), GPU torch-cu128 (Elijah-gated multi-GB; near-instant transcribe + `h264_nvenc`), `Daily Agent Refresh.bat` wiring (on-demand first).
+- ⏳ **Remaining (roadmap in `docs/plans/2026-06-14-interview-clip-enhancements-research.md`):** pure-FFmpeg silence/filler cut + audio cleanup (loudnorm/afftdn) + punch-in & emoji/word-pop captions (DO FIRST — no new deps); **LR-ASD active-speaker auto-switch + multicam** (the real v2 brain — torch, gated, keep models OFF OneDrive); PySceneDetect shot cuts; background blur (MediaPipe Selfie, add-later); GPU torch-cu128 (Elijah-gated); `Daily Agent Refresh.bat` wiring.
 
 ## The 3 new pieces (everything else is reused)
 1. **Transcribe** (done) — word-level JSON the caption-engine + highlight selector consume.
