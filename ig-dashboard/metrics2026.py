@@ -29,9 +29,12 @@ FIELD REALITY (verified against the live store.json on 2026-06-14):
     ig_reels_avg_watch_time, ig_reels_video_view_total_time
   - likes  = post-level "like_count"     (NOT inside insights)
   - comments = post-level "comments_count" (NOT inside insights)
-  - reels_skip_rate / reposts are NOT YET in the store (Phase 1 of the plan
-    adds them to refresh.py, which is out of scope here). Until then the skip
-    gate degrades to NEUTRAL and repost_rate is None -- never counted as a win.
+  - reels_skip_rate / reposts are now ingested by refresh.py (2026-06-14).
+    reels_skip_rate is stored as a 0..1 FRACTION (refresh.py normalizes it from
+    the API's 0-100 percent at ingestion, so the thresholds below apply as-is);
+    reposts is a raw count. Both land in insights[...] for reels refreshed since
+    the change -- recent posts (<=14d) on any run, all 300 after `--full`. Any
+    post still missing skip_rate keeps the gate NEUTRAL (not a win, not a penalty).
   - all 300 tracked posts are currently REELS.
 
 Usage:

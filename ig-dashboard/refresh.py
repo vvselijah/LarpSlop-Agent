@@ -39,7 +39,11 @@ HISTORY_CAP = 90                  # max velocity snapshots kept per post
 MEDIA_FIELDS = ("id,caption,media_type,media_product_type,permalink,"
                 "timestamp,like_count,comments_count,thumbnail_url,media_url,shortcode")
 CORE_INSIGHTS = "views,reach,saved,shares,total_interactions"
-REEL_EXTRAS = "ig_reels_avg_watch_time,ig_reels_video_view_total_time"
+# reels_skip_rate + reposts are REELS-only metrics that feed metrics2026.py's
+# 2026 skip-gate. reels_skip_rate comes back 0-100 (percent) and is normalized
+# to a 0..1 fraction at ingestion (see sync_posts); reposts is a raw count.
+REEL_EXTRAS = ("ig_reels_avg_watch_time,ig_reels_video_view_total_time,"
+               "reels_skip_rate,reposts")
 DAILY_METRICS = "reach,profile_views,website_clicks,accounts_engaged,total_interactions"
 DAILY_BACKFILL_DAYS = 29          # API only serves ~30 days back
 DEMO_BREAKDOWNS = ["age", "gender", "country", "city"]
@@ -207,7 +211,12 @@ def sync_posts(store, token, full):
                 ex = api(f"{pid}/insights", {"metric": REEL_EXTRAS, "access_token": token})
                 if "error" not in ex:
                     for d in ex.get("data", []):
-                        vals[d["name"]] = d.get("values", [{}])[0].get("value")
+                        v = d.get("values", [{}])[0].get("value")
+                        # API returns reels_skip_rate as a 0-100 percent; store as
+                        # a 0..1 fraction so it matches metrics2026's rate contract.
+                        if d["name"] == "reels_skip_rate" and isinstance(v, (int, float)):
+                            v = v / 100.0
+                        vals[d["name"]] = v
             post["insights"] = vals
             post["insights_updated"] = now.isoformat()
             # velocity history: snapshot the moving numbers while the post is young
