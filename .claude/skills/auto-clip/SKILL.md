@@ -58,6 +58,15 @@ The engine **stops at files in `out/`** and prints a manifest — it NEVER publi
 6. **Report the manifest** to Elijah: per clip — rank, file, title, hook, duration. These are review files in
    `out/`, NOT posted. Offer the obvious next steps (below) but do not act on them without his go-ahead.
 
+## Optional polish — tighten pacing (cut dead air + um/uh)
+When a clip drags, run `tighten.py` BEFORE captioning to remove long silences + disfluencies (it uses the
+word-level transcript, cleaner than `silencedetect`):
+`python tighten.py <source> --transcript data/<stem>.transcript.json --start S --end E --name <clipNN>`
+→ `out/<clipNN>_tight.mp4` + a remapped `data/<clipNN>.tight.transcript.json`. Then caption the tightened clip:
+`python caption.py data/<clipNN>.tight.transcript.json --clip out/<clipNN>_tight.mp4`. (For a wide source, run
+`facetrack.py` on the tightened clip first, then caption its output.) Default filler set is conservative
+(um/uh/er...), NOT like/so/you-know.
+
 ## Next layer (offer, don't auto-run)
 - **Captions:** built-in via `caption.py` (step 5, pure-FFmpeg). For the premium animated house style instead,
   wire the word-level transcript into the `caption-engine` skill; see `viral-shortform-2026` for polish.
