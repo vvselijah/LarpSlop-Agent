@@ -4,6 +4,10 @@
 > experiments. Newest first. Humans may edit/prune freely. Keep entries short:
 > one finding, one line of evidence, one implication.
 
+## 2026-06-15 — self-improve loop closed: the hub now grades its own model
+
+- **The 2026 score is validated out-of-sample — it actually predicts reality.** New read-only loop `self-improve/grade.py` graded `metrics2026` on a held-out split (train older 70% / test newer 30%): Spearman **+0.455 vs realized views**, **+0.476 vs avg watch-time** (n=90 it never saw), and the skip-gate is valid (healthy 14.8k vs throttled 5.4k mean views). Implication: rank on metrics2026 with confidence — and the genuinely-new frontier is now INSIDE the loop, so close self-improve L2 (log Higgsfield's pre-publish hook score so it can be graded vs realized watch-time, the 5–10× lever post-hoc rates can't see) rather than buying a 31st intel source. Propose-never-apply held all night: the grader writes only its append-only ledger, and the +0.023 weight-tune stays a PROPOSAL — harden it against fooling itself (majority-of-k-splits) before applying.
+
 ## 2026-06-14 — overnight autonomous research+build program (6 builds + 30-candidate research)
 
 - **Autonomous overnight loops run throttle-free at ≤5 concurrent agents, ONE workflow/agent at a time.** Evidence: 6 research waves (~7 agents each) + 6 build subagents ran clean over hours, zero throttling. Implication: pace via background-task completions (not bursts); keep the orchestrator's context lean by delegating + writing all state to disk (the tracker survives compaction).
