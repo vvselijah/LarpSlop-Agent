@@ -1,0 +1,71 @@
+{
+  "_readme": "Tool catalog for artifacial.io — Elijah's own AI Character & Video Studio venture (face-swap / image-to-video). The artifacial-ad-ideator skill fans over `tools` and DRAFTS one analytics-grounded ad concept per tool as a vault idea-note (DRAFT ONLY — never posts, zero ad spend). Each entry: `name` (tool label), `slug` (kebab id, stable join key), `what` (one-line capability), `ad_angle` (the seed pain/desire this tool sells against — a starting hook, NOT a finished ad), `verified` (true = confirmed on the live site at `_fetched`, '_unverified' string = plausible seed entry to confirm before use). Edit freely; the skill validates parse + tolerates missing optional fields. Tool list is a point-in-time snapshot — re-fetch artifacial.io and update when the product changes.",
+  "_source": "https://artifacial.io",
+  "_fetched": "2026-06-15",
+  "_venture": "Artifacial — listed in obsidian/Elijah's vault/CLAUDE.md active ventures; AI Character & Video Studio. Free tier observed: 3 generations on sign-up.",
+  "tools": [
+    {
+      "name": "Face Swap",
+      "slug": "face-swap",
+      "what": "Applies your face onto any existing footage or video clip.",
+      "ad_angle": "Put yourself in any scene you could never film — no camera, no crew.",
+      "verified": true
+    },
+    {
+      "name": "Image to Video",
+      "slug": "image-to-video",
+      "what": "Turns a single still photo into a cinematic moving video sequence.",
+      "ad_angle": "One photo becomes a moving cinematic shot — bring a dead image to life.",
+      "verified": true
+    },
+    {
+      "name": "Motion Transfer",
+      "slug": "motion-transfer",
+      "what": "Transfers movement and poses from reference footage onto your character.",
+      "ad_angle": "Steal the exact movement from any clip and run it on your own character.",
+      "verified": true
+    },
+    {
+      "name": "Character Swap",
+      "slug": "character-swap",
+      "what": "Substitutes a different character model while keeping consistency across the shot.",
+      "ad_angle": "Recast the lead of any video without reshooting a single frame.",
+      "verified": true
+    },
+    {
+      "name": "Lip Sync",
+      "slug": "lip-sync",
+      "what": "Synchronizes mouth movement to any audio track or line of dialogue.",
+      "ad_angle": "Make any character say anything — perfectly matched mouth to audio.",
+      "verified": true
+    },
+    {
+      "name": "Upscale",
+      "slug": "upscale",
+      "what": "Enhances video resolution and detail to clean 1080p cinematic output.",
+      "ad_angle": "Turn a blurry low-res clip into sharp 1080p you'd actually post.",
+      "verified": true
+    },
+    {
+      "name": "End-Frame Control",
+      "slug": "end-frame-control",
+      "what": "Directs the exact final frame — position and composition of where the shot lands.",
+      "ad_angle": "Decide exactly where a generated shot ENDS instead of rolling the dice.",
+      "verified": true
+    },
+    {
+      "name": "Motion Templates",
+      "slug": "motion-templates",
+      "what": "Pre-built camera/movement patterns you drop onto a scene to direct it.",
+      "ad_angle": "Pro camera moves on tap — no rig, no operator, no film-school degree.",
+      "verified": true
+    },
+    {
+      "name": "Prompt Enhancer",
+      "slug": "prompt-enhancer",
+      "what": "Refines a rough text description into a stronger prompt for better scene outcomes.",
+      "ad_angle": "Bad prompt in, great scene out — the model writes the prompt for you.",
+      "verified": true
+    }
+  ]
+}
