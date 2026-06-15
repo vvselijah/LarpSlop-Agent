@@ -27,6 +27,8 @@ team/stats.md
 # auto-clip generated artifacts: transcripts/highlights are regenerable, clips are large
 auto-clip/data/
 auto-clip/out/
+# self-improve generated grade ledger: regenerable from store.json by re-running grade.py
+self-improve/data/
 
 # --- Large media (110MB+ of May-14 TikTok analysis inputs) ---
 *.mp4
