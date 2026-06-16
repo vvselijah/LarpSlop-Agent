@@ -32,14 +32,14 @@ for value + how to extract more + what's underused, grounded in live model data,
 *architecture upgrades*, each tiered (Do-now / Later / Skip) with the cheapest first slice.
 
 ## How to run it (the ONLY step in this session)
-1. Resolve today's date as `YYYY-MM-DD` (the workflow can't read the clock).
-2. Launch the background workflow — **do not do the research inline** (that's the anti-rot rule):
+1. Launch the background workflow — **do not do the research inline** (that's the anti-rot rule). It
+   **self-dates** via PowerShell (`Get-Date`), so you don't need to pass the date; `focus` is optional:
    ```
-   Workflow({ name: 'level-up', args: { date: '<YYYY-MM-DD>', focus: '<optional area>' } })
+   Workflow({ name: 'level-up' })                                  // full pass
+   Workflow({ name: 'level-up', args: { focus: 'monetization' } }) // narrowed
    ```
-   `focus` is optional (e.g. "monetization" or "video tooling") to narrow the sweep; omit for a full pass.
-3. The workflow runs ~5 agents at a time, writes everything to disk, and notifies on completion.
-4. When it completes, **verify before reporting**: `git status` + confirm no production engine was
+2. The workflow runs ~5 agents at a time, writes everything to disk, and notifies on completion.
+3. When it completes, **verify before reporting**: `git status` + confirm no production engine was
    modified (the workflow is propose-only; it should only have created `docs/plans/<date>-level-up.md`,
    updated `docs/LEVEL-UP-LOG.md`, and prepended one `team/memory.md` learning). Then commit + push those
    additive docs and relay the TL;DR + the suggested-order list to Elijah.

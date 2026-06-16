@@ -11,7 +11,6 @@ export const meta = {
 }
 
 const REPO = "C:\\Users\\elija\\OneDrive\\Desktop\\ai agent team"
-const DATE = (args && args.date) || 'undated'
 const FOCUS = (args && args.focus) || 'all areas (viral, content, business, tools, agent practices)'
 
 const GUARD = `You are an agent in Elijah's AI-agent-team hub at ${REPO} (@elijahaifl, ~100k IG followers; niches: AI/tech, founder/business, motivation, money/finance, child-safety). HARD RULES:
@@ -23,6 +22,11 @@ const GUARD = `You are an agent in Elijah's AI-agent-team hub at ${REPO} (@elija
 
 // ----------------------------------------------------------------- Recall
 phase('Recall')
+// Workflow scripts can't read the clock (Date.now() throws), and args.date didn't propagate
+// reliably for named-workflow launches -- so an agent fetches today's date via PowerShell.
+const dateRaw = await agent(`Run exactly this via the PowerShell tool and reply with ONLY the date string it prints (format YYYY-MM-DD), nothing else: Get-Date -Format "yyyy-MM-dd"`, { label: 'today', phase: 'Recall' })
+const _dm = (dateRaw || '').match(/\d{4}-\d{2}-\d{2}/)
+const DATE = (_dm && _dm[0]) || (args && args.date) || 'undated'
 const recall = await agent(`${GUARD}
 
 TASK (Recall — so this pass BUILDS on prior ones and doesn't repeat them). Do all of:
