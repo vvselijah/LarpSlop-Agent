@@ -1,0 +1,170 @@
+# -*- coding: utf-8 -*-
+"""Reel 1 carousel — 'I designed + coded this landing page in one prompt' (ClipWith.ai).
+Capability-flex deck reverse-engineered from reel DaAsx3cNqYS, reframed to Elijah's
+peer 'putting you on' voice. Own identity: EMBER (dark + ClipWith orange).
+Embeds the REAL rendered landing page (landing/_hero.png) as the proof shot.
+Render with ..\\headroom\\render.ps1 (headless Edge)."""
+import os
+BASE = os.path.dirname(os.path.abspath(__file__))
+
+# absolute file URIs so the screenshots resolve from BOTH slide-folder and board locations
+_P = "file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/carousel-builds/reel1/landing/"
+HERO = _P + "_hero.png"        # the AI one-prompt rebuild
+REAL = _P + "_real_hero.png"   # the live clipwith.ai (the "before")
+
+STRUCT = """
+*{margin:0;padding:0;box-sizing:border-box}
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;
+  background:var(--bg);color:var(--ink);padding:150px 96px;
+  display:flex;flex-direction:column;justify-content:center;
+  font-family:var(--fb),'Segoe UI',sans-serif}
+.brand{position:absolute;top:84px;left:96px;font:600 30px var(--fb);color:var(--muted);letter-spacing:.02em}
+.swipe{position:absolute;bottom:78px;right:96px;font:500 30px var(--fb);color:var(--muted);opacity:.9}
+.eyebrow{font:700 26px var(--fb);letter-spacing:.26em;text-transform:uppercase;color:var(--eye);margin-bottom:30px}
+.h1{font-family:var(--fh);font-weight:var(--hw);color:var(--ink);letter-spacing:var(--ht)}
+.h1.xl{font-size:98px;line-height:1.02}
+.h1.lg{font-size:80px;line-height:1.06}
+.h1.md{font-size:66px;line-height:1.1}
+.ac{color:var(--accent)}
+.grad{background:linear-gradient(110deg,var(--accent),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+b{color:var(--ink);font-weight:700}
+.emo{font-family:'Segoe UI Emoji'}
+.sub{font:400 40px/1.4 var(--fb);color:var(--muted);margin-top:36px;max-width:900px}
+.body{font:400 39px/1.45 var(--fb);color:var(--muted);margin-top:32px;max-width:900px}
+.cap{margin-top:30px;font:400 33px/1.42 var(--fb);color:var(--muted);max-width:900px}
+.footer{margin-top:56px;font:400 28px var(--fb);color:var(--muted)}
+/* prompt card (save magnet) */
+.prompt{margin-top:42px;background:var(--card);border:1px solid var(--cbd);border-left:5px solid var(--accent);
+  border-radius:22px;padding:40px 44px}
+.plabel{font:700 23px var(--fm);letter-spacing:.16em;text-transform:uppercase;color:var(--eye);margin-bottom:20px}
+.ptext{font:500 33px/1.5 var(--fm);color:var(--ink)}
+.ptext .o{color:var(--accent)}
+/* checklist */
+.chk{list-style:none;margin-top:36px}
+.chk li{display:flex;align-items:flex-start;gap:22px;font:400 38px/1.32 var(--fb);color:var(--ink);margin-bottom:24px}
+.chk li .t{flex:none;width:46px;height:46px;border-radius:13px;background:var(--asoft);border:1px solid var(--cbd);
+  color:var(--accent);font:800 26px var(--fh);display:flex;align-items:center;justify-content:center;margin-top:4px}
+/* before -> after */
+.ba{display:flex;align-items:center;gap:30px;margin-top:48px;flex-wrap:wrap}
+.ba .col{flex:1;min-width:340px;background:var(--card);border:1px solid var(--cbd);border-radius:22px;padding:38px 40px}
+.ba .col .l{font:700 24px var(--fb);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.ba .col.old .l{color:#ff7a6b}
+.ba .col.old .v{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(255,122,107,.6)}
+.ba .col.new .l{color:var(--eye)}
+.ba .v{font:800 50px/1.12 var(--fh);color:var(--ink);letter-spacing:-.01em}
+.ba .new .v{color:var(--accent)}
+.ba .arrow{font-size:60px;color:var(--accent);flex:none}
+/* browser frame holding the real screenshot */
+.bx{margin-top:48px;border-radius:22px;overflow:hidden;border:1px solid var(--cbd);
+  box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 70px rgba(232,118,10,.12);background:#0b0b0f}
+.bx .bar{height:60px;display:flex;align-items:center;gap:13px;padding:0 26px;background:rgba(255,255,255,.04);border-bottom:1px solid var(--hair)}
+.bx .bar .d{width:16px;height:16px;border-radius:50%}
+.bx .bar .u{margin-left:20px;font:500 26px var(--fm);color:var(--muted)}
+.bx .shot{width:100%;display:block}
+.bx.crop .shot{margin-top:0}
+.bx.cropwrap{height:760px}
+.bx.cropwrap .shot{height:auto}
+.stat-big{font-family:var(--fh);font-weight:800;font-size:120px;line-height:1;letter-spacing:-.02em}
+"""
+
+THEMES = {
+ "ember": {
+  "label": "EMBER — dark + ClipWith orange (Reel 1: one-prompt landing page)",
+  "fonts": "https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap",
+  "vars": """:root{
+    --bg:repeating-linear-gradient(0deg, transparent 0 84px, rgba(245,166,35,.07) 84px 86px), repeating-linear-gradient(90deg, transparent 0 84px, rgba(245,166,35,.07) 84px 86px), radial-gradient(86% 64% at 100% 0%, rgba(232,118,10,.30), transparent 56%), radial-gradient(70% 60% at 0% 100%, rgba(99,102,241,.18), transparent 56%), radial-gradient(125% 100% at 16% -8%, #1a1206 0%, #100b06 52%, #050505 100%);
+    --ink:#f1f1f6; --muted:#9a9ab0; --accent:#f5a623; --gold:#caa54a; --asoft:rgba(245,166,35,.12);
+    --onac:#1a1206; --card:rgba(255,255,255,.045); --cbd:rgba(255,255,255,.13);
+    --hair:rgba(255,255,255,.08); --eye:#f5b94a; --barmute:rgba(255,255,255,.18);
+    --fh:'Syne'; --fb:'Outfit'; --fm:'JetBrains Mono'; --hw:800; --ht:-.025em;}""",
+ },
+}
+
+BR = '<div class="brand">@elijahaifl</div>'
+SW = '<div class="swipe">swipe &rarr;</div>'
+
+SLIDES = [
+ # 1 — cover / hook + proof shot (the AI rebuild)
+ (BR + '<div><div class="eyebrow">one prompt &middot; zero code</div>'
+  '<h1 class="h1 xl">I rebuilt our <span class="grad">whole landing page</span> with one prompt.</h1>'
+  '<div class="bx cropwrap"><div class="bar"><span class="d" style="background:#ff5f57"></span><span class="d" style="background:#ffbd2e"></span><span class="d" style="background:#28ca42"></span><span class="u">clipwith.ai &mdash; rebuilt by AI</span></div>'
+  '<img class="shot" src="%s"></div></div>' % HERO + SW),
+ # 2 — no skills needed
+ (BR + '<div class="eyebrow">the part nobody&rsquo;s ready for</div>'
+  '<h1 class="h1 lg">no designer. no developer. <span class="ac">no Figma.</span></h1>'
+  '<p class="body">I didn&rsquo;t open a design tool or write a line of code. I described what I wanted, once &mdash; and the AI built the entire thing. <span class="emo">&#128071;</span></p>' + SW),
+ # 3 — before -> after (the math)
+ (BR + '<div><div class="eyebrow">what changed</div>'
+  '<h1 class="h1 md">a year ago this was a <span class="ac">week + a few grand.</span></h1>'
+  '<div class="ba"><div class="col old"><div class="l">old way</div><div class="v">~1 week<br>designer + dev<br>$1,000s</div></div>'
+  '<div class="arrow">&rarr;</div>'
+  '<div class="col new"><div class="l">just now</div><div class="v">1 prompt<br>~90 seconds<br>$0</div></div></div></div>' + SW),
+ # 4 — the prompt (SAVE MAGNET)
+ (BR + '<div><div class="eyebrow">steal the prompt</div>'
+  '<h1 class="h1 md">this is the <span class="ac">whole prompt.</span></h1>'
+  '<div class="prompt"><div class="plabel">paste into Claude Code</div><div class="ptext">'
+  '&ldquo;Rebuild my landing page as a single self-contained <span class="o">index.html</span>. It&rsquo;s <span class="o">[your product + one-liner]</span>. '
+  'Premium dark mode, brand colors <span class="o">[x]</span>, fonts <span class="o">[y]</span>. Sections: sticky nav, hero with headline + a mascot/mockup, '
+  'stat row, features grid, how-it-works, pricing, FAQ, CTA, footer. Make it genuinely premium &mdash; glassy cards, hairline borders, big display type, '
+  'soft glows. HTML + CSS only, Google Fonts, inline SVG. Output the full file.&rdquo;</div></div>'
+  '<p class="cap">swap the brackets for your thing. that&rsquo;s it. <span class="emo">&#128293;</span></p></div>' + SW),
+ # 5 — what it built
+ (BR + '<div class="eyebrow">from that one message</div>'
+  '<h1 class="h1 md">it wrote <span class="ac">all of it</span> itself.</h1>'
+  '<ul class="chk">'
+  '<li><span class="t">&#10003;</span><span>Hero, headline &amp; our Clippy mascot</span></li>'
+  '<li><span class="t">&#10003;</span><span>The stat row + all 7 feature cards</span></li>'
+  '<li><span class="t">&#10003;</span><span>&ldquo;Fire your editor&rdquo; pricing &amp; the FAQ</span></li>'
+  '<li><span class="t">&#10003;</span><span>Fonts, glows, layout &mdash; code I never touched</span></li>'
+  '</ul>' + SW),
+ # 6 — the honesty beat: this is our REAL live site
+ (BR + '<div><div class="eyebrow">and it&rsquo;s a real product</div>'
+  '<h1 class="h1 md">this is our <span class="ac">actual site</span> &mdash; clipwith.ai, live.</h1>'
+  '<div class="bx cropwrap"><div class="bar"><span class="d" style="background:#ff5f57"></span><span class="d" style="background:#ffbd2e"></span><span class="d" style="background:#28ca42"></span><span class="u">clipwith.ai &mdash; live</span></div>'
+  '<img class="shot" src="%s"></div>'
+  '<p class="cap">the AI didn&rsquo;t invent a page &mdash; it rebuilt our real one, on-brand, in one prompt.</p></div>' % REAL + SW),
+ # 7 — the lesson + soft product
+ (BR + '<div><div class="eyebrow">the real takeaway</div>'
+  '<h1 class="h1 md">you don&rsquo;t need the skill anymore. you need the <span class="ac">idea</span> + the right prompt.</h1>'
+  '<p class="body">Same idea we built our whole startup on: <b>ClipWith</b> edits your videos from a single prompt &mdash; cuts, captions, b-roll, the works. The interface is just&hellip; asking.</p></div>' + SW),
+ # 8 — CTA
+ (BR + '<div><div class="eyebrow">your turn</div>'
+  '<h1 class="h1 lg">save this &mdash; the <span class="ac">full prompt</span> is in the comments.</h1>'
+  '<p class="sub">Copy it, swap in your product, watch it build. Follow &mdash; we&rsquo;re building ClipWith in public at <b>clipwith.ai</b>.</p>'
+  '<div class="footer">@elijahaifl &middot; be smart, be safe, be blessed <span class="emo">&#128591;</span></div></div>'),
+]
+
+HEAD = ('<!doctype html><html><head><meta charset="utf-8">'
+        '<link rel="preconnect" href="https://fonts.googleapis.com">'
+        '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+        '<link href="%s" rel="stylesheet"><style>%s\n%s</style></head><body>')
+TAIL = '</body></html>'
+
+BOARD_CSS = """
+body{background:#0c0a07;font-family:Outfit,sans-serif}
+.board{display:flex;flex-wrap:wrap;gap:18px;width:1416px;padding:22px}
+.title{width:100%;color:#fff;font:600 30px Outfit;padding:6px 2px 4px;letter-spacing:.04em}
+.thumb{width:330px;height:412px;overflow:hidden;border-radius:16px;border:1px solid rgba(255,255,255,.14)}
+.thumb .slide{transform:scale(.30556);transform-origin:top left}
+"""
+
+def slide_doc(theme, frag):
+    t = THEMES[theme]
+    return HEAD % (t["fonts"], STRUCT, t["vars"]) + '<div class="slide">' + frag + '</div>' + TAIL
+
+def board_doc(theme):
+    t = THEMES[theme]
+    thumbs = "".join('<div class="thumb"><div class="slide">%s</div></div>' % f for f in SLIDES)
+    body = '<div class="board"><div class="title">%s</div>%s</div>' % (t["label"], thumbs)
+    return HEAD % (t["fonts"], STRUCT + BOARD_CSS, t["vars"]) + body + TAIL
+
+for theme in THEMES:
+    d = os.path.join(BASE, theme)
+    os.makedirs(d, exist_ok=True)
+    for i, frag in enumerate(SLIDES, 1):
+        with open(os.path.join(d, "slide-%d.html" % i), "w", encoding="utf-8") as f:
+            f.write(slide_doc(theme, frag))
+    with open(os.path.join(BASE, theme + "_board.html"), "w", encoding="utf-8") as f:
+        f.write(board_doc(theme))
+    print("wrote", theme, "(8 slides + board)")
+print("done")

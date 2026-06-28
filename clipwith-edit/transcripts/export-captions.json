@@ -1,0 +1,1928 @@
+{
+  "sourceVideo": "Untitledclippyraw.mp4",
+  "script": "Do you think an ex-drug dealer could take a software company to a million dollars in a year ? My name's Tanner, and I was convicted of trafficking marijuana . And my name's Elijah, and I've never been convicted because I've never done anything wrong. And we've decided to disrupt a $200 billion dollar year industry. The editing industry. But he wants to be a creator, influencer, streamer, youtuber, TikTok, or whatever. So what do they do? They record everything, download, cap cut, and dream of posting three times a day with pro-level edits and going viral. But reality is, 99% of creators don't know how to edit. So they spend months attempting to learn a skill that takes people years to not even master . Or settling and spending thousands a month for an editor . Or they take the lazy route and find cheap templates that tank their quality and make their content look like everybody else's. And listen, we understand, I myself was about to spend $2,500 a month because I post almost 200 videos a month. That's just short form content. Not everyone has that budget, and not everyone has 100 hours to learn something. And while you're stressing about editing, your creativity and motivation are rapidly declining. So we built the first agent prompt to edit model. No more are the days of navigating around a confusing menu that takes months to learn and years to even perfect. Flip with A.I. handles motion graphics, cuts, captions , SFX, and everything else that you would need to do, literally just ask. If you're not taking full advantage of social media because you don't have a good editor, or the time to be able to put into it, or the money to be able to pay for it, we have fully eliminated that issue for everybody. This video is actually edited by Clip With A.I. with a few simple prompts. And make sure you follow because we're going to be building in public and documenting every single step of the journey. We're set to officially release at the end of the month, and if you want to join over 1,000 other creators who've already signed up for the free wait list, go check us out at clipwith. ai. Thank you. Yeah?",
+  "totalWords": 384,
+  "estimatedDuration": 104.4,
+  "words": [
+    {
+      "word": "Do",
+      "start": 0,
+      "end": 0.12
+    },
+    {
+      "word": "you",
+      "start": 0.28,
+      "end": 0.3
+    },
+    {
+      "word": "think",
+      "start": 0.31,
+      "end": 0.53
+    },
+    {
+      "word": "an",
+      "start": 0.61,
+      "end": 0.72
+    },
+    {
+      "word": "ex-drug",
+      "start": 0.72,
+      "end": 1.01
+    },
+    {
+      "word": "dealer",
+      "start": 1.17,
+      "end": 1.54
+    },
+    {
+      "word": "could",
+      "start": 1.54,
+      "end": 1.72
+    },
+    {
+      "word": "take",
+      "start": 1.72,
+      "end": 1.82
+    },
+    {
+      "word": "a",
+      "start": 1.87,
+      "end": 2
+    },
+    {
+      "word": "software",
+      "start": 2,
+      "end": 2.38
+    },
+    {
+      "word": "company",
+      "start": 2.38,
+      "end": 2.63
+    },
+    {
+      "word": "to",
+      "start": 2.64,
+      "end": 2.82
+    },
+    {
+      "word": "a",
+      "start": 2.82,
+      "end": 2.88
+    },
+    {
+      "word": "million",
+      "start": 2.88,
+      "end": 3.3
+    },
+    {
+      "word": "dollars",
+      "start": 3.3,
+      "end": 3.68
+    },
+    {
+      "word": "in",
+      "start": 3.8,
+      "end": 3.88
+    },
+    {
+      "word": "a",
+      "start": 3.88,
+      "end": 4.01
+    },
+    {
+      "word": "year",
+      "start": 4.01,
+      "end": 4.36
+    },
+    {
+      "word": "?",
+      "start": 4.56,
+      "end": 4.75
+    },
+    {
+      "word": "My",
+      "start": 4.76,
+      "end": 4.9
+    },
+    {
+      "word": "name's",
+      "start": 5.11,
+      "end": 5.33
+    },
+    {
+      "word": "Tanner,",
+      "start": 5.33,
+      "end": 5.88
+    },
+    {
+      "word": "and",
+      "start": 5.89,
+      "end": 6.03
+    },
+    {
+      "word": "I",
+      "start": 6.03,
+      "end": 6.07
+    },
+    {
+      "word": "was",
+      "start": 6.07,
+      "end": 6.21
+    },
+    {
+      "word": "convicted",
+      "start": 6.21,
+      "end": 6.64
+    },
+    {
+      "word": "of",
+      "start": 6.64,
+      "end": 6.73
+    },
+    {
+      "word": "trafficking",
+      "start": 6.73,
+      "end": 7.25
+    },
+    {
+      "word": "marijuana",
+      "start": 7.25,
+      "end": 7.51
+    },
+    {
+      "word": ".",
+      "start": 7.71,
+      "end": 7.72
+    },
+    {
+      "word": "And",
+      "start": 7.87,
+      "end": 7.87
+    },
+    {
+      "word": "my",
+      "start": 7.94,
+      "end": 7.97
+    },
+    {
+      "word": "name's",
+      "start": 7.97,
+      "end": 8.28
+    },
+    {
+      "word": "Elijah,",
+      "start": 8.28,
+      "end": 8.72
+    },
+    {
+      "word": "and",
+      "start": 8.72,
+      "end": 8.83
+    },
+    {
+      "word": "I've",
+      "start": 8.84,
+      "end": 8.99
+    },
+    {
+      "word": "never",
+      "start": 8.99,
+      "end": 9.19
+    },
+    {
+      "word": "been",
+      "start": 9.19,
+      "end": 9.35
+    },
+    {
+      "word": "convicted",
+      "start": 9.35,
+      "end": 9.71
+    },
+    {
+      "word": "because",
+      "start": 9.78,
+      "end": 10.11
+    },
+    {
+      "word": "I've",
+      "start": 10.11,
+      "end": 10.32
+    },
+    {
+      "word": "never",
+      "start": 10.32,
+      "end": 10.59
+    },
+    {
+      "word": "done",
+      "start": 10.59,
+      "end": 10.81
+    },
+    {
+      "word": "anything",
+      "start": 10.81,
+      "end": 11.11
+    },
+    {
+      "word": "wrong.",
+      "start": 11.25,
+      "end": 11.56
+    },
+    {
+      "word": "And",
+      "start": 11.56,
+      "end": 11.75
+    },
+    {
+      "word": "we've",
+      "start": 11.87,
+      "end": 12.07
+    },
+    {
+      "word": "decided",
+      "start": 12.07,
+      "end": 12.52
+    },
+    {
+      "word": "to",
+      "start": 12.52,
+      "end": 12.63
+    },
+    {
+      "word": "disrupt",
+      "start": 12.67,
+      "end": 13.07
+    },
+    {
+      "word": "a",
+      "start": 13.14,
+      "end": 13.15
+    },
+    {
+      "word": "$200",
+      "start": 13.15,
+      "end": 13.79
+    },
+    {
+      "word": "billion",
+      "start": 13.93,
+      "end": 14.25
+    },
+    {
+      "word": "dollar",
+      "start": 14.25,
+      "end": 14.64
+    },
+    {
+      "word": "year",
+      "start": 14.64,
+      "end": 14.9
+    },
+    {
+      "word": "industry.",
+      "start": 14.9,
+      "end": 15.68
+    },
+    {
+      "word": "The",
+      "start": 15.85,
+      "end": 15.9
+    },
+    {
+      "word": "editing",
+      "start": 15.9,
+      "end": 16.42
+    },
+    {
+      "word": "industry.",
+      "start": 16.42,
+      "end": 17.06
+    },
+    {
+      "word": "But",
+      "start": 17.14,
+      "end": 17.21
+    },
+    {
+      "word": "he",
+      "start": 17.21,
+      "end": 17.31
+    },
+    {
+      "word": "wants",
+      "start": 17.31,
+      "end": 17.54
+    },
+    {
+      "word": "to",
+      "start": 17.57,
+      "end": 17.67
+    },
+    {
+      "word": "be",
+      "start": 17.67,
+      "end": 17.77
+    },
+    {
+      "word": "a",
+      "start": 17.77,
+      "end": 17.82
+    },
+    {
+      "word": "creator,",
+      "start": 17.82,
+      "end": 18.29
+    },
+    {
+      "word": "influencer,",
+      "start": 18.29,
+      "end": 18.91
+    },
+    {
+      "word": "streamer,",
+      "start": 18.91,
+      "end": 19.5
+    },
+    {
+      "word": "youtuber,",
+      "start": 19.5,
+      "end": 20.12
+    },
+    {
+      "word": "TikTok,",
+      "start": 20.12,
+      "end": 20.58
+    },
+    {
+      "word": "or",
+      "start": 20.62,
+      "end": 20.73
+    },
+    {
+      "word": "whatever.",
+      "start": 20.73,
+      "end": 21.38
+    },
+    {
+      "word": "So",
+      "start": 21.54,
+      "end": 21.54
+    },
+    {
+      "word": "what",
+      "start": 21.63,
+      "end": 21.71
+    },
+    {
+      "word": "do",
+      "start": 21.71,
+      "end": 21.79
+    },
+    {
+      "word": "they",
+      "start": 21.79,
+      "end": 21.96
+    },
+    {
+      "word": "do?",
+      "start": 21.96,
+      "end": 22.21
+    },
+    {
+      "word": "They",
+      "start": 22.22,
+      "end": 22.33
+    },
+    {
+      "word": "record",
+      "start": 22.4,
+      "end": 22.57
+    },
+    {
+      "word": "everything,",
+      "start": 22.57,
+      "end": 23
+    },
+    {
+      "word": "download,",
+      "start": 23,
+      "end": 23.38
+    },
+    {
+      "word": "cap",
+      "start": 23.43,
+      "end": 23.57
+    },
+    {
+      "word": "cut,",
+      "start": 23.57,
+      "end": 23.8
+    },
+    {
+      "word": "and",
+      "start": 23.8,
+      "end": 23.95
+    },
+    {
+      "word": "dream",
+      "start": 23.95,
+      "end": 24.22
+    },
+    {
+      "word": "of",
+      "start": 24.22,
+      "end": 24.3
+    },
+    {
+      "word": "posting",
+      "start": 24.38,
+      "end": 24.72
+    },
+    {
+      "word": "three",
+      "start": 24.72,
+      "end": 25
+    },
+    {
+      "word": "times",
+      "start": 25,
+      "end": 25.28
+    },
+    {
+      "word": "a",
+      "start": 25.28,
+      "end": 25.33
+    },
+    {
+      "word": "day",
+      "start": 25.33,
+      "end": 25.52
+    },
+    {
+      "word": "with",
+      "start": 25.52,
+      "end": 25.67
+    },
+    {
+      "word": "pro-level",
+      "start": 25.68,
+      "end": 26.1
+    },
+    {
+      "word": "edits",
+      "start": 26.1,
+      "end": 26.34
+    },
+    {
+      "word": "and",
+      "start": 26.34,
+      "end": 26.41
+    },
+    {
+      "word": "going",
+      "start": 26.5,
+      "end": 26.72
+    },
+    {
+      "word": "viral.",
+      "start": 26.72,
+      "end": 27.15
+    },
+    {
+      "word": "But",
+      "start": 27.17,
+      "end": 27.31
+    },
+    {
+      "word": "reality",
+      "start": 27.33,
+      "end": 27.71
+    },
+    {
+      "word": "is,",
+      "start": 27.71,
+      "end": 27.86
+    },
+    {
+      "word": "99%",
+      "start": 27.93,
+      "end": 28.31
+    },
+    {
+      "word": "of",
+      "start": 28.31,
+      "end": 28.37
+    },
+    {
+      "word": "creators",
+      "start": 28.42,
+      "end": 28.86
+    },
+    {
+      "word": "don't",
+      "start": 28.86,
+      "end": 29.06
+    },
+    {
+      "word": "know",
+      "start": 29.18,
+      "end": 29.34
+    },
+    {
+      "word": "how",
+      "start": 29.35,
+      "end": 29.51
+    },
+    {
+      "word": "to",
+      "start": 29.51,
+      "end": 29.61
+    },
+    {
+      "word": "edit.",
+      "start": 29.61,
+      "end": 29.92
+    },
+    {
+      "word": "So",
+      "start": 30.13,
+      "end": 30.2
+    },
+    {
+      "word": "they",
+      "start": 30.2,
+      "end": 30.44
+    },
+    {
+      "word": "spend",
+      "start": 30.44,
+      "end": 30.74
+    },
+    {
+      "word": "months",
+      "start": 30.74,
+      "end": 31.1
+    },
+    {
+      "word": "attempting",
+      "start": 31.1,
+      "end": 31.72
+    },
+    {
+      "word": "to",
+      "start": 31.72,
+      "end": 31.84
+    },
+    {
+      "word": "learn",
+      "start": 31.84,
+      "end": 32.14
+    },
+    {
+      "word": "a",
+      "start": 32.14,
+      "end": 32.2
+    },
+    {
+      "word": "skill",
+      "start": 32.2,
+      "end": 32.5
+    },
+    {
+      "word": "that",
+      "start": 32.5,
+      "end": 32.74
+    },
+    {
+      "word": "takes",
+      "start": 32.74,
+      "end": 33.03
+    },
+    {
+      "word": "people",
+      "start": 33.06,
+      "end": 33.41
+    },
+    {
+      "word": "years",
+      "start": 33.41,
+      "end": 33.71
+    },
+    {
+      "word": "to",
+      "start": 33.71,
+      "end": 33.83
+    },
+    {
+      "word": "not",
+      "start": 33.83,
+      "end": 34.01
+    },
+    {
+      "word": "even",
+      "start": 34.01,
+      "end": 34.25
+    },
+    {
+      "word": "master",
+      "start": 34.25,
+      "end": 34.6
+    },
+    {
+      "word": ".",
+      "start": 34.76,
+      "end": 34.76
+    },
+    {
+      "word": "Or",
+      "start": 34.81,
+      "end": 34.86
+    },
+    {
+      "word": "settling",
+      "start": 34.86,
+      "end": 35.28
+    },
+    {
+      "word": "and",
+      "start": 35.28,
+      "end": 35.43
+    },
+    {
+      "word": "spending",
+      "start": 35.43,
+      "end": 35.78
+    },
+    {
+      "word": "thousands",
+      "start": 35.91,
+      "end": 36.31
+    },
+    {
+      "word": "a",
+      "start": 36.32,
+      "end": 36.37
+    },
+    {
+      "word": "month",
+      "start": 36.37,
+      "end": 36.63
+    },
+    {
+      "word": "for",
+      "start": 36.63,
+      "end": 36.78
+    },
+    {
+      "word": "an",
+      "start": 36.78,
+      "end": 36.87
+    },
+    {
+      "word": "editor",
+      "start": 36.87,
+      "end": 37.11
+    },
+    {
+      "word": ".",
+      "start": 37.4,
+      "end": 37.4
+    },
+    {
+      "word": "Or",
+      "start": 37.47,
+      "end": 37.5
+    },
+    {
+      "word": "they",
+      "start": 37.5,
+      "end": 37.69
+    },
+    {
+      "word": "take",
+      "start": 37.73,
+      "end": 37.88
+    },
+    {
+      "word": "the",
+      "start": 37.95,
+      "end": 38.08
+    },
+    {
+      "word": "lazy",
+      "start": 38.08,
+      "end": 38.29
+    },
+    {
+      "word": "route",
+      "start": 38.29,
+      "end": 38.55
+    },
+    {
+      "word": "and",
+      "start": 38.55,
+      "end": 38.68
+    },
+    {
+      "word": "find",
+      "start": 38.78,
+      "end": 38.92
+    },
+    {
+      "word": "cheap",
+      "start": 38.92,
+      "end": 39.18
+    },
+    {
+      "word": "templates",
+      "start": 39.18,
+      "end": 39.71
+    },
+    {
+      "word": "that",
+      "start": 39.76,
+      "end": 39.92
+    },
+    {
+      "word": "tank",
+      "start": 39.92,
+      "end": 40.12
+    },
+    {
+      "word": "their",
+      "start": 40.12,
+      "end": 40.37
+    },
+    {
+      "word": "quality",
+      "start": 40.37,
+      "end": 40.71
+    },
+    {
+      "word": "and",
+      "start": 40.71,
+      "end": 40.8
+    },
+    {
+      "word": "make",
+      "start": 40.8,
+      "end": 40.89
+    },
+    {
+      "word": "their",
+      "start": 40.98,
+      "end": 41.24
+    },
+    {
+      "word": "content",
+      "start": 41.24,
+      "end": 41.69
+    },
+    {
+      "word": "look",
+      "start": 41.69,
+      "end": 41.92
+    },
+    {
+      "word": "like",
+      "start": 41.97,
+      "end": 42.21
+    },
+    {
+      "word": "everybody",
+      "start": 42.21,
+      "end": 42.78
+    },
+    {
+      "word": "else's.",
+      "start": 42.78,
+      "end": 43.2
+    },
+    {
+      "word": "And",
+      "start": 43.24,
+      "end": 43.35
+    },
+    {
+      "word": "listen,",
+      "start": 43.35,
+      "end": 43.76
+    },
+    {
+      "word": "we",
+      "start": 43.76,
+      "end": 43.86
+    },
+    {
+      "word": "understand,",
+      "start": 43.86,
+      "end": 44.5
+    },
+    {
+      "word": "I",
+      "start": 44.54,
+      "end": 44.56
+    },
+    {
+      "word": "myself",
+      "start": 44.56,
+      "end": 44.97
+    },
+    {
+      "word": "was",
+      "start": 44.97,
+      "end": 45.17
+    },
+    {
+      "word": "about",
+      "start": 45.17,
+      "end": 45.51
+    },
+    {
+      "word": "to",
+      "start": 45.51,
+      "end": 45.64
+    },
+    {
+      "word": "spend",
+      "start": 45.64,
+      "end": 45.97
+    },
+    {
+      "word": "$2,500",
+      "start": 45.98,
+      "end": 46.97
+    },
+    {
+      "word": "a",
+      "start": 46.98,
+      "end": 47.04
+    },
+    {
+      "word": "month",
+      "start": 47.04,
+      "end": 47.36
+    },
+    {
+      "word": "because",
+      "start": 47.49,
+      "end": 47.79
+    },
+    {
+      "word": "I",
+      "start": 47.9,
+      "end": 47.9
+    },
+    {
+      "word": "post",
+      "start": 47.9,
+      "end": 48.1
+    },
+    {
+      "word": "almost",
+      "start": 48.12,
+      "end": 48.46
+    },
+    {
+      "word": "200",
+      "start": 48.46,
+      "end": 48.97
+    },
+    {
+      "word": "videos",
+      "start": 48.97,
+      "end": 49.31
+    },
+    {
+      "word": "a",
+      "start": 49.31,
+      "end": 49.36
+    },
+    {
+      "word": "month.",
+      "start": 49.36,
+      "end": 49.68
+    },
+    {
+      "word": "That's",
+      "start": 49.72,
+      "end": 50.05
+    },
+    {
+      "word": "just",
+      "start": 50.05,
+      "end": 50.3
+    },
+    {
+      "word": "short",
+      "start": 50.3,
+      "end": 50.62
+    },
+    {
+      "word": "form",
+      "start": 50.62,
+      "end": 50.87
+    },
+    {
+      "word": "content.",
+      "start": 50.87,
+      "end": 51.33
+    },
+    {
+      "word": "Not",
+      "start": 51.61,
+      "end": 51.7
+    },
+    {
+      "word": "everyone",
+      "start": 51.7,
+      "end": 52.07
+    },
+    {
+      "word": "has",
+      "start": 52.08,
+      "end": 52.22
+    },
+    {
+      "word": "that",
+      "start": 52.22,
+      "end": 52.38
+    },
+    {
+      "word": "budget,",
+      "start": 52.42,
+      "end": 52.73
+    },
+    {
+      "word": "and",
+      "start": 52.78,
+      "end": 52.9
+    },
+    {
+      "word": "not",
+      "start": 52.92,
+      "end": 53.06
+    },
+    {
+      "word": "everyone",
+      "start": 53.06,
+      "end": 53.44
+    },
+    {
+      "word": "has",
+      "start": 53.44,
+      "end": 53.58
+    },
+    {
+      "word": "100",
+      "start": 53.58,
+      "end": 54.01
+    },
+    {
+      "word": "hours",
+      "start": 54.01,
+      "end": 54.24
+    },
+    {
+      "word": "to",
+      "start": 54.24,
+      "end": 54.33
+    },
+    {
+      "word": "learn",
+      "start": 54.33,
+      "end": 54.56
+    },
+    {
+      "word": "something.",
+      "start": 54.56,
+      "end": 55.12
+    },
+    {
+      "word": "And",
+      "start": 55.25,
+      "end": 55.35
+    },
+    {
+      "word": "while",
+      "start": 55.35,
+      "end": 55.6
+    },
+    {
+      "word": "you're",
+      "start": 55.6,
+      "end": 55.9
+    },
+    {
+      "word": "stressing",
+      "start": 55.9,
+      "end": 56.36
+    },
+    {
+      "word": "about",
+      "start": 56.36,
+      "end": 56.61
+    },
+    {
+      "word": "editing,",
+      "start": 56.61,
+      "end": 57.06
+    },
+    {
+      "word": "your",
+      "start": 57.06,
+      "end": 57.26
+    },
+    {
+      "word": "creativity",
+      "start": 57.26,
+      "end": 57.77
+    },
+    {
+      "word": "and",
+      "start": 57.77,
+      "end": 57.91
+    },
+    {
+      "word": "motivation",
+      "start": 57.91,
+      "end": 58.43
+    },
+    {
+      "word": "are",
+      "start": 58.43,
+      "end": 58.49
+    },
+    {
+      "word": "rapidly",
+      "start": 58.57,
+      "end": 58.93
+    },
+    {
+      "word": "declining.",
+      "start": 58.93,
+      "end": 59.61
+    },
+    {
+      "word": "So",
+      "start": 59.62,
+      "end": 59.62
+    },
+    {
+      "word": "we",
+      "start": 59.82,
+      "end": 59.88
+    },
+    {
+      "word": "built",
+      "start": 59.88,
+      "end": 60.17
+    },
+    {
+      "word": "the",
+      "start": 60.23,
+      "end": 60.29
+    },
+    {
+      "word": "first",
+      "start": 60.41,
+      "end": 60.72
+    },
+    {
+      "word": "agent",
+      "start": 60.73,
+      "end": 61.05
+    },
+    {
+      "word": "prompt",
+      "start": 61.06,
+      "end": 61.44
+    },
+    {
+      "word": "to",
+      "start": 61.45,
+      "end": 61.5
+    },
+    {
+      "word": "edit",
+      "start": 61.57,
+      "end": 61.83
+    },
+    {
+      "word": "model.",
+      "start": 61.83,
+      "end": 62.23
+    },
+    {
+      "word": "No",
+      "start": 62.3,
+      "end": 62.32
+    },
+    {
+      "word": "more",
+      "start": 62.38,
+      "end": 62.57
+    },
+    {
+      "word": "are",
+      "start": 62.57,
+      "end": 62.74
+    },
+    {
+      "word": "the",
+      "start": 62.74,
+      "end": 62.91
+    },
+    {
+      "word": "days",
+      "start": 62.91,
+      "end": 63.13
+    },
+    {
+      "word": "of",
+      "start": 63.13,
+      "end": 63.23
+    },
+    {
+      "word": "navigating",
+      "start": 63.24,
+      "end": 63.8
+    },
+    {
+      "word": "around",
+      "start": 63.8,
+      "end": 64.09
+    },
+    {
+      "word": "a",
+      "start": 64.13,
+      "end": 64.18
+    },
+    {
+      "word": "confusing",
+      "start": 64.18,
+      "end": 64.68
+    },
+    {
+      "word": "menu",
+      "start": 64.68,
+      "end": 64.96
+    },
+    {
+      "word": "that",
+      "start": 64.96,
+      "end": 65.22
+    },
+    {
+      "word": "takes",
+      "start": 65.22,
+      "end": 65.54
+    },
+    {
+      "word": "months",
+      "start": 65.54,
+      "end": 65.93
+    },
+    {
+      "word": "to",
+      "start": 65.93,
+      "end": 66.06
+    },
+    {
+      "word": "learn",
+      "start": 66.06,
+      "end": 66.38
+    },
+    {
+      "word": "and",
+      "start": 66.38,
+      "end": 66.57
+    },
+    {
+      "word": "years",
+      "start": 66.57,
+      "end": 66.88
+    },
+    {
+      "word": "to",
+      "start": 66.88,
+      "end": 67
+    },
+    {
+      "word": "even",
+      "start": 67.04,
+      "end": 67.27
+    },
+    {
+      "word": "perfect.",
+      "start": 67.27,
+      "end": 67.9
+    },
+    {
+      "word": "Flip",
+      "start": 68.08,
+      "end": 68.17
+    },
+    {
+      "word": "with",
+      "start": 68.23,
+      "end": 68.38
+    },
+    {
+      "word": "A.I.",
+      "start": 68.38,
+      "end": 68.78
+    },
+    {
+      "word": "handles",
+      "start": 68.78,
+      "end": 69.15
+    },
+    {
+      "word": "motion",
+      "start": 69.15,
+      "end": 69.47
+    },
+    {
+      "word": "graphics,",
+      "start": 69.47,
+      "end": 69.99
+    },
+    {
+      "word": "cuts,",
+      "start": 69.99,
+      "end": 70.3
+    },
+    {
+      "word": "captions",
+      "start": 70.44,
+      "end": 70.94
+    },
+    {
+      "word": ",",
+      "start": 71.18,
+      "end": 71.18
+    },
+    {
+      "word": "SFX,",
+      "start": 71.27,
+      "end": 72.04
+    },
+    {
+      "word": "and",
+      "start": 72.04,
+      "end": 72.13
+    },
+    {
+      "word": "everything",
+      "start": 72.19,
+      "end": 72.6
+    },
+    {
+      "word": "else",
+      "start": 72.6,
+      "end": 72.75
+    },
+    {
+      "word": "that",
+      "start": 72.79,
+      "end": 72.94
+    },
+    {
+      "word": "you",
+      "start": 72.94,
+      "end": 73.06
+    },
+    {
+      "word": "would",
+      "start": 73.06,
+      "end": 73.28
+    },
+    {
+      "word": "need",
+      "start": 73.28,
+      "end": 73.45
+    },
+    {
+      "word": "to",
+      "start": 73.45,
+      "end": 73.52
+    },
+    {
+      "word": "do,",
+      "start": 73.53,
+      "end": 73.75
+    },
+    {
+      "word": "literally",
+      "start": 73.83,
+      "end": 74.45
+    },
+    {
+      "word": "just",
+      "start": 74.45,
+      "end": 74.75
+    },
+    {
+      "word": "ask.",
+      "start": 74.77,
+      "end": 75.13
+    },
+    {
+      "word": "If",
+      "start": 75.24,
+      "end": 75.3
+    },
+    {
+      "word": "you're",
+      "start": 75.35,
+      "end": 75.64
+    },
+    {
+      "word": "not",
+      "start": 75.64,
+      "end": 75.75
+    },
+    {
+      "word": "taking",
+      "start": 75.81,
+      "end": 76.09
+    },
+    {
+      "word": "full",
+      "start": 76.09,
+      "end": 76.29
+    },
+    {
+      "word": "advantage",
+      "start": 76.29,
+      "end": 76.73
+    },
+    {
+      "word": "of",
+      "start": 76.74,
+      "end": 76.84
+    },
+    {
+      "word": "social",
+      "start": 76.84,
+      "end": 77.14
+    },
+    {
+      "word": "media",
+      "start": 77.14,
+      "end": 77.4
+    },
+    {
+      "word": "because",
+      "start": 77.4,
+      "end": 77.71
+    },
+    {
+      "word": "you",
+      "start": 77.71,
+      "end": 77.84
+    },
+    {
+      "word": "don't",
+      "start": 77.84,
+      "end": 78.06
+    },
+    {
+      "word": "have",
+      "start": 78.06,
+      "end": 78.24
+    },
+    {
+      "word": "a",
+      "start": 78.24,
+      "end": 78.28
+    },
+    {
+      "word": "good",
+      "start": 78.28,
+      "end": 78.46
+    },
+    {
+      "word": "editor,",
+      "start": 78.46,
+      "end": 78.85
+    },
+    {
+      "word": "or",
+      "start": 78.85,
+      "end": 78.94
+    },
+    {
+      "word": "the",
+      "start": 78.94,
+      "end": 79.03
+    },
+    {
+      "word": "time",
+      "start": 79.09,
+      "end": 79.25
+    },
+    {
+      "word": "to",
+      "start": 79.25,
+      "end": 79.34
+    },
+    {
+      "word": "be",
+      "start": 79.34,
+      "end": 79.43
+    },
+    {
+      "word": "able",
+      "start": 79.43,
+      "end": 79.61
+    },
+    {
+      "word": "to",
+      "start": 79.61,
+      "end": 79.7
+    },
+    {
+      "word": "put",
+      "start": 79.7,
+      "end": 79.83
+    },
+    {
+      "word": "into",
+      "start": 79.83,
+      "end": 80.01
+    },
+    {
+      "word": "it,",
+      "start": 80.01,
+      "end": 80.24
+    },
+    {
+      "word": "or",
+      "start": 80.24,
+      "end": 80.33
+    },
+    {
+      "word": "the",
+      "start": 80.33,
+      "end": 80.46
+    },
+    {
+      "word": "money",
+      "start": 80.47,
+      "end": 80.71
+    },
+    {
+      "word": "to",
+      "start": 80.71,
+      "end": 80.79
+    },
+    {
+      "word": "be",
+      "start": 80.8,
+      "end": 80.89
+    },
+    {
+      "word": "able",
+      "start": 80.89,
+      "end": 81.07
+    },
+    {
+      "word": "to",
+      "start": 81.15,
+      "end": 81.17
+    },
+    {
+      "word": "pay",
+      "start": 81.17,
+      "end": 81.29
+    },
+    {
+      "word": "for",
+      "start": 81.37,
+      "end": 81.45
+    },
+    {
+      "word": "it,",
+      "start": 81.45,
+      "end": 81.59
+    },
+    {
+      "word": "we",
+      "start": 81.8,
+      "end": 81.84
+    },
+    {
+      "word": "have",
+      "start": 81.84,
+      "end": 82.08
+    },
+    {
+      "word": "fully",
+      "start": 82.08,
+      "end": 82.39
+    },
+    {
+      "word": "eliminated",
+      "start": 82.39,
+      "end": 83.01
+    },
+    {
+      "word": "that",
+      "start": 83.01,
+      "end": 83.25
+    },
+    {
+      "word": "issue",
+      "start": 83.25,
+      "end": 83.56
+    },
+    {
+      "word": "for",
+      "start": 83.56,
+      "end": 83.73
+    },
+    {
+      "word": "everybody.",
+      "start": 83.75,
+      "end": 84.46
+    },
+    {
+      "word": "This",
+      "start": 84.59,
+      "end": 84.73
+    },
+    {
+      "word": "video",
+      "start": 84.73,
+      "end": 84.99
+    },
+    {
+      "word": "is",
+      "start": 84.99,
+      "end": 85.09
+    },
+    {
+      "word": "actually",
+      "start": 85.09,
+      "end": 85.47
+    },
+    {
+      "word": "edited",
+      "start": 85.5,
+      "end": 85.81
+    },
+    {
+      "word": "by",
+      "start": 85.81,
+      "end": 85.91
+    },
+    {
+      "word": "Clip",
+      "start": 85.91,
+      "end": 86.12
+    },
+    {
+      "word": "With",
+      "start": 86.12,
+      "end": 86.29
+    },
+    {
+      "word": "A.I.",
+      "start": 86.34,
+      "end": 86.73
+    },
+    {
+      "word": "with",
+      "start": 86.73,
+      "end": 86.9
+    },
+    {
+      "word": "a",
+      "start": 86.99,
+      "end": 86.99
+    },
+    {
+      "word": "few",
+      "start": 87.05,
+      "end": 87.14
+    },
+    {
+      "word": "simple",
+      "start": 87.14,
+      "end": 87.44
+    },
+    {
+      "word": "prompts.",
+      "start": 87.45,
+      "end": 87.88
+    },
+    {
+      "word": "And",
+      "start": 87.88,
+      "end": 88
+    },
+    {
+      "word": "make",
+      "start": 88,
+      "end": 88.17
+    },
+    {
+      "word": "sure",
+      "start": 88.17,
+      "end": 88.34
+    },
+    {
+      "word": "you",
+      "start": 88.34,
+      "end": 88.46
+    },
+    {
+      "word": "follow",
+      "start": 88.46,
+      "end": 88.71
+    },
+    {
+      "word": "because",
+      "start": 88.71,
+      "end": 89.01
+    },
+    {
+      "word": "we're",
+      "start": 89.01,
+      "end": 89.21
+    },
+    {
+      "word": "going",
+      "start": 89.21,
+      "end": 89.42
+    },
+    {
+      "word": "to",
+      "start": 89.42,
+      "end": 89.5
+    },
+    {
+      "word": "be",
+      "start": 89.5,
+      "end": 89.58
+    },
+    {
+      "word": "building",
+      "start": 89.58,
+      "end": 89.92
+    },
+    {
+      "word": "in",
+      "start": 89.92,
+      "end": 89.96
+    },
+    {
+      "word": "public",
+      "start": 90,
+      "end": 90.22
+    },
+    {
+      "word": "and",
+      "start": 90.26,
+      "end": 90.37
+    },
+    {
+      "word": "documenting",
+      "start": 90.37,
+      "end": 90.84
+    },
+    {
+      "word": "every",
+      "start": 90.84,
+      "end": 91.05
+    },
+    {
+      "word": "single",
+      "start": 91.05,
+      "end": 91.3
+    },
+    {
+      "word": "step",
+      "start": 91.3,
+      "end": 91.46
+    },
+    {
+      "word": "of",
+      "start": 91.53,
+      "end": 91.55
+    },
+    {
+      "word": "the",
+      "start": 91.55,
+      "end": 91.66
+    },
+    {
+      "word": "journey.",
+      "start": 91.67,
+      "end": 92.18
+    },
+    {
+      "word": "We're",
+      "start": 92.34,
+      "end": 92.49
+    },
+    {
+      "word": "set",
+      "start": 92.49,
+      "end": 92.64
+    },
+    {
+      "word": "to",
+      "start": 92.64,
+      "end": 92.7
+    },
+    {
+      "word": "officially",
+      "start": 92.76,
+      "end": 93.24
+    },
+    {
+      "word": "release",
+      "start": 93.24,
+      "end": 93.59
+    },
+    {
+      "word": "at",
+      "start": 93.59,
+      "end": 93.69
+    },
+    {
+      "word": "the",
+      "start": 93.69,
+      "end": 93.79
+    },
+    {
+      "word": "end",
+      "start": 93.84,
+      "end": 93.99
+    },
+    {
+      "word": "of",
+      "start": 93.99,
+      "end": 94.09
+    },
+    {
+      "word": "the",
+      "start": 94.09,
+      "end": 94.24
+    },
+    {
+      "word": "month,",
+      "start": 94.24,
+      "end": 94.6
+    },
+    {
+      "word": "and",
+      "start": 94.6,
+      "end": 94.72
+    },
+    {
+      "word": "if",
+      "start": 94.73,
+      "end": 94.8
+    },
+    {
+      "word": "you",
+      "start": 94.8,
+      "end": 94.92
+    },
+    {
+      "word": "want",
+      "start": 94.92,
+      "end": 95.08
+    },
+    {
+      "word": "to",
+      "start": 95.08,
+      "end": 95.16
+    },
+    {
+      "word": "join",
+      "start": 95.16,
+      "end": 95.32
+    },
+    {
+      "word": "over",
+      "start": 95.32,
+      "end": 95.48
+    },
+    {
+      "word": "1,000",
+      "start": 95.48,
+      "end": 96.06
+    },
+    {
+      "word": "other",
+      "start": 96.06,
+      "end": 96.25
+    },
+    {
+      "word": "creators",
+      "start": 96.29,
+      "end": 96.64
+    },
+    {
+      "word": "who've",
+      "start": 96.64,
+      "end": 96.87
+    },
+    {
+      "word": "already",
+      "start": 96.87,
+      "end": 97.14
+    },
+    {
+      "word": "signed",
+      "start": 97.14,
+      "end": 97.37
+    },
+    {
+      "word": "up",
+      "start": 97.37,
+      "end": 97.44
+    },
+    {
+      "word": "for",
+      "start": 97.56,
+      "end": 97.56
+    },
+    {
+      "word": "the",
+      "start": 97.56,
+      "end": 97.68
+    },
+    {
+      "word": "free",
+      "start": 97.78,
+      "end": 97.85
+    },
+    {
+      "word": "wait",
+      "start": 97.85,
+      "end": 98.01
+    },
+    {
+      "word": "list,",
+      "start": 98.01,
+      "end": 98.28
+    },
+    {
+      "word": "go",
+      "start": 98.28,
+      "end": 98.45
+    },
+    {
+      "word": "check",
+      "start": 98.45,
+      "end": 98.87
+    },
+    {
+      "word": "us",
+      "start": 98.87,
+      "end": 99.04
+    },
+    {
+      "word": "out",
+      "start": 99.04,
+      "end": 99.26
+    },
+    {
+      "word": "at",
+      "start": 99.29,
+      "end": 99.4
+    },
+    {
+      "word": "clipwith.",
+      "start": 99.49,
+      "end": 100.19
+    },
+    {
+      "word": "ai.",
+      "start": 100.35,
+      "end": 100.6
+    },
+    {
+      "word": "Thank",
+      "start": 100.75,
+      "end": 100.93
+    },
+    {
+      "word": "you.",
+      "start": 100.96,
+      "end": 101.4
+    },
+    {
+      "word": "Yeah?",
+      "start": 101.4,
+      "end": 104.4
+    }
+  ]
+}

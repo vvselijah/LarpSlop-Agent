@@ -1,0 +1,174 @@
+{
+  "sourceVideo": "VID_20260624_154802_175.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "My name is Tanner, and I was- Dan, that's all good, just keep going. My name is Tanner , I was convicted- My name is Tanner, and I was convicted of trafficking marijuana.",
+  "totalWords": 33,
+  "estimatedDuration": 10,
+  "words": [
+    {
+      "word": "My",
+      "start": 0,
+      "end": 0.15
+    },
+    {
+      "word": "name",
+      "start": 0.44,
+      "end": 0.45
+    },
+    {
+      "word": "is",
+      "start": 0.49,
+      "end": 0.6
+    },
+    {
+      "word": "Tanner,",
+      "start": 0.6,
+      "end": 1.2
+    },
+    {
+      "word": "and",
+      "start": 1.2,
+      "end": 1.4
+    },
+    {
+      "word": "I",
+      "start": 1.4,
+      "end": 1.64
+    },
+    {
+      "word": "was-",
+      "start": 1.64,
+      "end": 2
+    },
+    {
+      "word": "Dan,",
+      "start": 2,
+      "end": 2.5
+    },
+    {
+      "word": "that's",
+      "start": 2.5,
+      "end": 2.8
+    },
+    {
+      "word": "all",
+      "start": 2.86,
+      "end": 2.97
+    },
+    {
+      "word": "good,",
+      "start": 2.97,
+      "end": 3.27
+    },
+    {
+      "word": "just",
+      "start": 3.27,
+      "end": 3.49
+    },
+    {
+      "word": "keep",
+      "start": 3.49,
+      "end": 3.7
+    },
+    {
+      "word": "going.",
+      "start": 4,
+      "end": 4
+    },
+    {
+      "word": "My",
+      "start": 4.03,
+      "end": 4.25
+    },
+    {
+      "word": "name",
+      "start": 4.25,
+      "end": 4.75
+    },
+    {
+      "word": "is",
+      "start": 4.75,
+      "end": 5
+    },
+    {
+      "word": "Tanner",
+      "start": 5,
+      "end": 5.43
+    },
+    {
+      "word": ",",
+      "start": 5.61,
+      "end": 6
+    },
+    {
+      "word": "I",
+      "start": 6,
+      "end": 6
+    },
+    {
+      "word": "was",
+      "start": 6,
+      "end": 6
+    },
+    {
+      "word": "convicted-",
+      "start": 6,
+      "end": 6
+    },
+    {
+      "word": "My",
+      "start": 6,
+      "end": 6.12
+    },
+    {
+      "word": "name",
+      "start": 6.37,
+      "end": 6.37
+    },
+    {
+      "word": "is",
+      "start": 6.44,
+      "end": 6.49
+    },
+    {
+      "word": "Tanner,",
+      "start": 6.49,
+      "end": 7
+    },
+    {
+      "word": "and",
+      "start": 7,
+      "end": 7.18
+    },
+    {
+      "word": "I",
+      "start": 7.18,
+      "end": 7.24
+    },
+    {
+      "word": "was",
+      "start": 7.24,
+      "end": 7.42
+    },
+    {
+      "word": "convicted",
+      "start": 7.42,
+      "end": 8
+    },
+    {
+      "word": "of",
+      "start": 8,
+      "end": 8.18
+    },
+    {
+      "word": "trafficking",
+      "start": 8.18,
+      "end": 8.82
+    },
+    {
+      "word": "marijuana.",
+      "start": 9.1,
+      "end": 10
+    }
+  ]
+}

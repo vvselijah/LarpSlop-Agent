@@ -1,0 +1,79 @@
+{
+  "sourceVideo": "VID_20260624_161801_190.mp4",
+  "audioSource": "mp4_audio",
+  "script": "Not everyone has that budget and not everyone has 100 hours to learn something.",
+  "totalWords": 14,
+  "estimatedDuration": 4.63,
+  "words": [
+    {
+      "word": "Not",
+      "start": 0.15,
+      "end": 0.18
+    },
+    {
+      "word": "everyone",
+      "start": 0.18,
+      "end": 0.64
+    },
+    {
+      "word": "has",
+      "start": 0.65,
+      "end": 0.83
+    },
+    {
+      "word": "that",
+      "start": 0.83,
+      "end": 1.07
+    },
+    {
+      "word": "budget",
+      "start": 1.07,
+      "end": 1.44
+    },
+    {
+      "word": "and",
+      "start": 1.44,
+      "end": 1.59
+    },
+    {
+      "word": "not",
+      "start": 1.59,
+      "end": 1.74
+    },
+    {
+      "word": "everyone",
+      "start": 1.74,
+      "end": 2.16
+    },
+    {
+      "word": "has",
+      "start": 2.16,
+      "end": 2.36
+    },
+    {
+      "word": "100",
+      "start": 2.41,
+      "end": 2.72
+    },
+    {
+      "word": "hours",
+      "start": 2.72,
+      "end": 2.89
+    },
+    {
+      "word": "to",
+      "start": 2.99,
+      "end": 3
+    },
+    {
+      "word": "learn",
+      "start": 3,
+      "end": 3.2
+    },
+    {
+      "word": "something.",
+      "start": 3.2,
+      "end": 4.63
+    }
+  ]
+}

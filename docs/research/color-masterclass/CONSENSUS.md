@@ -1,0 +1,141 @@
+# CONSENSUS — what the masterclasses agree on (and dispute)
+
+*Cross-referenced from 14 deeply-analyzed DaVinci color-grading masterclasses (see README.md). sourceCount = how many independent videos converged.*
+
+## Universal truths (ranked by agreement)
+
+### [7 sources] Read exposure/balance on the waveform/parade against a 10-bit 0-1023 scale: blacks near 0 without crushing, highlights high without clipping, R=G=B overlap to white over neutrals
+Waveform is the workhorse scope. A neutral object should read as a white (overlapping R/G/B) trace; channel separation = a cast. Parade (per-channel) is THE scope for shot matching. Scale 0-1023 (10-bit Rec.709 video levels) is universal across sources.
+_Sources: mostyn-color-page-intro, beginners-guide-grading, best-node-tree-any-camera, grading-too-complicated, cullen-36-project-settings, frenchie-masterclass, film-emulation-16-35mm_
+
+### [6 sources] Use color management to get a known starting point: a CST/RCM transform mapping camera log+gamut INTO a large working space (DaVinci Wide Gamut/Intermediate)
+DWG/DaVinci Intermediate is the consensus working space; grade everything inside it, then transform OUT to display. Mostyn/Mullins/Frenchie use it explicitly; Kelly input-maps every clip to DWG/I before any move. The unmanaged sources (Blakely, qualifier-tricks) are explicitly flagged as lacking this and treated as a limitation.
+_Sources: best-node-tree-any-camera (Mostyn), grading-too-complicated (Mostyn), cullen-contrast-cinematographer (Kelly), mullins-grading-philosophy, frenchie-masterclass, film-emulation-16-35mm_
+
+### [6 sources] Grade in a strict broad-to-fine ORDER: balance/exposure first, then contrast, then saturation — lock the foundation before any look or secondaries
+Canonical spine: BAL/EXP -> CONTRAST -> SAT. Mostyn builds the empty skeleton in this order as a discipline; Mullins splits into 'corrections' (exposure/balance/contrast) then 'look development' (sat/hue/split-tone); Kelly says exposure+balance is ~80% of the image. Normalization-before-color is universal.
+_Sources: beginners-guide-grading (Blakely), best-node-tree-any-camera (Mostyn), grading-too-complicated (Mostyn), mullins-grading-philosophy, cullen-contrast-cinematographer (Kelly), frenchie-masterclass_
+
+### [6 sources] Build a fixed, labeled, serial node tree used as a checklist/map; one idea per node so each is independently toggleable and copyable
+Separate serial nodes named BALANCE/CONTRAST/SAT/etc.; the reason is non-destructive staging and toggle-for-before/after (Cmd/Ctrl+D single node, Shift+D whole clip). The tree is saved as a Still/PowerGrade and dropped onto every clip; for any camera you only re-point the input transform.
+_Sources: mostyn-color-page-intro (Mostyn), beginners-guide-grading (Blakely), best-node-tree-any-camera (Mostyn), grading-too-complicated (Mostyn), mullins-grading-philosophy, frenchie-masterclass_
+
+### [5 sources] Prefer the OFFSET wheel (and/or HDR wheels) over Lift/Gamma/Gain for clean global balance and exposure
+Offset moves the whole image cleanly (Mostyn's beginner prescription + Kelly's 'oldest tool in mastering'); Mostyn/Mullins/Frenchie do exposure/balance in HDR/Offset wheels rather than primary LGG. A recurring advanced variant: set gamma to LINEAR then balance with the GAIN wheel only (Kelly/Mullins/Cullen-settings).
+_Sources: mostyn-color-page-intro, best-node-tree-any-camera, cullen-contrast-cinematographer, mullins-grading-philosophy, frenchie-masterclass_
+
+### [4 sources] Bookend the node tree with two transforms: an INPUT transform (camera->DWG) at the head and an OUTPUT transform (DWG->Rec.709) at the tail, and grade UNDERNEATH the output transform so you always see display-referred image
+The 'CST sandwich': node 01 = CAM>DWG, last node = DWG>Rec.709 Gamma 2.4 (or 2.2). Mullins calls it the sandwich; Mostyn bookends explicitly; Kelly puts the DRT/output transform at the END as the single most impactful move.
+_Sources: best-node-tree-any-camera (Mostyn), grading-too-complicated (Mostyn), mullins-grading-philosophy, cullen-contrast-cinematographer (Kelly)_
+
+### [4 sources] Skin tone is judged against the vectorscope skin-tone line (upper-left I-axis ~11 o'clock); land skin on or near it, and above all keep it CONSISTENT across shots
+Mostyn: real cinema skin sits slightly UNDER the line (reads slightly green) but must be consistent; 'on, under, or over — but consistently.' grading-too-complicated color-codes it green=under/yellow=on/magenta=over. Kelly references the line conceptually but rejects it as a hard numeric target. Disagreement on whether it's a hard target (see disputed).
+_Sources: mostyn-read-scopes (Mostyn), grading-too-complicated (Mostyn), qualifier-tricks, cullen-contrast-cinematographer (Kelly, conceptually)_
+
+### [3 sources] Use a saturation method that does NOT raise luminance; avoid the primary Saturation slider for serious work
+Preferred: HDR global saturation, Color Slice saturation (subtractive/'density', deepest/most natural), or an HSV-channel node. Proof shown on the waveform: primary Sat lifts the trace (bad), HDR/ColorSlice keeps or lowers it (good). Mostyn keeps the primary Sat slider at its 50.00 default.
+_Sources: grading-too-complicated (Mostyn), mullins-grading-philosophy, best-node-tree-any-camera (Mostyn)_
+
+### [3 sources] Set Luminance Mix to 0 when balancing color channels so color moves don't drag luminance; default Lum Mix to zero as a project setting
+Blakely sets Lum Mix=0 for shot matching so wheels stop pulling luma. Kelly enables 'Luminance mixer defaults to zero' as a top project-settings gem (must be set BEFORE node creation). Mullins sets curve Luminance Mix=0 for independent RGB split-toning.
+_Sources: beginners-guide-grading (Blakely), cullen-36-project-settings (Kelly), mullins-grading-philosophy (curves Lum Mix 0 for split-tone)_
+
+### [3 sources] Film-emulation print LUTs (e.g. Kodak 2383) expect a Cineon/film-log input, NOT Rec.709/Gamma2.4 — feed them log via a CST or they look wrong/too strong
+Mostyn places a CST (Rec.709 g2.4 -> Rec.709 Cineon Film Log) immediately before the 2383 LUT, then compounds the pair so look strength is keyable 0-100. film-emulation source sets CST output gamma to Cineon Film Log for the print LUT. Look is run UNDER the grade / at low mix.
+_Sources: best-node-tree-any-camera (Mostyn), film-emulation-16-35mm, mullins-grading-philosophy (LUTs in DWG)_
+
+### [3 sources] The 'film look' is the SUM of many small stacked effects (print emulation + grain + halation + softness/diffusion + vignette + density), not a single LUT flip
+Halation = isolate highlights, blur with red/orange weighted (R high, B low), composite ADD in linear light. Grain lives in shadows/mids. Vignette via inverted power window + dropped offset. Frenchie builds a faux print via split-tone curves (cool shadows/warm highlights) rather than a LUT.
+_Sources: film-emulation-16-35mm, mullins-grading-philosophy, frenchie-masterclass_
+
+### [3 sources] Set exposure/grade to FEEL right creatively, using scopes as a GUIDE not a target — verify on a calibrated monitor, decide by eye
+Mostyn: 'I'm not grading by scopes'; false color/skin line park exposure, then creative by eye. Kelly: 'get exposure to FEEL right, not BE right.' Scopes catch clipping and casts; taste finishes the grade.
+_Sources: mostyn-read-scopes (Mostyn), cullen-contrast-cinematographer (Kelly), mullins-grading-philosophy_
+
+### [3 sources] A grabbed Still / PowerGrade is a portable container of the whole node tree — grab once, drag/middle-click onto other shots to replicate and then shot-match
+Workflow: build one approved look, save as Still/PowerGrade, apply across the timeline, then trim per shot to match (Parade scope, channel-by-channel). Frenchie: a colorist builds ONE look, gets director approval, then propagates.
+_Sources: mostyn-color-page-intro (Mostyn), beginners-guide-grading (Blakely), frenchie-masterclass_
+
+### [2 sources] Do NOT key/qualify skin to fix it; correct skin globally in the balance/exposure node instead
+Mostyn's explicit Tip 5: if skin is wrong, reset and re-balance in the balance node; never key skin. Kelly handles skin globally via the offset balance move judged on the vectorscope, not via isolation. (Keying NON-skin objects is sanctioned.)
+_Sources: grading-too-complicated (Mostyn), cullen-contrast-cinematographer (Kelly, global-balance approach)_
+
+### [2 sources] Set 3D LUT interpolation to TETRAHEDRAL (never Trilinear) to avoid banding/compression when LUTs are applied
+Both stress this as a default-changing project setting; Mullins 'cannot stress this enough' — leaving Trilinear causes banding when LUTs/film emulation are applied.
+_Sources: cullen-36-project-settings (Kelly), mullins-grading-philosophy_
+
+## Canonical end-to-end workflow
+
+1. **0. Color management / input transform** — Map camera native color space + gamma (e.g. ARRI Wide Gamut3/LogC3, Sony S-Gamut3.Cine/S-Log3, RED RWG/Log3G10, Rec.709 fallback for unknown/phone) INTO DaVinci Wide Gamut / DaVinci Intermediate working space. Set Tetrahedral LUT interpolation, Lum-Mix-defaults-to-zero.  · _scope: Trace is lifted, low-contrast (log) — expected; nothing should clip yet._  · _tool: Project Settings (DaVinci YRGB) + Node 01 CST or RCM input mapping_
+2. **1. Output / display transform (the other half of the sandwich)** — Convert the working space back to the display space so all grading happens UNDER a correct display-referred image. Tone Mapping = DaVinci/Luminance Mapping; Gamut Mapping = Saturation Compression to fold out-of-gamut highlights.  · _scope: Image now reads as a finished/contrasty starting point; confirm no hard clip at 1023 or 0._  · _tool: Final node CST DWG->Rec.709 Gamma 2.4 (broadcast) or 2.2 (web/Mac/phone), or a DRT/viewing LUT_
+3. **2. Build the empty labeled node skeleton** — Lay out the fixed tree as a checklist so under time pressure the order is always known; fill in order, leave unused nodes empty.  · _scope: n/a (structural)_  · _tool: Serial nodes named BAL/EXP -> CONTRAST -> SAT (+ optional TEMP/HDR/WARPER/CURVES, TRIM, PW1-3, TEXTURE, FILM)_
+4. **3. Balance + exposure** — Set overall brightness where the image should 'live', neutralize color casts so neutrals read neutral. Fix skin here globally — do NOT key skin.  · _scope: Waveform: blacks near 0 (not crushed), highlights high (not clipped). Parade: align R/G/B over neutral objects to white. Vectorscope: skin lobe toward upper-left skin line, consistent across shots._  · _tool: BAL/EXP node — Offset wheel and/or HDR Global wheel (advanced: gamma=Linear, push Gain only)_
+5. **4. Contrast** — Add tonal separation/pop around a correct pivot. Judge with saturation pulled to zero (color deceives the eye).  · _scope: Waveform: trace spreads from floor to ceiling without clipping; histogram spike spreads out (log flatness removed)._  · _tool: CONTRAST node — primaries Contrast + Pivot (DWG middle-gray pivot ~0.336), or Gain up / Lift down_
+6. **5. Saturation** — Add saturation WITHOUT raising luminance; avoid the primary Sat slider.  · _scope: Waveform height should NOT rise when sat is added (proof the method is luma-safe); vectorscope trace extends but stays within target boxes._  · _tool: SAT node — HDR global saturation OR Color Slice saturation (subtractive 'density'); optional HSV-channel node_
+7. **6. Shot matching** — Pick a hero shot, normalize+balance it, then line up each clip's per-channel parade trace to the reference, tone-band by tone-band.  · _scope: Parade: each channel approximates the reference in shadows and highlights; ignore regions with no counterpart._  · _tool: MATCH node + Parade scope; reference still / split-screen wipe; Lum Mix = 0_
+8. **7. Secondaries (only if needed)** — Isolate a color/luma zone or area for targeted fixes (recover sky, vignette, wardrobe desaturation, split-tone). Feather every key.  · _scope: Toggle the isolated node on/off to confirm it improves the shot; watch for hard-clipped/artifacting keys._  · _tool: Parallel cluster: HSL qualifier (roll off edges), Power Windows (+tracker), Color Warper, Curves; key NON-skin only_
+9. **8. Look development / film emulation** — Build the creative identity: warm highlights/cool shadows, density, print emulation. Run the grade UNDER the look at a partial mix (~50%).  · _scope: Watch for LUT-lifted/washed blacks; restore low-end with a correction node beneath the LUT._  · _tool: FILM/LOOK node — split-tone curves (Lum Mix 0) OR a print-emulation LUT (Kodak 2383) fed Cineon log via a pre-CST, compounded for keyable strength_
+10. **9. Texture / finishing** — Add the physical film characteristics; grain sparing (lives in shadows/mids).  · _scope: n/a (visual); confirm grain survives export (high data rate)._  · _tool: TEXTURE node — film grain, halation (highlight-isolated blur, red-weighted, ADD in linear), optional diffusion/sharpen_
+11. **10. QC + propagate** — Grab the look as a Still, apply across the timeline, then eyeball all thumbnails to confirm skin/exposure land in the same region across the scene.  · _scope: Light Box: all shots consistent (all on the line / all consistently under)._  · _tool: Gallery Still / PowerGrade; Light Box; skin-balance heatmap at timeline level_
+
+## Node-tree consensus
+"CONSENSUS: a serial 'CST sandwich' with a fixed, labeled spine. Head = INPUT transform (Node 01: CAM -> DaVinci Wide Gamut/Intermediate). Tail = OUTPUT transform (last node: DWG -> Rec.709 Gamma 2.4/2.2). Between them, a serial foundation spine in fixed order: BAL/EXP -> CONTRAST -> SAT. This 4-6 node core (incl. the two transforms) is what 4+ independent Mostyn/Mullins/Kelly/Blakely sources converge on, and the simplified teaching tree in grading-too-complicated (CAM>DWG -> BAL/EXP -> CONTRAST -> SAT -> [HSV SAT] -> DWG>709) is the canonical minimal form. EXTENDED (Mostyn's day-to-day + Mullins' full tree, ~12-17 nodes): after SAT, a PARALLEL cluster of fine-tune nodes (TEMP, HDR, WARPER, CURVES) each feeding off the clean foundation via a layer/parallel mixer (not chained), then a TRIM node, then a PARALLEL cluster of POWER WINDOWS (PW1/PW2/PW3), then TEXTURE/grain, then the FILM/LOOK node, before the output CST. Mullins inserts MATRIX (3x3 skin) and HSV/HK DCTL nodes; Frenchie inserts SPLIT-TONE (curves) + HUES (warper) + DENSITY (ColorSlice) + OVERLAY + VIGN. WHERE THEY DIFFER: (1) parallel vs serial for fine-tune/secondary clusters — Mostyn/grading-too-complicated use Alt+P parallels off the foundation; simpler tutorials keep everything serial. (2) Whether the look is a separate node or a compound node with an internal CST (Mostyn/film-emulation compound it for keyable strength). (3) Frenchie's tree has a single parallel branch carrying the split-tone; Mostyn's has two parallel clusters. CONSENSUS DISCIPLINE regardless of count: every node is hand-labeled, one purpose per node, built empty-skeleton-first as a checklist, saved as a Still/PowerGrade, and re-pointed at node 01 for each new camera."
+
+## Scope targets
+
+| Metric | Target | Source |
+|---|---|---|
+| Waveform/parade scale (10-bit) | 0 = black, 1023 = white; gridlines 128/256/384/512/640/768/896 | All scope-reading sources (Mostyn, Blakely, Mullins, film-emulation, Frenchie) — universal |
+| Black floor | Sit blacks near 0 but do NOT crush below 0 (lose shadow detail); faded-film looks deliberately lift the floor off 0 | Blakely, grading-too-complicated, film-emulation |
+| Highlight ceiling | Bring highlights high but below clipping; Blakely's rule = top of trace at the 2nd graticule line from the top (just under 1023) | beginners-guide-grading (Blakely) |
+| Shadow placement (Blakely rule) | Bottom of trace between 0 and the 1st line up (~halfway) | beginners-guide-grading (Blakely) |
+| Neutral balance | A neutral object should read as a WHITE (overlapping R=G=B) waveform/parade trace; channel separation over a neutral = a cast | beginners-guide-grading, best-node-tree, mostyn-color-page-intro |
+| Skin exposure (IRE, false color) | Majority of face ~40-50 IRE (Mostyn: '~50, maybe a little less'); range ~35 at lowest up to 55-60, only a small highlight (forehead/cheek) reaching ~70. The 55-65 IRE 'gray' band = highlights; keep the bulk of the face BELOW it | mostyn-read-scopes (Mostyn), validated vs Top Gun Maverick / Her |
+| Skin hue (vectorscope skin line) | Skin on/near the upper-left I-axis skin line; Mostyn prefers slightly UNDER (reads slightly green); coded green=under / yellow=on / magenta=over. Consistency across shots > absolute position | mostyn-read-scopes, grading-too-complicated (Mostyn) |
+| Contrast pivot | 0.435 in Rec.709 (Resolve default); 0.336 for true middle-gray in DaVinci Wide Gamut/Intermediate | mullins-grading-philosophy, grading-too-complicated (Mostyn overlay) |
+| Exposure heatmap (Mononodes false color) | Subject skin ~0 (perfect) in flat light; a key-lit side reading slightly hot (>0) is correct, not an error | grading-too-complicated (Mostyn) |
+| Saturation discipline | Vectorscope trace extends but stays within target boxes / not splaying (Twin Peaks); primary Sat slider left at 50.00 default | best-node-tree, mostyn-read-scopes, grading-too-complicated |
+| Resolve neutral defaults (reference) | Lift 0.00, Gamma 1.00 (or 0.00 in some panels), Gain 1.00, Offset 25.00; Contrast 1.000, Saturation 50.00, Hue 50.00, Lum Mix 100.00 | mostyn-color-page-intro, cullen-36-project-settings, best-node-tree, cullen-contrast |
+| Output / project settings hygiene | 3D LUT interpolation = Tetrahedral; Lum-Mix-defaults-to-zero ON; broadcast-safe OFF in a managed pipeline; timeline res >= highest deliverable | cullen-36-project-settings (Kelly), mullins-grading-philosophy |
+
+## Where authorities genuinely disagree
+
+- Is the vectorscope skin-tone LINE a hard numeric target or just a guide? Mostyn (read-scopes, grading-too-complicated) uses it as the primary skin method but says skin should sit slightly UNDER the line and consistency matters more than the exact position. Cullen Kelly EXPLICITLY rejects it as a target — 'health of skin to my eye, not by some arbitrary metric on my vectorscope.' Mullins also avoids a numeric skin-line angle, doing skin by-eye via a 3x3 matrix/HSV in DWG.
+- Automatic color management (DaVinci YRGB Color Managed / DRCM or ACES) vs MANUAL node-level CSTs. Frenchie runs DRCM with per-clip input transforms (no per-node CST); Mostyn, Mullins, Kelly, and grading-too-complicated prefer explicit CST nodes for transparency/control. Both are sanctioned as valid; it's a preference split.
+- Output gamma: 2.4 vs 2.2. Mostyn (best-node-tree) and Kelly (contrast) output Rec.709 Gamma 2.4 (broadcast/calibrated-monitor convention); Mullins and Kelly (project-settings) and Frenchie use Gamma 2.2 arguing you should grade for how work is actually VIEWED (Mac/iPhone/YouTube). Deliverable-dependent.
+- Contrast pivot value: 0.435 (Resolve default, used by most beginner/Rec.709 demos) vs 0.336 (the correct DWG middle-gray pivot per Mullins and grading-too-complicated's overlay). The right pivot depends on whether you're working in Rec.709 or DWG/Intermediate.
+- 'Use S-curve for contrast' project setting: Kelly leaves it OFF (wants a clean linear contrast operator so he can crush to the floor, letting his downstream look/output transform supply the roll-off); the implied beginner default ON soft-clips. Taste + pipeline dependent.
+- Saturation engine preference: Mostyn favors HDR global sat; Mullins specifically favors Color Slice saturation (subtractive) over HDR/HSV/Color Boost; Frenchie uses ColorSlice 'density'. They agree on the PRINCIPLE (luma-safe) but disagree on the exact tool.
+
+## Single-source opinions (treat as taste, not law)
+
+- Cullen Kelly: in DaVinci YRGB the Timeline/Output color-space dropdowns do NOT transform the image — they only tag metadata (proven by switching Timeline to ACES with zero visible change). Authoritative but single-source.
+- Cullen Kelly's 'Referent' free DWG->Rec.709 viewing LUT as the only free output transform that yields a FINISHED image — self-promotional, treat as opinion.
+- Mullins: Helmholtz-Kohlrausch (HK) perceptual-luminance DCTL as a subtle finishing 'icing' pass on everything — single source, niche.
+- Mullins: the two-bucket mental model (CORRECTIONS = could-have-been-done-in-camera vs LOOK DEVELOPMENT = pushing past natural) as the organizing philosophy.
+- Kelly: 'Macro beats micro' / 'greatest gains for least effort' — the DRT/output transform is the single most impactful decision because it fixes ALL shots at once.
+- qualifier-tricks: using the HSL qualifier as a NOISE-REDUCTION MASK (key only the dark/noisy areas, exclude highlights so NR doesn't smear clouds) — a genuinely non-obvious technique, single source.
+- Frenchie: 'rub in' density via an Overlay-composite-mode node keyed back through Key Output gain; and Face Refinement on EYES ONLY (sharpening/eyebag) as a narrative 'hope' beat.
+- Frenchie: deliberate narrative color arc — warm/glowy vs cold/desaturated across scenes to externalize a character's mental state.
+- Kelly (project-settings): cache at the END of the node tree (after display conversion) so render cache format = ProRes 422 HQ; dedicated fast scratch drive for cache+gallery.
+- film-emulation: restrict export data rate (~100,000 kb/s at 4K) so platform compression doesn't destroy film grain.
+- Mostyn (read-scopes): OmniScope-specific tools — 'Twin Peaks' 3D brightness/hue/sat scope for white-balance/sat sanity, and a bottom-10/15/20% IRE shadow parade for black balancing — not replicable in native Resolve.
+- Mullins: build your own DWG-native film-emulation LUT pack (Terra = Kodak 2383 emulation tuned to NOT lift/crush blacks) rather than using free 2383 LUTs that wash the low end.
+
+## Implications for our headless engine
+
+- Color management (6 sources): The engine MUST implement an input transform stage. For each input clip, detect/accept the camera color space + transfer function (LogC3, S-Log3, Log3G10, F-Log, BMD Film, or Rec.709 fallback for phones/unknown) and convert to a wide linear/log working space before any operation. Use ffmpeg's zscale/lut3d or a Python OpenColorIO (OCIO) config (ACES or a DWG-equivalent) — OCIO is the headless analog of Resolve's CST. The single most important config knob = correct input transform per clip; everything downstream assumes it.
+- CST sandwich (4 sources): Architect the pipeline as input_transform -> [working-space ops] -> output_transform, where all auto-correct math runs in the working/scene-linear space and the LAST stage bakes to Rec.709 Gamma 2.4 (broadcast deliverable) or 2.2 (web/social — given this hub's IG/Reels use case, default 2.2). Expose gamma as a config flag. Implement output as an OCIO display/view transform or a baked .cube applied via ffmpeg lut3d with TETRAHEDRAL interpolation (zscale/ocio do this; if using lut3d, prefer interp=tetrahedral).
+- Broad-to-fine order (6 sources): Hard-code the auto-correct passes in order — (1) exposure normalization, (2) white balance / cast removal, (3) contrast, (4) saturation — and never reorder. Each is a separate, independently-toggleable function so A/B and per-clip overrides are possible. This maps cleanly to a small DAG of ffmpeg/numpy filter stages.
+- Fixed labeled tree as checklist (6 sources): Represent the grade as a serialized, named node graph (JSON) — a 'PowerGrade' equivalent — that can be saved once, applied to many clips, and diffed. Each node = {label, op, params, enabled}. This gives the engine the same 'grab still, apply across timeline, then per-clip trim' workflow headlessly, plus free before/after by toggling enabled flags.
+- Skin on the vectorscope line (4 sources, with dispute): Implement an analysis pass that converts a frame region to YCbCr/the vectorscope plane, finds the skin cluster (via a skin-hue mask, e.g. Cb/Cr or HSV orange band), measures its angle vs the I-line (~123deg / upper-left), and nudges white balance until skin sits on/just-under the line. Crucially, optimize for CONSISTENCY across clips in a scene (minimize variance of skin angle/IRE between shots), not a single fixed angle — that consistency metric is the load-bearing, agreed-upon target. Treat the exact on-line vs under-line position as a tunable, since authorities split.
+- Never key skin (2 sources): The auto-corrector should fix skin via the GLOBAL balance/exposure stage, not via a skin qualifier mask. Build skin correction into the white-balance solver (use skin as a balance reference), and reserve any masked/keyed operations for non-skin targets only.
+- Luma-safe saturation (3 sources): Do NOT implement saturation as a naive HSV S-multiplier (raises luma). Use a luminance-preserving saturation (operate in a luma-chroma space, scale chroma only, hold Y constant) — analogous to Color Slice/HDR sat. Validate by asserting mean luma is unchanged after the sat pass (the waveform-doesn't-rise check, automated).
+- Lum Mix = 0 for channel balance (3 sources): When the engine balances individual RGB channels (cast removal / shot matching), it must decouple luminance — operate on chroma channels with luma locked, the headless equivalent of Lum Mix 0, so balancing doesn't drift exposure.
+- Scope-driven auto-exposure/balance (7 sources): Build a headless scope module that computes the waveform/parade (per-channel histograms over image rows) and vectorscope from each frame. Auto-exposure: push black floor toward ~0 (clamp, no negative crush) and highlights toward but under 1023; flag clipping. Auto-balance: over detected-neutral regions, drive R/G/B means to equality (white trace). Shot-match: align per-channel percentiles of each clip to a chosen hero clip's parade. This IS the auto-correct core and every scope source supports it.
+- Offset/HDR-style global moves (5 sources): Prefer global offset (additive in log) and a gain-on-linear-gamma balance over lift/gamma/gain for the auto-correct math — additive offset is the cleanest, least-destructive global operation and maps directly to a per-channel add/multiply in the working space. Avoid temp/tint-style hue tints for primary balance.
+- Scopes are a guide, decide intent (3 sources): The engine should target a defensible default (skin ~50 IRE, neutral whites, no clipping) but expose creative-intent knobs (warm/cool, exposure bias, contrast amount) so a 'feel' can override the technically-correct result. Don't hard-lock to numeric targets — make them defaults.
+- Tetrahedral LUT interp (2 sources): Whenever the engine applies a 3D LUT (film emulation, output transform), use tetrahedral interpolation (ffmpeg lut3d interp=tetrahedral or OCIO) to avoid banding — a concrete, checkable implementation detail.
+- Film LUTs need log input (3 sources): If the engine offers a print-emulation look, it must feed the LUT the log space the LUT expects (e.g. Cineon film log), NOT display Rec.709 — implement a pre-LUT transform stage and run the look at a configurable opacity/mix (default ~50%), with the correction stages applied beneath it.
+- Film look = stacked effects (3 sources): Model the 'look' as a composable stack (split-tone curves with luma decoupled, grain, halation = highlight-isolated red-weighted blur composited additively in linear light, vignette, density) rather than one filter. ffmpeg can do most: curves/lut3d for tone, geq/noise for grain, a blurred highlight-extract overlaid with blend=addition for halation, vignette filter for edges. Each toggleable.
+- Project-settings hygiene as engine config (single+pair sources): Bake the equivalents of Kelly's gems into engine defaults — tetrahedral interpolation, luminance-decoupled ops by default, output for the actual viewing device (2.2 for social), and high export bitrate so grain/detail survives platform recompression (mirror film-emulation's ~100Mbps guidance for high-quality masters).

@@ -1,0 +1,399 @@
+{
+  "sourceVideo": "VID_20260624_162604_201.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "NOISE] So we built the first agentic prompt that- so we built the first agentic prompt to edit model. >> We built the first fully agentic. >> I want to say fully. >> It is. Go ahead. >> So we built the first agentic prompt to edit model. >> One more time. >> So we built the first agentic prompt to edit model. >> One more time. >> So we built the first agentic prompt to edit model.",
+  "totalWords": 78,
+  "estimatedDuration": 51.72,
+  "words": [
+    {
+      "word": "NOISE]",
+      "start": 3.56,
+      "end": 24.72
+    },
+    {
+      "word": "So",
+      "start": 24.83,
+      "end": 24.85
+    },
+    {
+      "word": "we",
+      "start": 24.85,
+      "end": 24.98
+    },
+    {
+      "word": "built",
+      "start": 24.98,
+      "end": 25.31
+    },
+    {
+      "word": "the",
+      "start": 25.31,
+      "end": 25.5
+    },
+    {
+      "word": "first",
+      "start": 25.5,
+      "end": 25.83
+    },
+    {
+      "word": "agentic",
+      "start": 25.83,
+      "end": 26.29
+    },
+    {
+      "word": "prompt",
+      "start": 26.29,
+      "end": 26.63
+    },
+    {
+      "word": "that-",
+      "start": 26.68,
+      "end": 27
+    },
+    {
+      "word": "so",
+      "start": 27,
+      "end": 27.08
+    },
+    {
+      "word": "we",
+      "start": 27.13,
+      "end": 27.26
+    },
+    {
+      "word": "built",
+      "start": 27.26,
+      "end": 27.59
+    },
+    {
+      "word": "the",
+      "start": 27.59,
+      "end": 27.78
+    },
+    {
+      "word": "first",
+      "start": 27.82,
+      "end": 28.11
+    },
+    {
+      "word": "agentic",
+      "start": 28.11,
+      "end": 28.56
+    },
+    {
+      "word": "prompt",
+      "start": 28.56,
+      "end": 28.96
+    },
+    {
+      "word": "to",
+      "start": 29.02,
+      "end": 29.09
+    },
+    {
+      "word": "edit",
+      "start": 29.09,
+      "end": 29.35
+    },
+    {
+      "word": "model.",
+      "start": 29.35,
+      "end": 29.91
+    },
+    {
+      "word": ">>",
+      "start": 30.05,
+      "end": 30.11
+    },
+    {
+      "word": "We",
+      "start": 30.11,
+      "end": 30.26
+    },
+    {
+      "word": "built",
+      "start": 30.26,
+      "end": 30.64
+    },
+    {
+      "word": "the",
+      "start": 30.64,
+      "end": 30.88
+    },
+    {
+      "word": "first",
+      "start": 30.88,
+      "end": 31.27
+    },
+    {
+      "word": "fully",
+      "start": 31.27,
+      "end": 31.66
+    },
+    {
+      "word": "agentic.",
+      "start": 31.66,
+      "end": 32.24
+    },
+    {
+      "word": ">>",
+      "start": 32.24,
+      "end": 32.33
+    },
+    {
+      "word": "I",
+      "start": 32.33,
+      "end": 32.37
+    },
+    {
+      "word": "want",
+      "start": 32.37,
+      "end": 32.56
+    },
+    {
+      "word": "to",
+      "start": 32.56,
+      "end": 32.64
+    },
+    {
+      "word": "say",
+      "start": 32.66,
+      "end": 32.79
+    },
+    {
+      "word": "fully.",
+      "start": 32.79,
+      "end": 33.18
+    },
+    {
+      "word": ">>",
+      "start": 33.27,
+      "end": 33.38
+    },
+    {
+      "word": "It",
+      "start": 33.38,
+      "end": 33.56
+    },
+    {
+      "word": "is.",
+      "start": 33.56,
+      "end": 34.04
+    },
+    {
+      "word": "Go",
+      "start": 34.04,
+      "end": 34.73
+    },
+    {
+      "word": "ahead.",
+      "start": 34.74,
+      "end": 37.51
+    },
+    {
+      "word": ">>",
+      "start": 37.56,
+      "end": 37.7
+    },
+    {
+      "word": "So",
+      "start": 37.76,
+      "end": 37.88
+    },
+    {
+      "word": "we",
+      "start": 37.88,
+      "end": 38.06
+    },
+    {
+      "word": "built",
+      "start": 38.06,
+      "end": 38.52
+    },
+    {
+      "word": "the",
+      "start": 38.52,
+      "end": 38.79
+    },
+    {
+      "word": "first",
+      "start": 38.79,
+      "end": 39.25
+    },
+    {
+      "word": "agentic",
+      "start": 39.25,
+      "end": 39.88
+    },
+    {
+      "word": "prompt",
+      "start": 39.88,
+      "end": 40.44
+    },
+    {
+      "word": "to",
+      "start": 40.44,
+      "end": 40.62
+    },
+    {
+      "word": "edit",
+      "start": 40.62,
+      "end": 40.97
+    },
+    {
+      "word": "model.",
+      "start": 40.98,
+      "end": 41.76
+    },
+    {
+      "word": ">>",
+      "start": 41.95,
+      "end": 41.98
+    },
+    {
+      "word": "One",
+      "start": 41.98,
+      "end": 42.31
+    },
+    {
+      "word": "more",
+      "start": 42.31,
+      "end": 42.75
+    },
+    {
+      "word": "time.",
+      "start": 42.75,
+      "end": 43.52
+    },
+    {
+      "word": ">>",
+      "start": 43.52,
+      "end": 43.64
+    },
+    {
+      "word": "So",
+      "start": 43.69,
+      "end": 43.78
+    },
+    {
+      "word": "we",
+      "start": 43.78,
+      "end": 43.91
+    },
+    {
+      "word": "built",
+      "start": 43.91,
+      "end": 44.23
+    },
+    {
+      "word": "the",
+      "start": 44.23,
+      "end": 44.42
+    },
+    {
+      "word": "first",
+      "start": 44.42,
+      "end": 44.73
+    },
+    {
+      "word": "agentic",
+      "start": 44.73,
+      "end": 45.19
+    },
+    {
+      "word": "prompt",
+      "start": 45.19,
+      "end": 45.56
+    },
+    {
+      "word": "to",
+      "start": 45.57,
+      "end": 45.71
+    },
+    {
+      "word": "edit",
+      "start": 45.71,
+      "end": 45.95
+    },
+    {
+      "word": "model.",
+      "start": 45.96,
+      "end": 46.52
+    },
+    {
+      "word": ">>",
+      "start": 46.71,
+      "end": 46.79
+    },
+    {
+      "word": "One",
+      "start": 46.79,
+      "end": 47.16
+    },
+    {
+      "word": "more",
+      "start": 47.16,
+      "end": 47.73
+    },
+    {
+      "word": "time.",
+      "start": 47.73,
+      "end": 48.68
+    },
+    {
+      "word": ">>",
+      "start": 48.68,
+      "end": 48.81
+    },
+    {
+      "word": "So",
+      "start": 48.9,
+      "end": 48.94
+    },
+    {
+      "word": "we",
+      "start": 48.94,
+      "end": 49.07
+    },
+    {
+      "word": "built",
+      "start": 49.07,
+      "end": 49.4
+    },
+    {
+      "word": "the",
+      "start": 49.4,
+      "end": 49.59
+    },
+    {
+      "word": "first",
+      "start": 49.59,
+      "end": 49.92
+    },
+    {
+      "word": "agentic",
+      "start": 49.92,
+      "end": 50.38
+    },
+    {
+      "word": "prompt",
+      "start": 50.38,
+      "end": 50.77
+    },
+    {
+      "word": "to",
+      "start": 50.77,
+      "end": 50.9
+    },
+    {
+      "word": "edit",
+      "start": 50.9,
+      "end": 51.16
+    },
+    {
+      "word": "model.",
+      "start": 51.16,
+      "end": 51.72
+    }
+  ]
+}

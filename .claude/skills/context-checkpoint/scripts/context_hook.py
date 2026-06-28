@@ -38,7 +38,7 @@ import sys
 import tempfile
 
 THRESHOLD = 40  # percent; the 40% rule. Edit to taste.
-DEFAULT_WINDOW = 200_000
+DEFAULT_WINDOW = 1_000_000  # 1M window (Opus 4.8 [1m], the model this hub runs on). Was 200_000, which over-reported usage ~5x. If you run this hub on a 200k-window model, set this back to 200_000.
 
 
 def latest_usage(path):

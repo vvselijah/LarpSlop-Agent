@@ -1,0 +1,7 @@
+numpy>=1.24
+opencv-contrib-python>=4.8
+scikit-image>=0.21
+colour-science>=0.4.4
+scenedetect>=0.6
+# dev: pytest>=7
+# also required at runtime (not pip-installable here): ffmpeg + ffprobe on PATH

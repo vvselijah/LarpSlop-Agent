@@ -8,7 +8,7 @@
 
 > ⚠ **This whole tree is inside OneDrive (cloud-synced). NEVER put secrets in files — use `setx` (Windows env vars).**
 > **New session: read this file first, then the workspace `CLAUDE.md`, then the vault's `CLAUDE.md`.**
-> ⏩ **LATEST VERIFIED SNAPSHOT (2026-06-13): `SESSION-COMPACT-2026-06-13.md` (repo root)** — read it before this file; it audits actual state (auto-clip "brain" done + committed `7e0b9a5`, unpushed) and supersedes the long baton `docs/plans/2026-06-13-SESSION-HANDOFF.md`.
+> ⏩ **LATEST BATON (2026-06-27): `SESSION-COMPACT-2026-06-27-lookstack-video.md` (repo root)** — read it first. The color engine's cinematic look-stack (halation/grain/vignette) now runs in the **VIDEO** ffmpeg filtergraph (proven flicker-free, 22/22 pytest, synced dev↔standalone), on top of the G1 skin-solver + Resolve HLG setup from the 2026-06-26 baton (`SESSION-COMPACT-2026-06-26-g1-resolve.md`). All DRAFT/uncommitted. Pending Elijah: eyeball `auto-clip/out/ftest/_VIDEOSTACK_*.png`, pick favorite looks, commit/push?. **NEXT (engine, baton §3):** scopes `--validate` in render → skin-LOCAL exposure → auto-pilot Claude-vision look-picker. Prior color batons: `SESSION-COMPACT-2026-06-26-g1-resolve.md`, `…-06-24-color-stretch.md`. (Older infra snapshot: `SESSION-COMPACT-2026-06-13.md`.)
 
 ---
 

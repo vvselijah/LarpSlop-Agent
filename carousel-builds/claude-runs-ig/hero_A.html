@@ -1,0 +1,138 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;
+  background:radial-gradient(125% 105% at 28% -5%, #d2784c 0%, #b85a30 42%, #863c1d 78%, #5e2911 100%);
+  font-family:'Inter',sans-serif;color:#fff}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.13;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:420px 420px}
+.glow{position:absolute;left:-120px;top:-140px;width:680px;height:560px;pointer-events:none;
+  background:radial-gradient(circle at 40% 40%, rgba(255,214,170,.38), transparent 62%)}
+.vignette{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(118% 100% at 50% 36%, transparent 52%, rgba(40,12,2,.34) 100%)}
+.dotrow{position:absolute;right:96px;top:430px;width:120px;height:90px;opacity:.55;pointer-events:none;
+  background-image:radial-gradient(rgba(0,0,0,.30) 2.4px, transparent 2.6px);background-size:20px 20px}
+.pill{position:absolute;top:64px;right:74px;background:rgba(0,0,0,.32);
+  border:1px solid rgba(255,255,255,.35);border-radius:40px;padding:10px 26px;
+  font:700 30px 'Inter';letter-spacing:.04em}
+.handle{position:absolute;top:70px;left:90px;font:600 30px 'Inter';color:rgba(255,255,255,.85)}
+.kick{position:absolute;top:150px;left:96px;font:700 70px 'Caveat';color:#fff;
+  transform:rotate(-2deg);text-shadow:2px 3px 0 rgba(0,0,0,.18)}
+.big{position:absolute;top:236px;left:84px;font:400 168px/.86 'Anton';
+  letter-spacing:1px;color:#fff;text-shadow:5px 6px 0 rgba(0,0,0,.22)}
+.brushwrap{position:absolute;top:556px;left:90px;transform:rotate(-1.6deg)}
+.brush{display:inline-block;background:#100c08;color:#fff;font:400 92px 'Anton';
+  letter-spacing:1px;padding:14px 40px 22px;
+  clip-path:polygon(1% 16%,16% 5%,34% 11%,52% 3%,70% 12%,86% 4%,99% 10%,98% 78%,84% 95%,64% 86%,44% 96%,24% 85%,9% 94%,1% 82%)}
+.sub{position:absolute;top:690px;left:96px;font:500 38px 'Inter';color:#fff}
+.sub b{font-weight:700}
+.swipe{position:absolute;right:90px;bottom:44px;font:600 30px 'Inter';color:rgba(255,255,255,.92)}
+/* starburst sticker */
+.sticker{position:absolute;top:198px;right:96px;width:172px;height:172px;
+  background:#fbf7ef;border-radius:34px;transform:rotate(13deg);
+  box-shadow:0 22px 40px rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center}
+.crown{position:absolute;top:-40px;left:-18px;font-size:62px;transform:rotate(-18deg)}
+/* terminal card */
+.term{position:absolute;top:768px;left:66px;width:628px;background:#181410;
+  border:1px solid rgba(255,255,255,.10);border-radius:18px;overflow:hidden;
+  transform:rotate(-3.2deg);box-shadow:0 26px 48px rgba(0,0,0,.40)}
+.tbar{display:flex;align-items:center;gap:12px;padding:16px 20px;background:#221c16;
+  border-bottom:1px solid rgba(255,255,255,.07);font:500 22px 'JetBrains Mono';color:#cbb9a6}
+.bot{width:30px;height:30px;border-radius:7px;background:#d4622e;position:relative;flex:none}
+.bot:before,.bot:after{content:"";position:absolute;top:9px;width:6px;height:9px;background:#181410;border-radius:1px}
+.bot:before{left:7px}.bot:after{right:7px}
+.tbody{padding:24px 26px 30px;font:400 25px/1.55 'JetBrains Mono';color:#d9cdbd}
+.tbody .mut{color:#8c7e6e}
+.tbody .or{color:#e8853f}.tbody .gr{color:#69c389}
+.cur{display:inline-block;width:13px;height:26px;background:#e8853f;vertical-align:-4px;margin-left:4px}
+/* dashboard card */
+.dash{position:absolute;top:992px;left:418px;width:592px;height:312px;border-radius:18px;
+  overflow:hidden;transform:rotate(3.4deg);box-shadow:0 26px 48px rgba(0,0,0,.42);
+  background:radial-gradient(120% 120% at 78% 30%, #134b48 0%, #0a201f 60%, #061312 100%);
+  border:1px solid rgba(255,255,255,.08)}
+.dhead{display:flex;justify-content:space-between;padding:20px 24px 0;
+  font:600 22px 'JetBrains Mono';letter-spacing:.32em;color:#7fe7d0}
+.dbody{padding:14px 24px;display:flex;gap:22px}
+.dcol{flex:1}
+.drow{font:600 20px 'Inter';color:#8fb8b2;margin:14px 0 2px;letter-spacing:.04em}
+.dnum{font:700 34px 'Inter';color:#eafaf5}
+.spark{margin-top:6px}
+.dbig{position:absolute;right:26px;bottom:22px;text-align:right}
+.dbig .n{font:700 52px 'Inter';color:#bff3e3;line-height:1}
+.dbig .l{font:600 18px 'JetBrains Mono';letter-spacing:.24em;color:#5fae9f}
+.dots i{position:absolute;width:4px;height:4px;border-radius:50%;background:#3fae97;opacity:.7}
+/* arrow */
+.arrow{position:absolute;top:952px;left:150px;width:340px;height:170px;z-index:5}
+</style></head>
+<body><div class="slide">
+  <div class="glow"></div>
+  <div class="grain"></div>
+  <div class="vignette"></div>
+  <div class="dotrow"></div>
+  <div class="handle">@elijahaifl</div>
+  <div class="pill">1/8</div>
+
+  <div class="kick">Claude can now run your</div>
+  <div class="big">ENTIRE<br>INSTAGRAM</div>
+  <div class="brushwrap"><span class="brush">BETTER THAN YOU</span></div>
+
+  <div class="sticker">
+    <span class="crown">&#128081;</span>
+    <svg width="118" height="118" viewBox="0 0 100 100">
+      <g fill="#cf5f2c">
+        <rect x="47.6" y="3" width="4.8" height="47" rx="2.4" transform="rotate(0 50 50)"/>
+        <rect x="47.6" y="9" width="4.8" height="41" rx="2.4" transform="rotate(30 50 50)"/>
+        <rect x="47.6" y="3" width="4.8" height="47" rx="2.4" transform="rotate(60 50 50)"/>
+        <rect x="47.6" y="9" width="4.8" height="41" rx="2.4" transform="rotate(90 50 50)"/>
+        <rect x="47.6" y="3" width="4.8" height="47" rx="2.4" transform="rotate(120 50 50)"/>
+        <rect x="47.6" y="9" width="4.8" height="41" rx="2.4" transform="rotate(150 50 50)"/>
+        <rect x="47.6" y="3" width="4.8" height="47" rx="2.4" transform="rotate(180 50 50)"/>
+        <rect x="47.6" y="9" width="4.8" height="41" rx="2.4" transform="rotate(210 50 50)"/>
+        <rect x="47.6" y="3" width="4.8" height="47" rx="2.4" transform="rotate(240 50 50)"/>
+        <rect x="47.6" y="9" width="4.8" height="41" rx="2.4" transform="rotate(270 50 50)"/>
+        <rect x="47.6" y="3" width="4.8" height="47" rx="2.4" transform="rotate(300 50 50)"/>
+        <rect x="47.6" y="9" width="4.8" height="41" rx="2.4" transform="rotate(330 50 50)"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="term">
+    <div class="tbar"><span class="bot"></span>Claude&nbsp;Code&nbsp;&nbsp;v2.1&nbsp;&middot;&nbsp;Opus&nbsp;4.8&nbsp;&middot;&nbsp;C:\Users\Elijah</div>
+    <div class="tbody">
+      <span class="mut">Using</span> Opus 4.8 <span class="mut">(.claude/settings.json)</span> &middot; /model<br>
+      &rsaquo; run my instagram<span class="cur"></span><br>
+      <span class="or">&#9656;&#9656; bypass permissions on</span> <span class="mut">(shift+tab)</span><br>
+      <span class="gr">&#9679;</span> high <span class="mut">/effort</span>
+    </div>
+  </div>
+
+  <svg class="arrow" viewBox="0 0 340 170">
+    <defs><marker id="ah" markerWidth="11" markerHeight="11" refX="6" refY="5.5" orient="auto">
+      <path d="M0,0 L11,5.5 L0,11 L3,5.5 Z" fill="#fdf3e9"/></marker></defs>
+    <path d="M14,8 C8,70 70,120 200,128" fill="none" stroke="#fdf3e9" stroke-width="5"
+      stroke-linecap="round" stroke-dasharray="2 16" marker-end="url(#ah)"/>
+  </svg>
+
+  <div class="dash">
+    <div class="dots">
+      <i style="left:360px;top:70px"></i><i style="left:410px;top:96px"></i><i style="left:455px;top:64px"></i>
+      <i style="left:392px;top:138px"></i><i style="left:470px;top:120px"></i><i style="left:430px;top:170px"></i>
+      <i style="left:505px;top:150px"></i><i style="left:350px;top:120px"></i><i style="left:498px;top:96px"></i>
+      <i style="left:440px;top:108px"></i><i style="left:380px;top:108px"></i><i style="left:520px;top:118px"></i>
+    </div>
+    <div class="dhead"><span>I.G. &mdash; DASHBOARD</span><span>LIVE</span></div>
+    <div class="dbody"><div class="dcol">
+      <div class="drow">VIEWS &middot; 30D</div><div class="dnum">11.4M</div>
+      <svg class="spark" width="190" height="34"><polyline points="0,28 26,22 52,24 78,12 104,16 130,6 156,9 190,3" fill="none" stroke="#5fe6c4" stroke-width="3"/></svg>
+      <div class="drow">REACH &middot; 30D</div><div class="dnum">5.0M</div>
+      <div class="drow">FOLLOWERS</div><div class="dnum">101K</div>
+    </div></div>
+    <div class="dbig"><div class="n">11,398,815</div><div class="l">VIEWS</div></div>
+  </div>
+
+  <div class="sub">so I open-sourced the whole project. <b>free.</b> &#128274;</div>
+  <div class="swipe">swipe &rarr;</div>
+</div></body></html>

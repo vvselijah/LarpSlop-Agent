@@ -8,3 +8,12 @@ faster-whisper>=1.2.0          # local word-level transcription (CTranslate2). G
 # anthropic>=0.40.0            # highlight.py — LLM moment selector (or route via local Ollama)
 # opencv-python>=4.10          # reframe.py — face/subject detection for 9:16 auto-reframe
 # mediapipe>=0.10              # reframe.py — lightweight face tracking (alt to opencv DNN)
+
+# --- color engine (colorkit) ---
+# Installed in auto-clip/.venv; run color.py via that venv python. All permissive licenses.
+# Drives color.py (CLI) + colorkit/{io_utils,measure,correct,stylize,segment,match,luts}.py.
+opencv-contrib-python>=4.13.0   # measure/correct/stylize — frame I/O + color ops (contrib build)
+numpy>=2.5.0                    # array math across the colorkit stages
+scikit-image>=0.26.0           # color-space + measurement helpers
+colour-science>=0.4.7          # colour-science: colorimetry / LUT math
+scenedetect>=0.7               # PySceneDetect — shot detection (constant-per-shot, anti-flicker)

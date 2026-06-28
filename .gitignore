@@ -57,3 +57,28 @@ venv/
 Thumbs.db
 desktop.ini
 *.log
+
+# === 2026-06-28: keep the PUBLIC framework lean — commit source, not heavy/private outputs ===
+# Carousel studio: keep build scripts + HTML + copy; drop rendered slides & AI asset images (regenerable)
+carousel-builds/**/*.png
+carousel-builds/**/*.jpg
+carousel-builds/**/*.jpeg
+carousel-builds/**/*.webp
+carousel-builds/**/*.gif
+# Color-engine LUTs: large (11MB each) + regenerable from the engine
+**/input_luts/
+**/resolve-luts/
+# ClipWith edit: keep edit data (json/md/scripts/transcripts); drop heavy frames/graphics
+clipwith-edit/reference-analysis/
+clipwith-edit/graphics/
+clipwith-edit/verify/
+# Paid 3rd-party course material — do not redistribute on a public repo
+gumroad/
+# Private IG performance data & content playbook (mirrors the "Private generated data" block above)
+ig-dashboard/3month-recap/
+ig-dashboard/hook-bank.md
+ig-dashboard/reach-recovery-plan.md
+ig-dashboard/carousel-money-moves.md
+# Saved-webpage junk ("Save Page As" dump of a Higgsfield assets page — scraped JS, not source)
+carousel-builds/Assets • Higgsfield.html
+carousel-builds/Assets • Higgsfield_files/

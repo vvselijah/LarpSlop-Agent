@@ -1,0 +1,295 @@
+{
+  "gap_map": [
+    {
+      "id": "skin-line-solver",
+      "technique": "Skin-tone-line solver: mask skin ROI, measure hue angle vs the ~123 deg I-line + skin chroma, then a small CAPPED rotation toward the line (soft, never a hard snap; allow a slightly-green filmic resting offset).",
+      "status": "missing",
+      "priority": "P0",
+      "technique_detail": "scene_stats only counts skin FRACTION; nothing measures or steers skin hue.",
+      "engine_change": "Add measure.skin_signature(bgr) -> {skin_mask_frac, skin_L_IRE, skin_hue_deg, skin_chroma} using the existing YCrCb skin rule (Cr 133-173, Cb 77-127) tightened with a luma gate; compute hue via atan2(Lab b*, a*). Add a capped skin-hue/balance stage in correct.compute_correction that nudges WB/tint toward putting the skin angle on (or a tunable few deg under) the I-line, gated so it only fires when skin_frac >= ~0.08 and damped to a small max delta.",
+      "module": "measure.py",
+      "evidence": "cullen-contrast 11:40 (judge by eye, reject hard snap); mostyn-read-scopes 00:42/05:37-05:42/04:55 (on/under/over OK if consistent, film trends slightly green); grading-too-complicated 07:20-07:22 (yellow=on-line, magenta=overshot); 2hr-beginner-course 21:38 (HSL skin key hue~32, luma 54-63); jenkinson-exact-system 26:55/30:12/33:00 (Vectorscope Show-Skin-Tone-Indicator I-bar ~11 o'clock is the skin/WB authority, match clips by how far skin sits off it); neistadt-ultimate-guide 36:37/27:25/38:28-38:37 (eyedropper HSL skin key Hue 37.9 Width 4.4 Sat 3-8 Lum 60-70, align to I-bar ~11 o'clock, don't push to 'Hulk'); wampus-pro-seminar 69:38 (vectorscope skin line is a guideline not a hard target); editing-explained-2hr 49:08/71:04/99:52 (skin arm down the I-line toward orange, judged on vectorscope)"
+    },
+    {
+      "id": "skin-exposure-ire-gate",
+      "technique": "Two-band skin EXPOSURE gate measured on the skin ROI in IRE: midtone bulk 40-50 IRE, highlights 55-65 IRE, hard ceiling ~70 IRE; flag over-exposed skin; measure the ROI not the whole frame.",
+      "status": "missing",
+      "priority": "P0",
+      "engine_change": "In measure.skin_signature compute the skin-ROI luma percentiles in IRE. In correct, after the global median->0.18 exposure, apply a small skin-gated exposure trim toward the 40-65 IRE band ONLY on the skin region's contribution; emit a 'skin over 70 IRE' / 'skin under 40 IRE' warning into the log.",
+      "module": "measure.py",
+      "evidence": "mostyn-read-scopes 02:21/02:40/04:35/05:21 (40-50 mid, 55-65 hi, ~70 ceiling); 04:22-04:31 (measure skin ROI, bright bg fools the eye); neistadt-ultimate-guide 36:37/38:09 (skin key Lum Low ~55-60 / High ~70 on the 0-100 qualifier scale corroborates a midtone-to-upper skin band); jenkinson-exact-system 07:59 (reference levels Low 20 / High 65 as default luma guide rails)"
+    },
+    {
+      "id": "headless-scopes",
+      "technique": "Headless scopes as self-validation: RGB parade per-channel histograms, luma waveform summary, 2D vectorscope hue-mass/centroid, clip-percentage at 0 and 1023, on a 0-1023 scale. Trust them as ground truth.",
+      "status": "missing",
+      "priority": "P0",
+      "engine_change": "New scopes.py (numpy-only): parade(rgb)->per-channel histograms+low/high percentiles; waveform(L)->occupancy; vectorscope(rgb)->2D hue-mass + centroid angle/radius; clip_stats->pct at 0 and at 1023. color.py computes scopes on each shot's corrected rep frame, logs the targets, and writes an optional --validate JSON sidecar.",
+      "module": "new scopes.py",
+      "evidence": "mostyn-read-scopes 00:24 (software scopes = ground truth) + 0-1023 throughout; beginners-guide 12:41 ('scopes cannot be deceived'); cullen-master-scopes 08:25; 2hr-beginner-course 10:55 (clip = lost information); qazi-start-here 19:07/19:39/23:48 (0-1023 waveform gridlines 0/128/256/384/512/640/768/896/1023; vectorscope's four jobs = balance/shot-match/skin-protect/sat-limit); batal-conquer-color-page 06:08/07:02 (Parade 0-1023, read R/G/B channels independently, peaks Red ~880 Green ~768 Blue ~768); benkabouche-1h-master 06:37/09:19-09:32 (0-1023 code values; Parade log-vs-standard classifier: compressed mid-band=log, full-height pinned=crushed/clipped); wampus-pro-seminar 10:32/17:22 (clipping = a flat PLATEAU at the 0 or 100 rail, not any pixel touching it); neistadt-ultimate-guide 21:06/22:29-22:37 (0-1023, Colorize + Extents to show out-of-range); editing-explained-2hr 63:56/70:38 (Parade 0-1023, graded peaks ~768-896 bases ~64-128 no clip)"
+    },
+    {
+      "id": "scope-target-gate",
+      "technique": "Assert the demonstrated scope targets after develop: black floor off 0, diffuse white ~896/1023 (~87.5%), no channel pinned at 1023, parade R/G/B converged toward neutral, skin lobe near the I-line.",
+      "status": "missing",
+      "priority": "P1",
+      "engine_change": "Add scopes.validate(rep_after_develop, skin_sig) returning pass/fail per target + a one-line verdict; surface in color.py's per-shot log and the --validate sidecar. Non-fatal (advisory), but enables future auto-tuning.",
+      "module": "new scopes.py",
+      "evidence": "beginners-guide 07:09/16:15 (white ~896, black off 0); best-node-tree 13:04-13:32 (balanced parade, skin on I-line, no clip); film-emulation 16:15; editing-explained-2hr 70:38 (graded parade peaks ~768-896, bases lifted ~64-128, no clip at 1023, channels aligned); batal-conquer-color-page 23:11-23:13 (before=heavily red-weighted -> after=R/G/B closer together is the demonstrated balance target); wampus-pro-seminar 41:32-41:40 (keep highlights JUST under the 100 rail for grading room = 'don't clip' guard); jenkinson-exact-system 10:34 (don't flag a small specular spike at 100, only broad midtone energy pinned); neistadt-ultimate-guide 24:10 (Reference Levels 83/964 as a cinematic floor/ceiling guardrail)"
+    },
+    {
+      "id": "halation",
+      "technique": "Halation = linear-light, red-weighted highlight bloom: linearize -> Gaussian blur+glow on the top ~20% luma (flat below a high knee) -> recombine with Add/Screen; intensity scalar (default ~0.5).",
+      "status": "missing",
+      "priority": "P1",
+      "engine_change": "Add stylize.halation(rgb_linear, knee~0.8, strength~0.5, red_weight) operating in linear (tonemap.srgb_eotf/oetf already available): build a high-luma mask, Gaussian-blur a red-weighted copy, Screen/Add composite. Wire as an optional toggle on a look preset (the look becomes an ordered stack, not one cube).",
+      "module": "stylize.py",
+      "evidence": "film-emulation-16-35mm 11:36-12:26/17:56 (linear CST sandwich, top-20% luma mask, Add); mostyn-perfect-node-tree 40:19-40:24 (Glow threshold 0.75, Screen beats Overlay); neistadt-ultimate-guide 53:59/54:45 (Halation OFX is a dedicated finishing node, subtle red glow on highlights; Glow for beauty/emotional moments); euro-pro-level-64min 25:03 (Glow is its own node in the 'Eigener Workflow' tail of the template tree)"
+    },
+    {
+      "id": "film-grain",
+      "technique": "Film grain = monochrome (sat 0) Overlay noise, mid/shadow-weighted (clean highlights), size ~0.36 / strength ~0.38; pre-render a tiled plate ONCE (heaviest op) and composite at low opacity.",
+      "status": "missing",
+      "priority": "P1",
+      "engine_change": "Add stylize.grain: generate/cache a tiled monochrome noise plate; composite Overlay at low opacity with luma weighting (shadows>mids>>highlights). Pre-bake the plate to avoid per-frame regen; expose size/strength/weighting. Toggle on look presets.",
+      "module": "stylize.py",
+      "evidence": "2hr-beginner-course 62:14-62:58 (size 0.357/strength 0.380, mid-weighted, monochrome Overlay); mullins-grading-philosophy 54:44 (Shadows 0.605 > Mids 0.287 > Highlights 0.000); neistadt-ultimate-guide 52:22/52:33 (Film Grain OFX '35mm 400T': Composite Overlay, Opacity 0.500, Texture 0.750, Strength 0.284, Softness 0.234; custom Texture 0.791 Grain Size 0.721 Strength 0.310 -> corroborates Overlay-noise model + the size/strength envelope; Grain is its own node #23 in the reference tree); euro-pro-level-64min 25:03 (Denoise/Sharpen + grain live in the dedicated finishing tail)"
+    },
+    {
+      "id": "vignette",
+      "technique": "Vignette = feathered elliptical radial luma falloff darkening edges to lift the subject; store size/aspect/pan/tilt/softness.",
+      "status": "missing",
+      "priority": "P2",
+      "engine_change": "Add stylize.vignette(rgb, size, aspect, softness, strength) as a radial luma multiplier (pixel path) plus an ffmpeg 'vignette' filter string for the video path; toggle on look presets. Keep it subtle/feathered.",
+      "module": "stylize.py",
+      "evidence": "frenchie-masterclass 20:49 (Size 52.96/Aspect 78.03/Soft1 18.0); 2hr-beginner-course 42:08-42:52 (circular PW, single-digit lift to avoid halo); jenkinson-exact-system 17:08/17:40/29:08 (inverted ellipse window, vignette Gamma -0.02..-0.05, surround Gain ~0.92, subject Gain ~1.05, Size 50.87 Aspect 81.69 Soft1 9.06); editing-explained-2hr 53:46/56:26/59:42 (all four window types - rect 4-edge feather, ellipse via Aspect, freeform spline Inside/Outside, linear gradient - with explicit softness values); neistadt-ultimate-guide 43:02 (circle window Size 50 Aspect 32.92 Soft1 24.68, tight face Soft1 4.13); euro-pro-level-64min 03:17/25:03 (Power Window neutral Size/Aspect/Pan/Tilt 50, Softness ~50; Vignette is node in Light-Shaping group)"
+    },
+    {
+      "id": "density-perceptual-sat",
+      "technique": "Look-time saturation as density/subtractive (deepen, not electrify) or a luma-preserving 3x3 matrix, with a protected Skin band — NOT a naive HSV/per-channel multiply.",
+      "status": "partial",
+      "priority": "P2",
+      "technique_detail": "develop vibrance is already chroma-aware + skin-protecting; but the LOOKS use luts._saturate (naive multiply) and split-tone in gamma 0-1.",
+      "engine_change": "Replace luts._saturate with a density/per-hue model: scale chroma sublinearly (deepen) and exempt a Skin hue band; or apply a luma-preserving channel-mix. Keep develop vibrance as-is.",
+      "module": "luts.py",
+      "evidence": "frenchie-masterclass 22:28-22:33 (subtractive density deepens not electrifies, +14%); grading-too-complicated 09:38-11:51 (HSV/per-hue density, never RGB gain); mullins 32:12 (luma-preserving 3x3); euro-pro-level-64min 03:14/24:30 (Color Slice palette = subtractive Density/Den.Depth/Sat.Depth per-hue vector tool, sits in the 'SAT scv / Col Dens' stage); benkabouche-1h-master 17:17-17:20/09:07 (Color Warper Hue-Saturation per-hue Center/Hue/Sat on -1..1/0..1, Skin Center isolated, for targeted density not broad sat); jenkinson-exact-system 14:05 (set the saturation node's color space to HSV so moves behave softly); wampus-pro-seminar 71:06/78:28 (saturation IS a multiplicative chroma gain; in an HSV-mapped node the RGB slots remap to H/S/V so a 'gain' push acts on a sat/hue axis)"
+    },
+    {
+      "id": "skin-gated-wb",
+      "technique": "Constrained white balance: keep Shades-of-Gray estimate but DAMP any WB move that worsens the skin-hue angle (maximize separation s.t. skin no-worse); add optional per-zone (shadow/highlight) neutralization.",
+      "status": "partial",
+      "priority": "P1",
+      "technique_detail": "Shades-of-Gray WB exists (with low-light fade) but is skin-blind and applied as one global estimate.",
+      "engine_change": "In compute_correction, after WB estimate, recompute the predicted skin-hue angle and damp wb_gains toward neutral if the move pushes skin off the I-line. Optionally add a windowed (bottom-percentile) per-channel black neutralization separate from the highlight balance.",
+      "module": "correct.py",
+      "evidence": "cullen-contrast 09:57-11:30 (Two Keys: separation + skin no-worse); mostyn-read-scopes 08:58-09:11 (windowed black-guide, drive R=G=B at the floor); beginners-guide 17:57-18:55 (per-channel parade convergence); jenkinson-exact-system 12:28-12:56/22:29/37:04 (WB target = align the R/G/B parade traces 'get the circles to line up'; diagnose offending channel, pull it on Offset; demonstrated moves tiny - within +/-1.5 of neutral 25, e.g. Blue 24.28); batal-conquer-color-page 23:11-23:13 (auto-correct objective = pull blue up so R/G/B sit closer); benkabouche-1h-master 07:46/07:55/08:31 (single-channel Gain pull biases hue: B-down->yellow, R-down->cyan; warm = R-up/G-slight/B-flat); wampus-pro-seminar 63:42-65:40 (prefer per-channel Gain for WB over Offset - Offset moves lift+gain together and is slower/less clean); editing-explained-2hr 78:30/00:40/92:32 (WB lives in Temp/Tint not the wheels e.g. Temp -560; per-channel Gain = white-balance-in-highlights, warm=+R/-B, cool=-R/+B)"
+    },
+    {
+      "id": "expose-contrast-pivot-params",
+      "technique": "Expose contrast amount AND a linear-pivot bias as tunable params (low pivot protects highlights, high pivot protects shadows); demonstrated working contrast is scene-adaptive 1.0-1.10 for clean footage.",
+      "status": "partial",
+      "priority": "P2",
+      "technique_detail": "tonemap.pivoted_contrast is correct (linear 0.18 == 0.435 post-encode); but contrast=1.08 and pivot are hard-coded in correct.py.",
+      "engine_change": "Thread a 'contrast' and 'pivot_bias' through compute_correction/develop_fn (default 1.08 / 0.18 so the approved look is byte-identical); let decide.py or a flag set them per scene. KEEP linear pivot at 0.18 — do NOT change it to 0.435 (that constant is for log/encoded space, which colorkit never grades in).",
+      "module": "correct.py",
+      "evidence": "mullins 21:05-21:52 (0.435 = 18% grey in log, NOT 0.5) + 20:34/20:41 (pivot biases protection); grading-too-complicated 08:26 (pivot is working-space-dependent); qualifier-tricks 02:09 (contrast 1.104); jenkinson-exact-system 27:53/36:38 (subtle add Contrast 1.058 @ Pivot 0.435; stronger Contrast 1.130 with LOWERED Pivot 0.337 = the pivot-bias move demonstrated); euro-pro-level-64min 21:34/22:18/24:44 (working range Contrast 1.16-1.18 @ Pivot 0.435 = scene-adaptive); batal-conquer-color-page 22:20 (clean correction leaves Contrast 1.000/Pivot 0.435 neutral, contrast belongs in a separate grade stage); qazi-start-here 05:53 (project 'Use S-curve for contrast' ON as the default contrast method); benkabouche-1h-master 16:01-16:04 (Log3G10 0.18 = mid-grey linear confirms the 0.18 linear anchor; many videos confirm 0.435 is the DWG-encoded default pivot)"
+    },
+    {
+      "id": "filmic-soft-toe-curve",
+      "technique": "Optional filmic develop curve: lifted/soft toe + rolled shoulder (raised black, no white clip) — the demonstrated film-print tonality, a single S/CST response.",
+      "status": "partial",
+      "priority": "P2",
+      "technique_detail": "highlight_soft_clip rolls the shoulder (good) but there is no lifted-toe option; the looks add toe via per-channel LGG only.",
+      "engine_change": "Add an optional lifted-toe term to the develop tone curve (small black lift + soft toe) in tonemap, exposed as a develop param defaulting to off, so a 'filmic' develop variant can raise the toe like a print stock without re-stacking the look LUT.",
+      "module": "tonemap.py",
+      "evidence": "mullins 43:45 (single CST -> soft S, lifted toe + rolled shoulder); film-emulation-16-35mm 16:15 (milky toe ~80-120, rolled shoulder); 2hr-beginner-course 32:12 (gentle S, soft-clip knees); neistadt-ultimate-guide 31:06-31:15 (build contrast with a subtle Custom S-curve, confirm by waveform spread); qazi-start-here 14:14 (RapidGrade Kodak-2383 film contrast: Blacks 0.92 slightly up, Highlights -0.750 / Whites -2.72 pulled down = print shoulder roll-off + raised toe); batal-conquer-color-page 22:50 (final grade adds a slight S/contrast curve shape); qazi-start-here 05:53 ('Use S-curve for contrast' project default)"
+    },
+    {
+      "id": "shot-match-hue-mass",
+      "technique": "Shot-match metric = maximize 2D vectorscope hue-MASS overlap (distribution), skin-weighted and excluding saturated set-dressing — stronger than per-channel LAB mean/std.",
+      "status": "partial",
+      "priority": "P2",
+      "technique_detail": "match.py is Reinhard LAB mean/std toward a median-luma hero with alpha=0.8 (damping already correct); but matches whole-frame stats, set-dressing-blind.",
+      "engine_change": "Add a skin-weighted / set-dressing-masked variant of compute_match_params (down-weight high-chroma non-skin pixels) and/or a hue-mass-overlap score to pick the hero and validate the match. Keep the constant-per-shot baked-LUT mechanism.",
+      "module": "match.py",
+      "evidence": "cullen-master-scopes 08:52-11:07 (hue-mass overlap = match metric) + 07:44 (saturated set-dressing is a trap, judge on skin lobe); cullen-36 25:50; jenkinson-exact-system 31:53/32:05/33:00 (match clips by skin position on the vectorscope + a reference-still split read as a waveform step; 'warm/cool nudge' = Offset toward the reference skin angle); euro-pro-level-64min 21:07-21:27/23:32 (Image-Wipe dual-viewer/diagonal-split/alpha-blend reference compare + X-Rite ColorChecker auto-match via Color Match palette; conform frame rates first); qazi-start-here 16:10-16:48 (Lightbox-first whole-program pass: cluster shots into scene/location groups, flag outliers, grade group-wise); neistadt-ultimate-guide 12:56/14:52 (save grade as a still/PowerGrade, Lightbox consistency pass before export); content-creators-indepth 32:20 (Paste-Attributes Color-Correction to propagate one hero grade across a shot family)"
+    },
+    {
+      "id": "temporal-scope-averaging",
+      "technique": "Temporal averaging: accumulate the scope/measurement read over several frames before committing a correction (reduces single-frame noise).",
+      "status": "missing",
+      "priority": "P2",
+      "technique_detail": "color.py measures ONE median-brightness rep frame per shot.",
+      "engine_change": "Optionally sample N rep frames across the shot, average the scene_stats / scope reads (and skin signature), then derive ONE constant correction from the averaged stats — preserving the constant-per-shot anti-flicker rule.",
+      "module": "measure.py",
+      "evidence": "cullen-master-scopes 08:18 ('show it to me enough times'); mostyn-read-scopes (temporally build the diagnosis); neistadt-ultimate-guide 02:10/14:52 (loop the clip while grading + Lightbox to read consistency across the whole clip/timeline); qazi-start-here 16:10-16:21 (play the program holistically before committing a grade)"
+    },
+    {
+      "id": "false-color-ire-bands",
+      "technique": "False-color / IRE band map (luma -> -5..+5 bands, band 0 ~= 0.391 mid-grey) for a per-pixel/per-region exposure-zone check before grading.",
+      "status": "missing",
+      "priority": "P2",
+      "engine_change": "Add scopes.false_color(L) bucketizing Rec.709 luma into IRE bands; use it to drive the skin-exposure gate and emit a 'subject under / background hot' note. Optional debug PNG.",
+      "module": "new scopes.py",
+      "evidence": "mostyn-read-scopes 00:46/02:09 (permanent false-color IRE legend); grading-too-complicated 05:36-05:37 (band 0 = mid-grey 0.391, -5..+5); faris-full-course-2026 82:10 (False Color is a listed Resolve FX Color OFX); neistadt-ultimate-guide 28:28-28:33 (per-band Vectorscopes All/Low/Mid/High with Low Range 0.30 / High Range 0.70 thresholds = zone-banding the tonal range)"
+    },
+    {
+      "id": "look-as-ordered-stack",
+      "technique": "Model each look as an ordered, toggle-able STACK (color cube + halation + grain + vignette + density), not a single opaque tint cube — the demonstrated film-emulation architecture.",
+      "status": "missing",
+      "priority": "P2",
+      "engine_change": "Refactor the look registry so a look is a small spec {cube, halation?, grain?, vignette?, density?} applied in fixed order at the configured opacity; the still and video paths both walk the stack (video bakes the cube + composites the texture ops). Keep --look-opacity 0.7 default.",
+      "module": "stylize.py",
+      "evidence": "film-emulation-16-35mm 00:34/16:24 (film look = ordered toggle-able node graph, decomposes, not a cube); mostyn-perfect-node-tree (FLC + glow + grain stages); 2hr-beginner-course canonical tree; neistadt-ultimate-guide 00:26 (reference tree: ...Look(18) -> FineTune(19) -> Sharpen(20) -> Glow(21) -> FX(22) -> Grain(23) -> CST-Out(24) = look IS an ordered stack of named finishing nodes); euro-pro-level-64min 25:03 (template tree: SAT/ColorSlice/ColDens -> LightShaping(vignette/eyes/gradient) -> Look I/Look II -> Glow/CleanW/Pop -> Denoise/Sharpen, each a toggle-able node); editing-explained-2hr 70:18 (Dehancer film-emulation runs as its own dedicated node on top of the grade, not a baked LUT); qazi-start-here 13:57/14:14 (one-click film look = print curve + per-zone film/color contrast applied between IDT and ODT with one master-blend opacity)"
+    },
+    {
+      "id": "multicam-input-lut-lookup",
+      "technique": "Per-camera input transform is the ONLY thing that changes per source: a camera->input-LUT lookup (iPhone/consumer = Rec.709 passthrough; Insta360 = I-Log LUT).",
+      "status": "partial",
+      "priority": "P3",
+      "technique_detail": "_detect_input_lut handles I-Log by filename + HDR tonemap; no general camera lookup, fine for a single-camera creator.",
+      "engine_change": "If phone/other-camera b-roll grows, add a small camera->input-LUT map and detect source via metadata/filename, defaulting unknown SDR to Rec.709 passthrough (no log decode).",
+      "module": "correct.py",
+      "evidence": "best-node-tree-any-camera 16:36/21:18 (iPhone/consumer = Rec.709/Rec.709, only node 01 changes per camera); grading-too-complicated 02:26; jenkinson-exact-system 03:58 (camera->CST table: Sony S-Gamut3.Cine/S-Log3, Canon Cinema Gamut/Log2-3, DJI D-Gamut/D-Log, Panasonic V-Gamut/V-Log); euro-pro-level-64min 14:47/17:38 (per-clip Input Color Space: Apple Log/Rec.2020, F-Log2, D-Log-M, BM Film Gen5, ARRI, Rec.709); benkabouche-1h-master 21:52-21:57 (per-clip Input Color Space override for mixed BMD-DNG vs RED REDWideGamutRGB/Log3G10 vs ProRes); faris-full-course-2026 123:44 (tag each clip's Input Color Space to camera-native e.g. Pocket 4K Film, full IDT list ACES/ARRI/Canon/RED/Sony/...); content-creators-indepth 16:42 (manufacturer->conversion-LUT registry Sony/Arri/Canon/Panasonic/RED/DJI); wampus-pro-seminar 31:48 ('skip CST if input==output==Rec.709' fast path)"
+    },
+    {
+      "id": "output-gamma-2p2-vs-2p4",
+      "technique": "Output gamma is a disputed knob: 2.2 (Mullins, web/SDR) vs 2.4 (calibrated monitor). For IG delivery 2.2 is the better default but expose it.",
+      "status": "partial",
+      "priority": "P3",
+      "technique_detail": "colorkit encodes via sRGB OETF (~2.2-ish), which is the right default; no explicit 2.4 path.",
+      "engine_change": "If a 2.4-tagged delivery is ever needed, expose an output-transfer flag (srgb/2.2/2.4) on the OETF; default stays sRGB. Document that 2.2 is intentional for IG/SDR web.",
+      "module": "tonemap.py",
+      "evidence": "mullins-grading-philosophy 02:59 (delivers Gamma 2.2, not 2.4); best-node-tree 01:51 (2.4 for calibrated monitor); euro-pro-level-64min 16:08/16:30/08:21 (Gamma 2.2 = computer/web/sRGB; Gamma 2.4 = TV/cinematic/dark-room; instructor's recommended Output = Rec.709 Gamma 2.2 for web); wampus-pro-seminar 35:56 (2.4 standard, 2.2 for YouTube/web); benkabouche-1h-master 18:13/18:24/18:46 (Rec.709=>gamma 2.4, DCI-P3=>gamma 2.6); lenz-most-important-concept 08:31/20:53 (CST output Gamma 2.4 for Rec.709 delivery); qazi-start-here 04:57/22:39 (Output Rec.709 Gamma 2.4); jenkinson-exact-system 04:44 (Output Rec.709-A)"
+    },
+    {
+      "id": "fixed-pipeline-order",
+      "technique": "Enforce a fixed broad-to-fine grade pipeline order as a HARD contract: (input transform) -> NR -> exposure/contrast -> white balance -> saturation -> secondaries -> look -> output transform. Order is the single most-corroborated cross-video law; re-ordering changes the result (grading is not commutative).",
+      "status": "partial",
+      "priority": "P0",
+      "technique_detail": "colorkit's color.py already fixes an order (HDR -> input-LUT -> develop -> match -> look -> scale) but it is implicit and does not separate NR / WB / saturation / secondaries as named, independently-strength-scalable stages.",
+      "engine_change": "Make the pipeline order an explicit named contract in color.py/correct.py, each stage an isolated op that can be enabled and strength-scaled independently (mirror the demonstrated node trees). Keep colorkit's existing relative order; add NR-before-amplify and the grade-before-output-transform guard. Assert/log if a destructive op runs out of order.",
+      "module": "color.py",
+      "evidence": "lenz-most-important-concept 25:12-25:44/02:17/26:07 (order-of-ops is THE most important concept, a+b!=b+a for grading; NR -> EXP/CON -> BAL -> SECONDARIES -> LOOK -> CST-to-709); euro-pro-level-64min 24:30/25:03/25:27 (full template tree + beginner Exposure->Balance->Saturation); jenkinson-exact-system 07:31/30:35 (EXP->WB->CON->SAT->secondaries, each on its own named node); neistadt-ultimate-guide 00:26/00:33 (CST-in->exp/bal->curves->sat->secondaries->windows->look->finishing->CST-out); editing-explained-2hr 49:08/64:36 (Exposure->WhiteBalance->Sat->parallel secondaries->trim tail); content-creators-indepth 21:06 (Lift/Gamma/Gain/Offset tonal pyramid order); batal-conquer-color-page 09:28-09:33 (Lift=base/Gamma=mids/Gain=highs/Offset=master mental order)"
+    },
+    {
+      "id": "cst-sandwich-wide-working-space",
+      "technique": "Color-managed-first CST 'sandwich': input transform (camera log/gamut -> WIDE working space such as DaVinci Wide Gamut / Intermediate) FIRST, do ALL grading in the wide space, output transform (-> Rec.709) LAST. Grade in a wide gamut to retain color data; only compress to display at the tail. Tone-map defaults: Method DaVinci, Adaptation 9.00, Gamut Mapping None, White-Point-Adaptation on.",
+      "status": "partial",
+      "priority": "P1",
+      "technique_detail": "colorkit grades in sRGB-LINEAR (defensible for single-camera) and applies an I-Log->Rec709 input LUT + HDR tonemap; it does NOT grade in a wide gamut (DWG-equivalent), so saturated/out-of-gamut moves can clip earlier than a wide-space pipeline. This is the single most-repeated pro contract in the new corpus.",
+      "engine_change": "Document sRGB-linear as the deliberate single-camera choice; offer an optional wide-gamut working-space path (linearize into a DWG/ACEScct-like wide primaries set, grade, transform to Rec.709 at output) for when out-of-gamut clipping appears. Mirror tonemap params (DaVinci method, Adaptation 9.0, gamut-mapping none, WP-adaptation on). Keep input transform first and output transform last (already true).",
+      "module": "tonemap.py",
+      "evidence": "lenz-most-important-concept 22:14-23:00 (the 'sandwich': Log->input CST->DWG/Intermediate (largest space)->output CST->Rec.709, Swap builds the inverse); euro-pro-level-64min 12:32/26:22/06:52-07:16 (IN+OUT conversion nodes, grade between, DWG>ARRI-WG>ACES-AP1>Rec.2020>P3>Rec.709 nesting); jenkinson-exact-system 03:44/04:48/06:01-06:21 (CST sandwich, wide gamut recovers apparent Rec.709 clipping); qazi-start-here 21:19-22:39/13:21/23:07-23:24 (idt->grade->odt, DWG/DI = 'most juice', 16-17 stops latitude); benkabouche-1h-master 14:55/15:09-15:11/16:51 (decode to wide not display, Rec.709 deletes out-of-gamut colors); wampus-pro-seminar 37:16/38:32/50:12 (CST sandwich, grade between, Adaptation 9.00); neistadt-ultimate-guide 53:21-53:36 (CST-in/out, DaVinci tonemap Adaptation 9.0, OOTF forward + WP-adaptation on); faris-full-course-2026 00:39 (color-managed project: DaVinci WG Intermediate processing, Rec.709 output set BEFORE grading)"
+    },
+    {
+      "id": "grade-before-lut-clip-guard",
+      "technique": "Grade-before-the-LUT/output-transform guard: any exposure/offset/contrast correction must run UPSTREAM of the display LUT/output transform, because a LUT/CST clips everything outside its range and that information is unrecoverable ('nothing comes back'). Never bake the display LUT before grading.",
+      "status": "partial",
+      "priority": "P1",
+      "technique_detail": "colorkit applies the input LUT then develops, then bakes the look at the tail, so it largely respects this; but it has no explicit assertion that a destructive transform never precedes an exposure op, and the looks are baked cubes (a tail LUT) which is the correct placement.",
+      "engine_change": "Add an assertion/log in color.py: if a destructive transform (output/display LUT, hard clip) precedes an exposure/contrast op for a given path, flag it. Verify middle-grey/exposure sits in the input transform's expected range BEFORE the output transform; warn on over/under-exposed log that would break the Rec.709 mapping.",
+      "module": "color.py",
+      "evidence": "lenz-most-important-concept 15:32-15:48/18:49/13:32 (LUT clips out-of-range info permanently; exposure BEFORE the transform restores dynamic range; 'nothing will come back' once baked); euro-pro-level-64min 25:58-26:10 (don't convert log->709 in node 01 then grade - the explicit beginner mistake); neistadt-ultimate-guide 53:05/55:05 (CST over a creative LUT to avoid clip/distort; apply OFX in color-managed order before creative grade); content-creators-indepth 19:26 (LUT-first only as a technical conversion base, wheels do small tweaks after); jenkinson-exact-system 15:27 (creative LUT goes AFTER CST OUT, in display space)"
+    },
+    {
+      "id": "per-stage-strength-knob",
+      "technique": "Universal per-stage strength/opacity knob (Resolve 'Key Output Gain', neutral 1.0): every node/stage supports a 0-1 mix so the whole grade or any single correction can be dialed back without rebuilding it. Creative LUTs in particular almost always read too strong at full and are pulled back to ~0.5.",
+      "status": "partial",
+      "priority": "P1",
+      "technique_detail": "colorkit has a global --look-opacity (0.7) and bakes the look at opacity, but per-STAGE strength (WB, secondary, develop) is not individually exposed.",
+      "engine_change": "Expose a 0-1 strength/opacity on each pipeline stage (develop, match, look, and any future skin/WB/secondary), defaulting to 1.0 except the look (0.7). Implement as an identity->result lerp (the existing bake_look_at_opacity pattern generalized).",
+      "module": "color.py",
+      "evidence": "jenkinson-exact-system 16:18/31:10/38:27 (Key Output Gain ~0.5 as a universal strength knob for WB, secondaries, AND creative LUTs - LUTs too strong on apply, dial back to 0.5-0.57); neistadt-ultimate-guide 11:33 (Key Output Gain 1.0 = node opacity neutral); qazi-start-here 13:11/13:57 (RapidGrade Master Blend 1.000 single look-opacity); content-creators-indepth 19:26 (post-LUT wheels do only small tweaks = LUT carries it, trims are light); film-emulation 50% Key-Output (existing corpus corroboration)"
+    },
+    {
+      "id": "linear-exposure-gain",
+      "technique": "Exposure as a GAIN-in-linear move (a stop multiply), NOT an offset: set the working gamma to linear, raise gain -> highlights move while blacks stay anchored at the floor; an Offset/lift instead lifts AND flattens shadows ('flat and noisy'). This is the clean exposure adjustment.",
+      "status": "present",
+      "priority": "P2",
+      "technique_detail": "colorkit ALREADY does exposure as a linear median->0.18 scale (a gain in scene-linear) - this corpus strongly validates that existing choice rather than asking for a change.",
+      "engine_change": "No change required - confirm/document that correct.py's linear-light median->0.18 exposure is exactly the demonstrated 'gain in linear' move (highlights move, blacks anchored). Do NOT switch exposure to an additive offset. Optionally expose a stop-multiply alias for readability.",
+      "module": "correct.py",
+      "evidence": "wampus-pro-seminar 53:14-54:12/53:46/79 (set node gamma Linear then raise Gain = clean in-camera-stop exposure, blacks pinned; Offset lift in non-linear space makes darks flat and noisy; 'linear is how cameras capture light'); benkabouche-1h-master 06:46/16:01-16:04 (Gain = the single 'intensity' control; 0.18 = linear mid-grey); neistadt-ultimate-guide 03:57 (Offset=global exposure but moves everything together - contrast with the cleaner linear-gain approach)"
+    },
+    {
+      "id": "tetrahedral-lut-interpolation",
+      "technique": "Use Tetrahedral (not Trilinear) interpolation for any 3D LUT/.cube apply - trilinear creates harsh banding, tetrahedral renders smooth gradients.",
+      "status": "missing",
+      "priority": "P2",
+      "technique_detail": "colorkit bakes constant per-shot .cube files and applies looks as cubes; the interpolation method used when sampling those LUTs is not specified/controlled.",
+      "engine_change": "Ensure all 3D-LUT sampling (input LUT, look cubes) uses tetrahedral interpolation; if the still/video path uses an ffmpeg or numpy LUT apply, select tetrahedral where available (ffmpeg lut3d interp=tetrahedral) to avoid banding, especially on 8-bit sources and smooth skies/gradients.",
+      "module": "luts.py",
+      "evidence": "euro-pro-level-64min 16:57/18:43 (change Trilinear -> Tetrahedral, 'improves how LUTs work'); qazi-start-here 05:04-05:32 (tetrahedral over trilinear: trilinear=harsh banding, tetrahedral=smooth gradients)"
+    },
+    {
+      "id": "tracked-window-local-corrections",
+      "technique": "Local corrections via tracked Power Windows: ellipse/rect/freeform-spline/linear masks with feather, tracked onto the moving subject, for subject-pop, surround-darken vignette, glare-tame (windowed highlight pull), and dodge/burn (burn Gain ~0.46, dodge Gain ~1.72).",
+      "status": "missing",
+      "priority": "P2",
+      "technique_detail": "colorkit is global/constant-per-shot only; auto-clip has facetrack for reframing but the color engine does no spatial/local correction or subject mask.",
+      "engine_change": "Add an optional local-correction stage: a (tracked) subject mask (reuse auto-clip facetrack/Cloud-equivalent) enabling subject-vs-background separate grades - subject Gain ~+5%, surround Gain ~0.92 / Gamma -0.02..-0.05 for an eye-directing vignette, a windowed Highlights pull (~-49) on hot specular regions, and an optional dodge/burn pair. Keep constant-per-shot anti-flicker by deriving the mask grade from averaged stats.",
+      "module": "stylize.py",
+      "evidence": "jenkinson-exact-system 17:08-17:51/19:43/24:54/29:08/29:30 (inverted ellipse vignette, subject brighten Gain 1.05, glare-tame Highlights -49, Cloud-Tracker on the window); editing-explained-2hr 53:46-60:20/93:00-97:42 (all 4 window types + tracking; dodge/burn pair Gain 0.46 burn / 1.72 dodge); content-creators-indepth 80:50-84:44 (pen window + Cloud-Tracker to follow subject, composite over gradient); neistadt-ultimate-guide 42:30/43:02/45:32 (power-window background darken Lift -0.05, tracked face circle, AI IntelliTrack); faris-full-course-2026 136:00-141:52 (sky-vs-foreground split via soft-edged mask, restore practicals through small masks)"
+    },
+    {
+      "id": "color-harmony-palette-planning",
+      "technique": "Plan the target palette via color-harmony theory before grading (Analogous / Monochromatic / Complementary / Split-Complementary), mapped to film references, then drive an orange-and-teal style split: push skin toward the orange/I-line vector and shadows/background toward teal.",
+      "status": "missing",
+      "priority": "P3",
+      "technique_detail": "colorkit's 10 looks are fixed split-tone presets; there is no harmony-target/complementary-split mode that derives a look from a chosen scheme + the scene's own skin/background hues.",
+      "engine_change": "Add an optional harmony-target look mode that, given a scheme (analogous/complementary/split-complementary), splits shadows/background toward the complement of skin while holding skin on the I-line - a principled generator for the orange-and-teal family rather than a hand-tuned cube.",
+      "module": "stylize.py",
+      "evidence": "editing-explained-2hr 76:46-88:40/77:08/82:36 (Adobe Color harmony palettes - Analogous/Monochromatic/Complementary/Split-Complementary - mapped to Blade Runner/Joker/etc., driving the orange-and-teal split); benkabouche-1h-master 23:29 (teal-cool exterior / warm-tungsten interior split look profile with skin warmth preserved); wampus-pro-seminar 11:46 (complementary pairs R<->Cyan, G<->Magenta, B<->Yellow as the basis)"
+    },
+    {
+      "id": "order-sanity-heuristic",
+      "technique": "Order/space sanity heuristic: if hitting a target needs EXTREME control values (e.g. Gain >> ~2x, or a large negative Offset crushing to the floor), that is a diagnostic of wrong operation order or wrong color space - flag it rather than accepting the destructive grade.",
+      "status": "missing",
+      "priority": "P3",
+      "technique_detail": "colorkit has no self-check that an unusually large correction implies a pipeline/space mistake.",
+      "engine_change": "After solving a correction, if any derived primitive exceeds a sane envelope (linear gain beyond ~2-3x, exposure shift beyond a few stops, near-floor crush), emit a 'likely wrong input transform / order' warning into the per-shot log instead of silently applying it.",
+      "module": "correct.py",
+      "evidence": "lenz-most-important-concept 21:04/21:36-vs-22:22 (wrong color space needed ~3.7-4x Gain vs ~1.5x correctly ordered = a diagnostic; large negative Offset crushes to black, 'nothing comes back'); wampus-pro-seminar 41:32-41:40 (a move that flatlines the rail = went too far / wrong approach)"
+    },
+    {
+      "id": "log-raw-pregrade-gate",
+      "technique": "Pre-grade source gate: prefer/flag log or RAW (and >=10-12 bit) sources for gradable headroom; classify log-vs-standard off the Parade (compressed mid-band = log/no-clip; full-height pinned at 0/1023 = standard/crushed); flag 8-bit as banding-risk when stretching darks/gradients.",
+      "status": "missing",
+      "priority": "P3",
+      "technique_detail": "colorkit auto-detects the I-Log input LUT by filename and HDR by tag, but does not classify/flag low-headroom (8-bit, already-baked-Rec.709) footage before grading.",
+      "engine_change": "Add a measure.py pre-grade classifier: read bit depth + a Parade-shape test (mid-band-compressed => log/flat headroom OK; full-range pinned => standard/limited headroom); surface bit depth + stop count and warn on 8-bit-stretch banding risk before committing a strong grade.",
+      "module": "measure.py",
+      "evidence": "benkabouche-1h-master 09:19-09:32/09:58/10:48/14:23 (Parade log-vs-standard classifier; shoot log/RAW >=12-bit for 13 stops; 12-bit = 4096 steps); batal-conquer-color-page 04:29-04:33 (shoot flat/RAW to preserve latitude, 'ask the camera to add nothing'); editing-explained-2hr 24:30/37:36 (shoot 10-bit not 8-bit to avoid banding, 'Colors > Pixels'); euro-pro-level-64min 02:02-02:05 (ungraded log is unfinished/flat, not a look)"
+    }
+  ],
+  "flagged_claims": [
+    "2hr-beginner-course identity defaults list Gain 1.00 AND Offset 25.00 simultaneously (02:03) — in Resolve's Log/Offset readout 25.00 is the NEUTRAL offset (not an additive lift), so 'Offset 25 = unity' should be re-confirmed against the cited frame before treating 25 as a black-floor LIFT in any port.",
+    "film-emulation-16-35mm 10:00 exposure move 'pull Gain 25.00 -> 13.25 (R/G/B)' reads Gain on a 0-25/offset-style scale, not the usual ~1.0 multiplier scale — verify whether this is the Offset wheel (0-100, neutral 25) mislabelled as Gain, since 'Gain 25' is not the standard 1.0-centered gain.",
+    "frenchie BALANCE warmth 'Blue offset down B/Ofs = -0.01' (12:19) is a suspiciously tiny number to produce a visible warm shift on a 0-100/neutral-25 offset scale — likely a wheel-coordinate (-1..1) not the 0-100 readout; re-check the frame so a port doesn't apply a 100x-too-small blue trim.",
+    "mullins claims default Pivot 0.435 = 18% middle-grey in LOG and proves it with a DCTL (21:05); other videos use pivot 0.435 while grading under a 709 output and grading-too-complicated says 0.435 is WRONG for DWG (use 0.336) — the exact working space each 0.435 is measured in is inconsistent across videos and worth one human pass before hard-coding any encoded-space pivot (colorkit's linear 0.18 sidesteps this).",
+    "qualifier-tricks 06:29 final warm-offset 'Offset R 0.47 / G 29.29 / B 53.88' — R at 0.47 on the same scale where G/B are ~29-54 implies red is crushed near zero, an extreme split that contradicts a 'warm/orange lift'; verify the frame (likely a per-channel wheel value vs the 0-100 offset readout being mixed).",
+    "lenz-most-important-concept 21:36 wrong-order Gain 3.70/3.95/3.70 (~3.7-4x) — medium-confidence read of the Gain numeric readout, used as a DELIBERATE extreme/destructive demo (grading in the wrong color space), NOT a real grade; do not ingest as a target gain. (Correct-order contrast at 22:22 = Gain ~1.50.)",
+    "wampus-pro-seminar 78:28 'subtractive saturation' Gain slot driven to 2.22 — 2.22 is a real ~2.2x on a 1.00-neutral slot, BUT the node is in HSV color space so the slot is an HSV axis (H/S/V), not literal Blue — which is WHY the image goes red, not blue. Do not read 2.22 as an RGB Blue gain.",
+    "wampus-pro-seminar 68:42 HDR 'Global exposure +1 stop' — the +1 stop is STATED in narration; the captured on-screen Global readout sat at ~neutral (color ~0.00 / Sat ~1.00) so the value is not frozen in a number — confirm against the moving frame before encoding a +1-stop HDR-global primitive.",
+    "euro-pro-level-64min 14:47 Offset '5.00 / 25.00 / 25.00' during the Input-Color-Space menu — likely the leading '2' of '25.00' occluded by the context-menu overlay, NOT a real -20 red offset; recheck the frame, do not treat as a red-down grade.",
+    "euro-pro-level-64min 14:56 Offset 42.55/42.55/42.55 (all three channels EQUAL) — a uniform luminance/brightening master offset, NOT a color cast; frame is dimmed by a transition overlay (medium confidence). Equal-across-channels Offset = pure level, never a hue shift.",
+    "euro-pro-level-64min 16:51-16:53 Broadcast-Safe IRE low bound reads '20' vs '-20' across frames — ambiguous; recheck which bound is correct before baking a broadcast-safe clamp (Resolve default is -20 to 120). Qazi 05:04 and the 18:43 frame both read -20-120.",
+    "faris-full-course-2026 00:24 Gain 1.13/1.13/1.13 in a neutral-tour frame — likely the wheel-color swatch readout, NOT the gain coefficient; 12:55 and 00:39 both confirm neutral Gain = 1.00. Do not treat 1.13 here as a +13% boost. (Same 1.13 swatch-vs-gain ambiguity recurs at batal 19:53 where 1.13 IS a real modest lift, so scale-context matters.)",
+    "faris-full-course-2026 Fusion-page values (121:12-146:36: ColorCorrector/BrightnessContrast Gain/Gamma/Contrast neutral = 1.0, Lift/Brightness = 0.0, Sat = 1.0; e.g. Gain 0.14-0.208, Gamma 0.31-0.61, Sat 0.42-0.77) are on FUSION-TOOL scales, NOT Color-page primary scales — do not ingest as Lift/Gamma/Gain wheel values; they are a portable day-for-night value envelope only.",
+    "faris-full-course-2026 174:53 / 194:08 strong-green demos (Gain readout 2.57/33.97/-0.01 at 174:53; bottom-row Shad -51.50 / Hi-Light 98.00 at 194:08) are deliberate extreme 'this lives in one node' / lower-slider demos that flood the image green — NOT real grades; the 33.97 green and the bottom-row sliders are 0-100-scale lower-panel controls distinct from the wheel readouts.",
+    "faris-full-course-2026 84:35 title text color (HSV Hue 173 / Sat 213 / Val 255 on a 0-255 scale, #2affe6) and 108:23/111:58/112:07 Fusion status-bar pixel samples (0-1 float source-pixel reads) are NOT grade controls — do not ingest as wheel/curve values.",
+    "faris-full-course-2026 248:07 Mid/Detail readout '78.00' (sign ambiguous) — control just adjusted to soften skin; prior frames read -78.00, so the intended value is almost certainly NEGATIVE (detail reduction). Treat as ~-78 (skin detail-reduction), not +78.",
+    "jenkinson-exact-system 16:33 WB-on-Gain readout 24.76/24.68/24.28 — these are NOT the 1.0-centered Gain numbers; at this bar width Resolve shows a bar/percent-style readout (~25 mid). Blue (24.28) lowest = 'blue down' is consistent, but recheck the scale before porting the magnitude.",
+    "qazi-start-here 10:12/10:16 HDR Color Wheels zone readouts (Dark -1.50, Shadow +1.00, Light -1.00; Global Y pulled to -1.41) are HDR zone-EDGE/tonal-range values on the HDR-palette scale, NOT Lift/Gamma/Gain offsets — verify scale before feeding as primary-wheel values. (Same HDR zone-edge-vs-applied ambiguity flagged at jenkinson 29:52 and wampus 67:30.)",
+    "qazi-start-here 20:16 'Color management instantly makes your grades look 85% BETTER' — a rhetorical/marketing figure, not a measured or on-screen control value; do not encode 85% as a parameter.",
+    "qazi-start-here 16:01 AI Blemish Removal / AI UltraSharpen slider values (~0.605 / ~0.475 / ~0.349) are from STATIC marketing screenshots embedded in the Resolve webpage, NOT a grade Qazi performed — illustrative only.",
+    "batal-conquer-color-page 17:05 Lift wheel numeric readout reads 0.00 while the scope shows a full lift (entire trace pinned to top) — a transitional/mid-demo frame; the numeric value is not trustworthy, read the scope intent (extreme Lift) not the 0.00 readout.",
+    "benkabouche-1h-master 17:10 Advanced-Panel 'Temperature 34.00' (and 28:56 Temp 660.0, 14:00 Temp 55.00) — the panel 'Temperature' scale is ambiguous (a panel/readout unit, NOT degrees Kelvin); don't treat these as Kelvin white-balance targets without confirming the scale.",
+    "benkabouche-1h-master 18:46 DCI-P3 target shown as gamma 2.60 paired with D65 — 2.60 gamma normally pairs with the DCI white point, not D65; likely a P3-D65 display target (vs theatrical DCI-P3) - flag the labeling, treat P3 gamma as 2.6 but note the white point.",
+    "benkabouche-1h-master 15:50 'a Rec.709 display shows only ~30% of captured colors' is a SPOKEN estimate, not an on-screen readout; use only as a qualitative 'wide gamut preserves much more' argument, not a measured figure.",
+    "benkabouche-1h-master 33:04-33:05 / content-creators-indepth 82:40 tracker numeric pairs/deltas (e.g. 3.54/-23.78; Pan -3.18 / Tilt -8.66 / Zoom 7.01 / Rotate -0.02) are tracker PIXEL-DISPLACEMENT / motion outputs, NOT color-wheel values — do not ingest as grade inputs.",
+    "neistadt-ultimate-guide 33:15 primary Saturation bar 81.40 (and 35:53 Saturation 56.20) read on the 0-100 primary Saturation control are distinct from the Sat-vs-Sat curve's 0.00-1.00 Output Sat — do not conflate the two saturation scales when extracting values.",
+    "content-creators-indepth 25:04/50:50 Edit-page Transform Zoom ~1.3-1.9 — geometry (Transform panel), NOT a color Gain; an extractor must filter by page (Color vs Edit) so a Transform Zoom is never ingested as a Gain magnitude. (Most numbers in this source are Edit-page Transform + audio dB, not color.)"
+  ]
+}

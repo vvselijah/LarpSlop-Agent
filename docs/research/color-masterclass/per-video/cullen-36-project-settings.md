@@ -1,0 +1,99 @@
+# cullen-36-project-settings — analysis
+
+*Source: Cullen Kelly, 38K views (HIGH authority) · framesRead: 23*
+
+## Overview
+This is NOT a hands-on grading tutorial — it is a complete, section-by-section walkthrough of EVERY DaVinci Resolve 19 Project Settings panel (opened with Shift+N), narrated by a working Hollywood colorist explaining which settings actually matter for the color page and which are conform/editorial/delivery noise. The teaching value is twofold: (1) a curated list of the "gem" settings that pros change and beginners miss, and (2) a decluttering of what every setting means so you grade with confidence. Throughout, Cullen demonstrates on a UHD military/explosion clip (RED source, ProRes 422 HQ render cache, DaVinci YRGB color science, DWG/Intermediate timeline color space → Rec.709 Gamma 2.2 output) using a multi-node tree (Prim → Bal → Sat correctors plus a parallel mixer), and twice breaks into live grading to PROVE a setting's effect: the luminance-mix artifact demo on a warm-wash fire grade, and the s-curve-for-contrast demo on a synthetic grayscale ramp read in the waveform. His signature balancing technique (flip the balance node's gamma to LINEAR, then push GAIN in the desired direction) appears in the luminance-mix demo. A key authoritative teaching point: in DaVinci YRGB, the Timeline and Output color-space dropdowns do NOT color-manage the image (proven by setting them to ACES and seeing zero change on save) — they only tag metadata for HDR tools and the deliver page.
+
+## Order of operations
+1. Open Project Settings via Shift+N (or gear icon lower-right, or File > Project Settings), then work top-to-bottom through every section
+2. Master Settings: set Timeline Resolution to match-or-exceed your highest-res deliverable (UHD 3840x2160 here); confirm 16:9 by dividing W/H = 1.777; keep pixel aspect SQUARE; verify timeline vs playback frame rate match (23.976)
+3. Master Settings: set Video Monitoring resolution + format to match timeline (only affects signal to a reference/client monitor via a Blackmagic/Decklink IO box — irrelevant for plain HDMI/DisplayPort)
+4. Master Settings: skip proxies/optimized media for grading (touch native camera original); set Render Cache Format = ProRes 422 HQ (because Cullen caches at the END of the node tree, after display conversion); point Cache + Gallery Stills working folders to a dedicated, fast, permanently-mounted scratch drive
+5. Image Scaling: leave Resize Filter = Sharper, Deinterlace = Normal; Input Scaling = Scale full frame with crop (fill canvas, crop edges) NOT scale-to-fit (which letterboxes); Output Scaling = Match timeline settings (99% of the time)
+6. Color Management: leave Color Science = DaVinci YRGB; understand Timeline (DWG/Intermediate) + Output (Rec.709 Gamma 2.2) color-space dropdowns only TAG metadata, they do not transform the image in YRGB mode; LUTs section — set 3D LUT Interpolation = Tetrahedral (never Trilinear)
+7. Color Management LUTs: optionally slot a Color Viewer LUT (Cullen uses CTC macOS Viewing Transform v1.3) to match GUI monitor to reference monitor; leave Input/Output/Video-monitor LUTs empty unless needed
+8. Broadcast Safe: leave OFF (Cullen never turns it on in a proper color-managed pipeline)
+9. General Options > Color: enable 'Luminance mixer defaults to zero' (the big gem — must be set BEFORE creating the node); decide 'Use S-curve for contrast' per taste (Cullen leaves it OFF for a linear contrast operator); set Node Stack Layers (Resolve 19 feature) e.g. 3 = primaries/secondaries/trims; optionally preset Version names (First Pass / Second Pass / Client Notes)
+10. Camera Raw: understand the raw-profile dropdown only chooses WHICH profile you're TUNING, not which to apply; decode is driven per-clip by Decode using = Project/Clip/Camera Metadata
+11. Capture & Playback / Subtitles / Fairlight / Path Mapping: skip for grading; Blackmagic Cloud: set 'Don't sync media' as default
+12. Before delivering: return Timeline Resolution to full (if temporarily lowered for performance) so you don't scale down then back up
+
+## Node tree
+Two node trees appear. (1) The main grade tree on the explosion clip: a serial chain labeled Prim (01) → Bal (02) → Sat (03) → a final node → output, with a PARALLEL branch (nodes 06 and 05 feeding a parallel mixer), confirmed by the keyframes/clips panel listing Corrector 1-7, a Parallel Mixer, and Sizing. The Bal node is where the linear-gamma + gain balancing happens. (2) The s-curve demonstration tree on a synthetic grayscale ramp: Ramp (02) → node 04 → Contour (look plugin) → ->709 (output transform), used to isolate and read the pure contrast behavior in the waveform. Resolve 19's Node Stack Layers feature is shown set to 3 and labeled L1/L2/L3 (e.g. primaries / secondaries / trims) as a default node-tree organization scheme.
+
+## Scopes
+- **Waveform (RGB parade-style overlay)** — Primary scope on screen throughout (Scopes panel, Waveform + Vectorscope side by side, IRE/digital scale 0-100 on left). Used to read clipping at floor/ceiling and to visualize the contrast curve. · targets: In the grayscale-ramp demo the waveform shows a straight diagonal ramp from 0 to 100; increasing Contrast steepens the slope and HARD-CLIPS values pushing through the 100 ceiling and 0 floor (s-curve OFF). With s-curve ON the same mid-slope is kept but the top and bottom ROLL OFF / compress (soft clip) — the classic S shape. In the fire grade the waveform shows reds blown to the 100 ceiling when the luminance-mix artifact is active.
+- **Vectorscope** — Shown beside the waveform; used to see the hue/saturation excursion of the grade. In the warm-wash fire grade the trace stretches hard toward the red/orange axis as the gain is pushed. · targets: No numeric skin-line target is taught in this video (it is a project-settings video, not a balancing video) — the vectorscope is shown for context, not driven to a number.
+- **Histogram** — Not the primary scope used; the waveform is the workhorse here. · targets: n/a — not driven to targets in this video.
+
+## Primaries
+Demonstrated on the Color Wheels (lift/gamma/gain/offset) panel, with Cullen's signature BALANCING technique shown live: on the balance node he flips the GAMMA wheel into LINEAR mode and then pushes the GAIN wheel in the direction he wants the image to go (here a warm wash). In the luminance-mix demo the Gain wheel RGB values read 1.00 / 1.56 / 0.65 / 0.24 (R-G-B-master, i.e. green lifted, blue and overall pulled down) producing the orange/warm push; Lift, Gamma, Offset all sit at defaults (0.00 / 1.00 / 25.00). The on-screen Contrast control reads 1.000 at default and is pushed to 1.309 in the s-curve grayscale demo; Pivot reads 0.435 (Resolve's default mid pivot). Saturation 50.00, Hue 50.00 are at neutral defaults. Key authoritative point: Cullen advises AVOIDING the Log color wheels for balancing — they don't give smooth adjustments — and instead using the linear-gamma + gain technique on the primary wheels. The Contrast/Pivot tool's BEHAVIOR is governed by the 'Use S-curve for contrast' project setting: OFF = a pure linear operator that hard-clips (his preference, so he can crush to the floor without resistance because his look + output transform already add roll-off); ON = soft-clips/compresses highlights and shadows.
+
+## Secondaries
+No qualifiers, power windows, HSL keys, or tracking are demonstrated in this video — it is scoped to project settings. The node tree contains a Sat node and a parallel mixer, but secondaries technique is not taught here. The only secondary-adjacent settings discussed are 'Apply stereoscopic convergence to windows and effects' (skipped as an edge case) and Dynamics Profile keyframe easing values (left at defaults — Dynamic profile start/end = 1 — and adjusted per-instance rather than globally).
+
+## Skin tone
+Not covered. This is a project-settings walkthrough with no skin-tone-line / vectorscope-skin-target demonstration. The vectorscope is shown for general saturation/hue context only.
+
+## Color management
+Color Science = DaVinci YRGB (not RCM/ACES). Timeline Color Space = DaVinci Wide Gamut / Intermediate; Output Color Space = Rec.709 Gamma 2.2. Critical, authoritatively-demonstrated nuance: in YRGB mode these two dropdowns DO NOT transform the image — they only encode color-space metadata for HDR tooling (HDR zones palette) and the Deliver page. Cullen proves it by switching Timeline space to ACES (a totally wrong linear/wide-gamut space) and option-saving with zero visible change. He explicitly defers a deep RCM/ACES/CST treatment to a separate dedicated video. The actual creative pipeline is handled with explicit nodes + an output transform + a look plugin (Contour), and a Color Viewer LUT (CTC macOS Viewing Transform v1.3) is used purely to better match the GUI monitor to the reference monitor. 3D LUT interpolation is set to Tetrahedral. Dolby Vision / HDR10+ / HDR Vivid are shown but declared out of scope (Dolby Vision 4.0, Balanced, 4000-nit P3 D65 ST.2084 mastering display when toggled for the demo).
+
+## Look design
+Look design is referenced but not built in this settings video. Cullen's pipeline uses a third-party LOOK-DEVELOPMENT plugin called Contour (visible as a 'Contour' node in the grayscale-ramp tree) plus an OUTPUT TRANSFORM node, both of which he says already contain significant highlight/shadow ROLL-OFF (compression). This is the stated REASON he keeps 'Use S-curve for contrast' turned OFF — he wants a clean LINEAR contrast operator upstream so he can crush values to the floor without the look/transform's roll fighting him, then let the downstream Contour + output transform supply the filmic roll. No split-tone, hue-vs-hue, or film-emulation LUT is demonstrated here — those are downstream of this settings discussion.
+
+## Numeric settings seen on screen
+- Timeline Resolution 3840 x 2160 Ultra HD (also shown temporarily at 1920x1080 HD)
+- Timeline + Playback frame rate 23.976 fps
+- Pixel aspect ratio Square
+- Video Monitoring Resolution 3840 x 2160, Format 23.976, Use 4:4:4 SDI, Single link, Data levels Full, Video bit depth 10-bit
+- Monitor scaling Bilinear
+- Render cache format ProRes 422 HQ; Proxy/Optimized media format ProRes 422 HQ; Enable background caching after 5 seconds
+- Working folders: Cache files /Volumes/Scratch Alpha/CACHE/CacheClip, Gallery stills /Volumes/Scratch Alpha/Gallery1.stills, Proxy gen /Users/cullenkelly/Movies/ProxyMedia
+- Image Scaling: Resize filter Sharper, Deinterlace Normal, Input = Scale full frame with crop, Output = Match timeline settings, Super Scale = None
+- Color Science DaVinci YRGB; Timeline Color Space DaVinci WG/Intermediate; Output Color Space Rec.709 Gamma 2.2
+- 3D LUT Interpolation Tetrahedral (vs Trilinear)
+- Color Viewer LUT = CTC macOS Viewing Transform v1.3
+- Dolby Vision (when toggled on for demo) version 4.0, Analysis tuning Balanced, Mastering display 4000-nit P3 D65 ST.2084 Full
+- Broadcast safe IRE levels -20 to 120 (panel default, left OFF)
+- Color wheels at default: Lift 0.00, Gamma 1.00, Gain 1.00, Offset 25.00; Contrast 1.000, Pivot 0.435, Saturation 50.00, Hue 50.00
+- Luminance-mix demo: Lum Mix 100.00 (artifact) vs 0.00 (clean); Gain wheel R/G/B/master = 1.00 / 1.56 / 0.65 / 0.24
+- S-curve demo: Contrast pushed to 1.309 on the grayscale ramp
+- Node Stack Layers set to 3, labeled L1 / L2 / L3 (Resolve 19 feature)
+- Camera Raw demo (Blackmagic RAW): Decode quality Full res, Decode using Project, Color science Gen 5, White balance As shot, Color space ACES AP0, Gamma Rec.2100 ST2084 (PQ), Highlight recovery ON, LUT source Embedded, Midpoint ~0.45
+- Capture & Playback: HD 1080PsF 24, Codec ProRes 422 HQ, Deck preroll 5 seconds
+- Blackmagic Cloud: For media files = Don't sync media
+
+## Teaching points
+- Timeline Resolution = your CANVAS / active image area, not just the delivery standard. Set it to match-or-exceed your highest-resolution deliverable. You may temporarily drop it for playback performance, but always restore full res before Deliver, and only drop to a SAME-aspect-ratio resolution (1920x1080 and 3840x2160 both = 1.777 = 16:9; divide W/H on a calculator to check).
+- The single biggest 'gem': enable 'Luminance mixer defaults to zero' (General Options > Color). With luminance mix ON, aggressive primary moves (especially the linear-gamma + gain balancing technique) introduce ugly clipped/broken artifacts in saturated areas (the fire goes a hard, broken red). Dropping Lum Mix to 0 instantly cleans it up. The setting must be in place BEFORE you create the node — it only affects newly created nodes.
+- 'Use S-curve for contrast' fundamentally changes your Contrast/Pivot tool. OFF = linear contrast that hard-clips at 0 and 100 (visible as the ramp punching through floor/ceiling in the waveform). ON = soft roll-off at top and bottom (compression/soft clip). Choose based on how much roll-off already exists downstream — Cullen keeps it OFF because his look (Contour plugin) and output transform already add plenty of roll, and he wants an upstream linear operator he can crush with.
+- In DaVinci YRGB color science, the Timeline Color Space and Output Color Space dropdowns do NOT color-manage your image — they only WRITE METADATA tags used by HDR tools and the Deliver page. Proof: setting Timeline space to ACES (wildly wrong) and saving changes NOTHING on screen. (This is different from RCM/managed modes where those dropdowns DO transform.) Still tag them correctly for downstream metadata.
+- Always set 3D LUT Interpolation = Tetrahedral, never Trilinear. Trilinear can produce banding/artifacts/broken gradients when a LUT is applied; Tetrahedral is superior in every way and smooths them out. 'No one should use trilinear ever in a modern grading environment.'
+- Render Cache Format choice depends on WHERE in the node tree you cache. Cullen caches at the very END (after display conversion), so ProRes 422 HQ is sufficient. If you cache while still in a log/working space (e.g. DWG Intermediate) upstream, step up to ProRes 4444 XQ or uncompressed 16-bit float — and make sure your cache drive is fast enough to play it back in real time, or the cache defeats its own purpose.
+- Input Scaling = 'Scale full frame with crop' (fill the canvas, crop excess) is preferred over 'Scale entire image to fit' (which pads/letterboxes). If you picked the right timeline resolution you shouldn't need built-in letter/pillar-boxing; you either fill cleanly or crop to fill. (Exception: a deliberate 2.39 master inside a 16:9 canvas — compute height as 3840 / 2.39 = 1606, set Output Scaling to override, and you get intentional letterboxing.)
+- The Camera Raw 'RAW profile' dropdown does NOT pick which profile your project uses — it only selects which camera's decode parameters you are currently TUNING. The actual decode is chosen per-clip via 'Decode using' = Project / Clip / Camera Metadata. This resolves a common point of confusion.
+- Use a dedicated, fast, permanently-mounted SCRATCH drive for Cache Files and Gallery Stills — separate from project media and not an internal OS drive — so cache I/O doesn't fight other resources for bandwidth.
+- Broadcast Safe can stay OFF in a proper color-managed pipeline — Cullen has never needed it in his career because the managed output is already legal; turning it on just risks unwanted clamping.
+- Know what to IGNORE: proxies, optimized media, frame interpolation, conform options, stereoscopic, DPX BGR order, capture & playback, subtitles, Fairlight, path mapping are all editorial/conform/delivery concerns, not color-page concerns — recognizing this is half the value.
+
+## Quotable claims
+- "Trilinear is an interpolation scheme that no one should use ever in a modern color grading environment. Tetrahedral is superior in every way and it's the one you want to go with." (00:20:07)
+- "[The Timeline and Output color space dropdowns in YRGB] are not color managing your image whatsoever — they are passing metadata tags that are used in other areas of Resolve including the HDR zones palette and the deliver page." (00:16:43)
+- "Because of this [luminance mix] and because of other reasons, I don't like to have my luminance mix on at all by default — I want my luminance mix to default to zero, and that's exactly what this setting allows us to do." (00:25:20)
+- "I have so many instances of compression and roll in my imaging pipeline — namely from my look and my output transform — that I actually like having a linear operator upstream so that if I need to push something down to the floor I can really do it." (00:28:58)
+- "I have never once turned [Broadcast Safe] on in my entire career... I can't recall a single instance where I have had a broadcast safe excursion that I needed to solve when I was using a proper color managed workflow." (00:21:10)
+- "You really want to be touching the native camera original source whenever possible and not proxies that might be being generated on the fly — I am not going to be generating proxies in any workflow that I do inside of Resolve." (00:05:11)
+- "We really want to think of this timeline resolution that we define here as being active image area, not just the standard that we are delivering for." (00:11:44)
+- "[The raw profile dropdown] is not designating what raw profile you want to use — the only thing you are choosing is which raw profile you want to tune the input parameters for." (00:35:01)
+
+## Key frames
+- `f001.jpg` — Baseline grading session before settings dive: UHD military/explosion clip, full node tree (Prim 01 → Bal 02 → Sat 03 → output, with parallel nodes 06/05), Color Wheels panel showing default lift/gamma/gain/offset and Contrast 1.000 / Pivot 0.435, plus the Waveform + Vectorscope scopes. Establishes the working environment.
+- `f021.jpg` — Color Management panel open with Color Science = DaVinci YRGB, Timeline Color Space dropdown expanded (DWG/Intermediate among many options), Output space, and the full Lookup Tables block — Input/Output/Video-monitor LUTs 'No LUT selected', Color Viewer LUT = CTC macOS Viewing Transform v1.3, 3D LUT interpolation = Tetrahedral. The core color-management teaching frame.
+- `f026.jpg` — 3D LUT Interpolation dropdown open showing the two choices Trilinear vs Tetrahedral — the 'always pick Tetrahedral' lesson made concrete.
+- `f033.jpg` — Luminance-mix ARTIFACT in action: the warm-wash fire grade with Lum Mix high produces a hard, broken, neon-red fire; waveform shows reds slammed to the ceiling and the vectorscope trace stretched hard to red. The 'before' of the gem demo.
+- `f034.jpg` — Same fire grade after dropping Lum Mix to 0.00 — the red cleans up to a natural orange, detail returns. Gain wheel reads 1.00/1.56/0.65/0.24 (the linear-gamma + gain balancing technique). The 'after' that proves 'Luminance mixer defaults to zero' matters.
+- `f036.jpg` — S-curve demo, OFF state: a synthetic grayscale ramp (Ramp node tree Ramp→04→Contour→->709) read in the waveform as a straight diagonal; Contrast pushed to 1.309 hard-clips the ramp through the 0 floor and 100 ceiling. Shows linear-contrast hard clipping.
+- `f037.jpg` — S-curve demo, ON state: 'Use S-curve for contrast' checked in General Options; the SAME ramp now shows rolled/compressed shoulders and toe (the S shape) in the waveform — same mid-slope, soft-clipped extremes. Directly proves the setting's effect.
+- `f044.jpg` — Versions preset list in action: the 'New Version' dialog now offers a custom shortlist (First Pass / Second Pass / Client Notes) created from the General Options > Versions setting — the time-saving workflow gem.
+- `f045.jpg` — Camera Raw panel with the deliberately 'zany' Blackmagic RAW tuning (Gen 5, ACES AP0, Rec.2100 ST2084 PQ, Highlight recovery on, Decode using Project) — illustrating that the raw-profile dropdown only TUNES a profile, decode is per-clip.

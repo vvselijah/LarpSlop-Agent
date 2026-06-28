@@ -1,0 +1,94 @@
+{
+  "sourceVideo": "VID_20260624_155108_178.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "-And my name's Elijah. I've never been convicted because I've never done anything wrong. -So... -No. BLANK_AUDIO]",
+  "totalWords": 17,
+  "estimatedDuration": 22.35,
+  "words": [
+    {
+      "word": "-And",
+      "start": 0.3,
+      "end": 14.09
+    },
+    {
+      "word": "my",
+      "start": 14.09,
+      "end": 14.15
+    },
+    {
+      "word": "name's",
+      "start": 14.15,
+      "end": 14.33
+    },
+    {
+      "word": "Elijah.",
+      "start": 14.33,
+      "end": 14.63
+    },
+    {
+      "word": "I've",
+      "start": 14.64,
+      "end": 14.82
+    },
+    {
+      "word": "never",
+      "start": 14.82,
+      "end": 15.04
+    },
+    {
+      "word": "been",
+      "start": 15.05,
+      "end": 15.23
+    },
+    {
+      "word": "convicted",
+      "start": 15.23,
+      "end": 15.68
+    },
+    {
+      "word": "because",
+      "start": 15.68,
+      "end": 16
+    },
+    {
+      "word": "I've",
+      "start": 16,
+      "end": 16.09
+    },
+    {
+      "word": "never",
+      "start": 16.09,
+      "end": 16.22
+    },
+    {
+      "word": "done",
+      "start": 16.22,
+      "end": 16.5
+    },
+    {
+      "word": "anything",
+      "start": 16.5,
+      "end": 16.79
+    },
+    {
+      "word": "wrong.",
+      "start": 16.79,
+      "end": 17.03
+    },
+    {
+      "word": "-So...",
+      "start": 17.12,
+      "end": 19.12
+    },
+    {
+      "word": "-No.",
+      "start": 19.12,
+      "end": 19.12
+    },
+    {
+      "word": "BLANK_AUDIO]",
+      "start": 19.66,
+      "end": 22.35
+    }
+  ]
+}

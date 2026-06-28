@@ -1,0 +1,69 @@
+{
+  "sourceVideo": "VID_20260624_154848_176.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "My name is Tanner , and I was convicted of trafficking marijuana.",
+  "totalWords": 12,
+  "estimatedDuration": 9.2,
+  "words": [
+    {
+      "word": "My",
+      "start": 0.25,
+      "end": 0.25
+    },
+    {
+      "word": "name",
+      "start": 0.29,
+      "end": 0.75
+    },
+    {
+      "word": "is",
+      "start": 0.75,
+      "end": 0.97
+    },
+    {
+      "word": "Tanner",
+      "start": 1.02,
+      "end": 1.44
+    },
+    {
+      "word": ",",
+      "start": 1.76,
+      "end": 2
+    },
+    {
+      "word": "and",
+      "start": 2,
+      "end": 2.14
+    },
+    {
+      "word": "I",
+      "start": 2.34,
+      "end": 2.48
+    },
+    {
+      "word": "was",
+      "start": 2.48,
+      "end": 2.84
+    },
+    {
+      "word": "convicted",
+      "start": 3,
+      "end": 3.84
+    },
+    {
+      "word": "of",
+      "start": 3.91,
+      "end": 4.16
+    },
+    {
+      "word": "trafficking",
+      "start": 4.16,
+      "end": 6.66
+    },
+    {
+      "word": "marijuana.",
+      "start": 6.66,
+      "end": 9.2
+    }
+  ]
+}

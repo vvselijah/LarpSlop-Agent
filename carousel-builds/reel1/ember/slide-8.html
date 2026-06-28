@@ -1,0 +1,60 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><style>
+*{margin:0;padding:0;box-sizing:border-box}
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;
+  background:var(--bg);color:var(--ink);padding:150px 96px;
+  display:flex;flex-direction:column;justify-content:center;
+  font-family:var(--fb),'Segoe UI',sans-serif}
+.brand{position:absolute;top:84px;left:96px;font:600 30px var(--fb);color:var(--muted);letter-spacing:.02em}
+.swipe{position:absolute;bottom:78px;right:96px;font:500 30px var(--fb);color:var(--muted);opacity:.9}
+.eyebrow{font:700 26px var(--fb);letter-spacing:.26em;text-transform:uppercase;color:var(--eye);margin-bottom:30px}
+.h1{font-family:var(--fh);font-weight:var(--hw);color:var(--ink);letter-spacing:var(--ht)}
+.h1.xl{font-size:98px;line-height:1.02}
+.h1.lg{font-size:80px;line-height:1.06}
+.h1.md{font-size:66px;line-height:1.1}
+.ac{color:var(--accent)}
+.grad{background:linear-gradient(110deg,var(--accent),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+b{color:var(--ink);font-weight:700}
+.emo{font-family:'Segoe UI Emoji'}
+.sub{font:400 40px/1.4 var(--fb);color:var(--muted);margin-top:36px;max-width:900px}
+.body{font:400 39px/1.45 var(--fb);color:var(--muted);margin-top:32px;max-width:900px}
+.cap{margin-top:30px;font:400 33px/1.42 var(--fb);color:var(--muted);max-width:900px}
+.footer{margin-top:56px;font:400 28px var(--fb);color:var(--muted)}
+/* prompt card (save magnet) */
+.prompt{margin-top:42px;background:var(--card);border:1px solid var(--cbd);border-left:5px solid var(--accent);
+  border-radius:22px;padding:40px 44px}
+.plabel{font:700 23px var(--fm);letter-spacing:.16em;text-transform:uppercase;color:var(--eye);margin-bottom:20px}
+.ptext{font:500 33px/1.5 var(--fm);color:var(--ink)}
+.ptext .o{color:var(--accent)}
+/* checklist */
+.chk{list-style:none;margin-top:36px}
+.chk li{display:flex;align-items:flex-start;gap:22px;font:400 38px/1.32 var(--fb);color:var(--ink);margin-bottom:24px}
+.chk li .t{flex:none;width:46px;height:46px;border-radius:13px;background:var(--asoft);border:1px solid var(--cbd);
+  color:var(--accent);font:800 26px var(--fh);display:flex;align-items:center;justify-content:center;margin-top:4px}
+/* before -> after */
+.ba{display:flex;align-items:center;gap:30px;margin-top:48px;flex-wrap:wrap}
+.ba .col{flex:1;min-width:340px;background:var(--card);border:1px solid var(--cbd);border-radius:22px;padding:38px 40px}
+.ba .col .l{font:700 24px var(--fb);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.ba .col.old .l{color:#ff7a6b}
+.ba .col.old .v{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(255,122,107,.6)}
+.ba .col.new .l{color:var(--eye)}
+.ba .v{font:800 50px/1.12 var(--fh);color:var(--ink);letter-spacing:-.01em}
+.ba .new .v{color:var(--accent)}
+.ba .arrow{font-size:60px;color:var(--accent);flex:none}
+/* browser frame holding the real screenshot */
+.bx{margin-top:48px;border-radius:22px;overflow:hidden;border:1px solid var(--cbd);
+  box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 70px rgba(232,118,10,.12);background:#0b0b0f}
+.bx .bar{height:60px;display:flex;align-items:center;gap:13px;padding:0 26px;background:rgba(255,255,255,.04);border-bottom:1px solid var(--hair)}
+.bx .bar .d{width:16px;height:16px;border-radius:50%}
+.bx .bar .u{margin-left:20px;font:500 26px var(--fm);color:var(--muted)}
+.bx .shot{width:100%;display:block}
+.bx.crop .shot{margin-top:0}
+.bx.cropwrap{height:760px}
+.bx.cropwrap .shot{height:auto}
+.stat-big{font-family:var(--fh);font-weight:800;font-size:120px;line-height:1;letter-spacing:-.02em}
+
+:root{
+    --bg:repeating-linear-gradient(0deg, transparent 0 84px, rgba(245,166,35,.07) 84px 86px), repeating-linear-gradient(90deg, transparent 0 84px, rgba(245,166,35,.07) 84px 86px), radial-gradient(86% 64% at 100% 0%, rgba(232,118,10,.30), transparent 56%), radial-gradient(70% 60% at 0% 100%, rgba(99,102,241,.18), transparent 56%), radial-gradient(125% 100% at 16% -8%, #1a1206 0%, #100b06 52%, #050505 100%);
+    --ink:#f1f1f6; --muted:#9a9ab0; --accent:#f5a623; --gold:#caa54a; --asoft:rgba(245,166,35,.12);
+    --onac:#1a1206; --card:rgba(255,255,255,.045); --cbd:rgba(255,255,255,.13);
+    --hair:rgba(255,255,255,.08); --eye:#f5b94a; --barmute:rgba(255,255,255,.18);
+    --fh:'Syne'; --fb:'Outfit'; --fm:'JetBrains Mono'; --hw:800; --ht:-.025em;}</style></head><body><div class="slide"><div class="brand">@elijahaifl</div><div><div class="eyebrow">your turn</div><h1 class="h1 lg">save this &mdash; the <span class="ac">full prompt</span> is in the comments.</h1><p class="sub">Copy it, swap in your product, watch it build. Follow &mdash; we&rsquo;re building ClipWith in public at <b>clipwith.ai</b>.</p><div class="footer">@elijahaifl &middot; be smart, be safe, be blessed <span class="emo">&#128591;</span></div></div></div></body></html>

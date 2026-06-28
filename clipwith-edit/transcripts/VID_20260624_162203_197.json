@@ -1,0 +1,99 @@
+{
+  "sourceVideo": "VID_20260624_162203_197.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "You're stressing about editing , and while you're stressing about editing, your creativity and motivation are rapidly declining.",
+  "totalWords": 18,
+  "estimatedDuration": 8.86,
+  "words": [
+    {
+      "word": "You're",
+      "start": 0.22,
+      "end": 0.44
+    },
+    {
+      "word": "stressing",
+      "start": 0.44,
+      "end": 1.1
+    },
+    {
+      "word": "about",
+      "start": 1.1,
+      "end": 1.47
+    },
+    {
+      "word": "editing",
+      "start": 1.47,
+      "end": 1.58
+    },
+    {
+      "word": ",",
+      "start": 2.29,
+      "end": 3.03
+    },
+    {
+      "word": "and",
+      "start": 3.24,
+      "end": 4.64
+    },
+    {
+      "word": "while",
+      "start": 4.64,
+      "end": 4.72
+    },
+    {
+      "word": "you're",
+      "start": 4.72,
+      "end": 4.93
+    },
+    {
+      "word": "stressing",
+      "start": 4.94,
+      "end": 5.28
+    },
+    {
+      "word": "about",
+      "start": 5.28,
+      "end": 5.48
+    },
+    {
+      "word": "editing,",
+      "start": 5.48,
+      "end": 5.93
+    },
+    {
+      "word": "your",
+      "start": 6.04,
+      "end": 6.16
+    },
+    {
+      "word": "creativity",
+      "start": 6.16,
+      "end": 6.72
+    },
+    {
+      "word": "and",
+      "start": 6.72,
+      "end": 6.88
+    },
+    {
+      "word": "motivation",
+      "start": 6.88,
+      "end": 7.5
+    },
+    {
+      "word": "are",
+      "start": 7.5,
+      "end": 7.68
+    },
+    {
+      "word": "rapidly",
+      "start": 7.68,
+      "end": 8.11
+    },
+    {
+      "word": "declining.",
+      "start": 8.11,
+      "end": 8.86
+    }
+  ]
+}

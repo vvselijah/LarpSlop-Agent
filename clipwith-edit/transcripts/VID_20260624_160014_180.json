@@ -1,0 +1,64 @@
+{
+  "sourceVideo": "VID_20260624_160014_180.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "And we've decided to disrupt the $200 billion a year industry.",
+  "totalWords": 11,
+  "estimatedDuration": 14.45,
+  "words": [
+    {
+      "word": "And",
+      "start": 0.29,
+      "end": 0.89
+    },
+    {
+      "word": "we've",
+      "start": 0.89,
+      "end": 2.37
+    },
+    {
+      "word": "decided",
+      "start": 2.37,
+      "end": 4.45
+    },
+    {
+      "word": "to",
+      "start": 4.45,
+      "end": 5.04
+    },
+    {
+      "word": "disrupt",
+      "start": 6.7,
+      "end": 7.12
+    },
+    {
+      "word": "the",
+      "start": 7.12,
+      "end": 8.03
+    },
+    {
+      "word": "$200",
+      "start": 8.12,
+      "end": 11.04
+    },
+    {
+      "word": "billion",
+      "start": 11.04,
+      "end": 13.16
+    },
+    {
+      "word": "a",
+      "start": 13.16,
+      "end": 13.32
+    },
+    {
+      "word": "year",
+      "start": 13.32,
+      "end": 14
+    },
+    {
+      "word": "industry.",
+      "start": 14,
+      "end": 14.45
+    }
+  ]
+}

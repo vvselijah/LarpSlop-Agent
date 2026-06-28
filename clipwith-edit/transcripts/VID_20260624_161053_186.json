@@ -1,0 +1,64 @@
+{
+  "sourceVideo": "VID_20260624_161053_186.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "Or settling and spending thousands of a month for an editor.",
+  "totalWords": 11,
+  "estimatedDuration": 5.55,
+  "words": [
+    {
+      "word": "Or",
+      "start": 0.27,
+      "end": 0.27
+    },
+    {
+      "word": "settling",
+      "start": 0.63,
+      "end": 1.37
+    },
+    {
+      "word": "and",
+      "start": 1.37,
+      "end": 1.72
+    },
+    {
+      "word": "spending",
+      "start": 2.03,
+      "end": 2.88
+    },
+    {
+      "word": "thousands",
+      "start": 2.88,
+      "end": 4.15
+    },
+    {
+      "word": "of",
+      "start": 4.15,
+      "end": 4.24
+    },
+    {
+      "word": "a",
+      "start": 4.24,
+      "end": 4.28
+    },
+    {
+      "word": "month",
+      "start": 4.28,
+      "end": 4.46
+    },
+    {
+      "word": "for",
+      "start": 4.54,
+      "end": 4.65
+    },
+    {
+      "word": "an",
+      "start": 4.65,
+      "end": 4.73
+    },
+    {
+      "word": "editor.",
+      "start": 4.73,
+      "end": 5.55
+    }
+  ]
+}

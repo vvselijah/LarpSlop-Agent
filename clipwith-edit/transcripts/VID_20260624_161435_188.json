@@ -1,0 +1,109 @@
+{
+  "sourceVideo": "VID_20260624_161435_188.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "And listen, we understand. I myself was about to pay $2,500 a month just to get my (cle ars throat)",
+  "totalWords": 20,
+  "estimatedDuration": 7.68,
+  "words": [
+    {
+      "word": "And",
+      "start": 0.29,
+      "end": 0.35
+    },
+    {
+      "word": "listen,",
+      "start": 0.83,
+      "end": 1.3
+    },
+    {
+      "word": "we",
+      "start": 1.3,
+      "end": 1.45
+    },
+    {
+      "word": "understand.",
+      "start": 1.45,
+      "end": 2.2
+    },
+    {
+      "word": "I",
+      "start": 2.23,
+      "end": 2.26
+    },
+    {
+      "word": "myself",
+      "start": 2.26,
+      "end": 2.62
+    },
+    {
+      "word": "was",
+      "start": 2.62,
+      "end": 2.8
+    },
+    {
+      "word": "about",
+      "start": 2.8,
+      "end": 3.1
+    },
+    {
+      "word": "to",
+      "start": 3.1,
+      "end": 3.17
+    },
+    {
+      "word": "pay",
+      "start": 3.23,
+      "end": 3.42
+    },
+    {
+      "word": "$2,500",
+      "start": 3.42,
+      "end": 4.44
+    },
+    {
+      "word": "a",
+      "start": 4.44,
+      "end": 4.53
+    },
+    {
+      "word": "month",
+      "start": 4.53,
+      "end": 4.97
+    },
+    {
+      "word": "just",
+      "start": 4.98,
+      "end": 5.35
+    },
+    {
+      "word": "to",
+      "start": 5.35,
+      "end": 5.53
+    },
+    {
+      "word": "get",
+      "start": 5.53,
+      "end": 5.77
+    },
+    {
+      "word": "my",
+      "start": 5.79,
+      "end": 6
+    },
+    {
+      "word": "(cle",
+      "start": 6,
+      "end": 6.31
+    },
+    {
+      "word": "ars",
+      "start": 6.47,
+      "end": 6.82
+    },
+    {
+      "word": "throat)",
+      "start": 6.82,
+      "end": 7.68
+    }
+  ]
+}

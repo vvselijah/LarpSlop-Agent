@@ -1,0 +1,89 @@
+{
+  "sourceVideo": "VID_20260624_164047_208.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "This video is actually edited by Clip with AI with a few simple props . BLANK_AUDIO]",
+  "totalWords": 16,
+  "estimatedDuration": 6.33,
+  "words": [
+    {
+      "word": "This",
+      "start": 0.29,
+      "end": 0.35
+    },
+    {
+      "word": "video",
+      "start": 0.39,
+      "end": 0.78
+    },
+    {
+      "word": "is",
+      "start": 0.88,
+      "end": 0.96
+    },
+    {
+      "word": "actually",
+      "start": 0.96,
+      "end": 1.67
+    },
+    {
+      "word": "edited",
+      "start": 1.67,
+      "end": 2.23
+    },
+    {
+      "word": "by",
+      "start": 2.26,
+      "end": 2.36
+    },
+    {
+      "word": "Clip",
+      "start": 2.36,
+      "end": 2.61
+    },
+    {
+      "word": "with",
+      "start": 2.61,
+      "end": 2.86
+    },
+    {
+      "word": "AI",
+      "start": 2.86,
+      "end": 3
+    },
+    {
+      "word": "with",
+      "start": 3,
+      "end": 3.17
+    },
+    {
+      "word": "a",
+      "start": 3.27,
+      "end": 3.27
+    },
+    {
+      "word": "few",
+      "start": 3.3,
+      "end": 3.46
+    },
+    {
+      "word": "simple",
+      "start": 3.46,
+      "end": 3.88
+    },
+    {
+      "word": "props",
+      "start": 3.88,
+      "end": 4.07
+    },
+    {
+      "word": ".",
+      "start": 4.23,
+      "end": 4.25
+    },
+    {
+      "word": "BLANK_AUDIO]",
+      "start": 4.88,
+      "end": 6.33
+    }
+  ]
+}

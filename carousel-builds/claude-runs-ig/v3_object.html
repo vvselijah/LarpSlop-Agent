@@ -1,0 +1,28 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
+*{margin:0;padding:0;box-sizing:border-box}
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;font-family:'Inter',sans-serif}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.12;mix-blend-mode:overlay;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:420px 420px}
+.bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.scrim{position:absolute;inset:0}
+.handle{position:absolute;top:70px;left:90px;font:600 30px 'Inter';color:var(--soft)}
+.pill{position:absolute;top:64px;right:74px;background:var(--pillbg);border:1px solid var(--pillbd);
+ border-radius:40px;padding:10px 26px;font:700 30px 'Inter';color:var(--ink);letter-spacing:.04em}
+.kick{position:absolute;top:150px;left:96px;font:700 70px 'Caveat';color:var(--ink);
+ transform:rotate(-2deg);text-shadow:1px 2px 0 rgba(0,0,0,.12)}
+.big{position:absolute;top:232px;left:84px;font:400 152px/.9 'Anton';letter-spacing:1px;color:var(--ink);
+ text-shadow:var(--bigshadow)}
+.big .or{color:var(--accent)}
+.brushwrap{position:absolute;top:540px;left:90px;transform:rotate(-1.6deg)}
+.brush{display:inline-block;background:#100c08;color:#fff;font:400 88px 'Anton';letter-spacing:1px;
+ padding:14px 38px 20px;
+ clip-path:polygon(1% 16%,16% 5%,34% 11%,52% 3%,70% 12%,86% 4%,99% 10%,98% 78%,84% 95%,64% 86%,44% 96%,24% 85%,9% 94%,1% 82%)}
+.sub{position:absolute;top:672px;left:96px;font:500 38px 'Inter';color:var(--ink)}
+.sub b{font-weight:700}
+.swipe{position:absolute;right:90px;bottom:44px;font:600 30px 'Inter';color:var(--soft)}
+.sticker{position:absolute;top:196px;right:96px;width:166px;height:166px;background:#fbf7ef;
+ border-radius:32px;transform:rotate(13deg);box-shadow:0 22px 40px rgba(0,0,0,.30);
+ display:flex;align-items:center;justify-content:center}
+.crown{position:absolute;top:-38px;left:-16px;font-size:58px;transform:rotate(-18deg)}
+
+:root{--ink:#241813;--soft:#7a5a48;--accent:#c2552c;--pillbg:rgba(0,0,0,.08);--pillbd:rgba(0,0,0,.22);--bigshadow:3px 4px 0 rgba(0,0,0,.10);}</style></head><body><div class="slide" style="background:radial-gradient(120% 100% at 78% 8%, #fdeede 0%, #f7d9bf 58%, #f0c39e 100%)"><div class="grain"></div><div class="handle">@elijahaifl</div><div class="pill">1/8</div><div class="sticker"><span class="crown">&#128081;</span><svg width="116" height="116" viewBox="0 0 100 100"><g fill="#cf5f2c"><rect x="47.6" y="3" width="4.8" height="47" rx="2.4" transform="rotate(0 50 50)"/><rect x="47.6" y="9" width="4.8" height="41" rx="2.4" transform="rotate(30 50 50)"/><rect x="47.6" y="3" width="4.8" height="47" rx="2.4" transform="rotate(60 50 50)"/><rect x="47.6" y="9" width="4.8" height="41" rx="2.4" transform="rotate(90 50 50)"/><rect x="47.6" y="3" width="4.8" height="47" rx="2.4" transform="rotate(120 50 50)"/><rect x="47.6" y="9" width="4.8" height="41" rx="2.4" transform="rotate(150 50 50)"/><rect x="47.6" y="3" width="4.8" height="47" rx="2.4" transform="rotate(180 50 50)"/><rect x="47.6" y="9" width="4.8" height="41" rx="2.4" transform="rotate(210 50 50)"/><rect x="47.6" y="3" width="4.8" height="47" rx="2.4" transform="rotate(240 50 50)"/><rect x="47.6" y="9" width="4.8" height="41" rx="2.4" transform="rotate(270 50 50)"/><rect x="47.6" y="3" width="4.8" height="47" rx="2.4" transform="rotate(300 50 50)"/><rect x="47.6" y="9" width="4.8" height="41" rx="2.4" transform="rotate(330 50 50)"/></g></svg></div><div class="swipe">swipe &rarr;</div><div class="kick">Claude can now run your</div><div class="big">ENTIRE<br><span class="or">INSTAGRAM</span></div><div class="brushwrap"><span class="brush">BETTER THAN YOU</span></div><div class="sub">so I open-sourced the whole project. <b>free.</b> &#128274;</div><img src="assets/m_object.png" style="position:absolute;bottom:-24px;left:50%;transform:translateX(-48%);width:820px;filter:drop-shadow(0 28px 40px rgba(120,60,20,.26))"></div></body></html>

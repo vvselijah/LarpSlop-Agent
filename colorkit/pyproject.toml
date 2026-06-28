@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "colorkit"
+version = "0.3.0"
+description = "Headless agentic color-correction + film grading for images and video (Python + FFmpeg), with headless scopes / self-validation."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Elijah Sullivan" }]
+keywords = ["color grading", "color correction", "ffmpeg", "opencv", "lut", "film emulation", "scopes", "video"]
+dependencies = [
+    "numpy>=1.24",
+    "opencv-contrib-python>=4.8",
+    "scikit-image>=0.21",
+    "colour-science>=0.4.4",
+    "scenedetect>=0.6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+colorkit = "colorkit.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["colorkit*"]
+
+[tool.setuptools.package-data]
+colorkit = ["luts/*.cube", "input_luts/*.cube"]

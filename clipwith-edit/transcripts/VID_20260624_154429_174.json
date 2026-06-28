@@ -1,0 +1,114 @@
+{
+  "sourceVideo": "VID_20260624_154429_174.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "Do you think that an X drug dealer can take a software company to a million dollars in a year? BLANK_AUDIO]",
+  "totalWords": 21,
+  "estimatedDuration": 13.49,
+  "words": [
+    {
+      "word": "Do",
+      "start": 0.29,
+      "end": 0.35
+    },
+    {
+      "word": "you",
+      "start": 0.35,
+      "end": 0.88
+    },
+    {
+      "word": "think",
+      "start": 0.88,
+      "end": 1.75
+    },
+    {
+      "word": "that",
+      "start": 1.76,
+      "end": 2.47
+    },
+    {
+      "word": "an",
+      "start": 2.47,
+      "end": 2.82
+    },
+    {
+      "word": "X",
+      "start": 2.82,
+      "end": 2.99
+    },
+    {
+      "word": "drug",
+      "start": 3.36,
+      "end": 3.7
+    },
+    {
+      "word": "dealer",
+      "start": 3.7,
+      "end": 4.8
+    },
+    {
+      "word": "can",
+      "start": 4.8,
+      "end": 9.66
+    },
+    {
+      "word": "take",
+      "start": 9.74,
+      "end": 9.84
+    },
+    {
+      "word": "a",
+      "start": 9.84,
+      "end": 9.89
+    },
+    {
+      "word": "software",
+      "start": 9.89,
+      "end": 10.32
+    },
+    {
+      "word": "company",
+      "start": 10.32,
+      "end": 10.7
+    },
+    {
+      "word": "to",
+      "start": 10.7,
+      "end": 10.88
+    },
+    {
+      "word": "a",
+      "start": 10.88,
+      "end": 10.96
+    },
+    {
+      "word": "million",
+      "start": 10.96,
+      "end": 11.34
+    },
+    {
+      "word": "dollars",
+      "start": 11.34,
+      "end": 11.72
+    },
+    {
+      "word": "in",
+      "start": 11.72,
+      "end": 11.88
+    },
+    {
+      "word": "a",
+      "start": 11.88,
+      "end": 11.95
+    },
+    {
+      "word": "year?",
+      "start": 11.95,
+      "end": 12.38
+    },
+    {
+      "word": "BLANK_AUDIO]",
+      "start": 13.06,
+      "end": 13.49
+    }
+  ]
+}

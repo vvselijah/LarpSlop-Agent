@@ -1,0 +1,129 @@
+{
+  "sourceVideo": "VID_20260624_155034_177.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "I think we should switch it up as much like a differentiation as possible to put fluid and balance it through. sound of clattering]",
+  "totalWords": 24,
+  "estimatedDuration": 22.79,
+  "words": [
+    {
+      "word": "I",
+      "start": 0.29,
+      "end": 0.29
+    },
+    {
+      "word": "think",
+      "start": 0.3,
+      "end": 1.74
+    },
+    {
+      "word": "we",
+      "start": 1.74,
+      "end": 2.31
+    },
+    {
+      "word": "should",
+      "start": 2.32,
+      "end": 4.06
+    },
+    {
+      "word": "switch",
+      "start": 4.06,
+      "end": 5.79
+    },
+    {
+      "word": "it",
+      "start": 5.81,
+      "end": 6.38
+    },
+    {
+      "word": "up",
+      "start": 6.38,
+      "end": 6.98
+    },
+    {
+      "word": "as",
+      "start": 7.02,
+      "end": 8.78
+    },
+    {
+      "word": "much",
+      "start": 8.78,
+      "end": 12.36
+    },
+    {
+      "word": "like",
+      "start": 12.36,
+      "end": 12.44
+    },
+    {
+      "word": "a",
+      "start": 12.44,
+      "end": 12.47
+    },
+    {
+      "word": "differentiation",
+      "start": 12.47,
+      "end": 13
+    },
+    {
+      "word": "as",
+      "start": 13,
+      "end": 13.2
+    },
+    {
+      "word": "possible",
+      "start": 13.2,
+      "end": 13.96
+    },
+    {
+      "word": "to",
+      "start": 14.02,
+      "end": 14.12
+    },
+    {
+      "word": "put",
+      "start": 14.12,
+      "end": 14.22
+    },
+    {
+      "word": "fluid",
+      "start": 14.36,
+      "end": 14.64
+    },
+    {
+      "word": "and",
+      "start": 14.64,
+      "end": 14.87
+    },
+    {
+      "word": "balance",
+      "start": 14.87,
+      "end": 15.43
+    },
+    {
+      "word": "it",
+      "start": 15.43,
+      "end": 15.57
+    },
+    {
+      "word": "through.",
+      "start": 15.59,
+      "end": 16.4
+    },
+    {
+      "word": "sound",
+      "start": 16.91,
+      "end": 18.41
+    },
+    {
+      "word": "of",
+      "start": 18.41,
+      "end": 19.07
+    },
+    {
+      "word": "clattering]",
+      "start": 19.07,
+      "end": 22.79
+    }
+  ]
+}

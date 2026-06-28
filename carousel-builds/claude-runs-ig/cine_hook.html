@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;background:#0a0806;color:#fff;font-family:'Inter',sans-serif}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.scrim{position:absolute;inset:0;background:linear-gradient(180deg, rgba(7,5,3,.92) 0%, rgba(7,5,3,.78) 24%, rgba(7,5,3,.20) 46%, rgba(7,5,3,0) 62%, rgba(7,5,3,.55) 100%)}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.10;mix-blend-mode:overlay;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:420px 420px}
+.pill{position:absolute;top:60px;right:70px;background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.35);
+ border-radius:40px;padding:9px 24px;font:700 28px 'Inter';letter-spacing:.04em}
+.zone{position:absolute;top:0;left:0;right:0;padding:150px 88px 0}
+.kick{font:700 62px 'Caveat';color:#ffd9b0;transform:rotate(-2deg);margin-bottom:6px}
+.h{font-family:'Anton';font-weight:400;font-size:138px;line-height:.92;letter-spacing:1px;
+ text-shadow:3px 4px 16px rgba(0,0,0,.6)}
+.or{color:#ffae5c}
+.rule{width:150px;height:5px;background:#ffae5c;border-radius:3px;margin:30px 0 0}
+.sub{font:500 38px/1.35 'Inter';margin-top:26px;color:#f3e9df;max-width:840px}
+.sub b{font-weight:700;color:#fff}
+.swipe{position:absolute;right:88px;bottom:42px;font:600 28px 'Inter';color:rgba(255,255,255,.9)}
+</style></head><body><div class="slide">
+  <img class="bg" src="assets/m_cinematic.png">
+  <div class="scrim"></div>
+  <div class="grain"></div>
+  <div class="pill">1/8</div>
+  <div class="zone">
+    <div class="kick">Claude can now run your</div>
+    <div class="h">ENTIRE<br><span class="or">INSTAGRAM</span><br>BETTER<br>THAN YOU.</div>
+    <div class="rule"></div>
+    <div class="sub">so I open-sourced the whole project. <b>free.</b> &#128274;</div>
+  </div>
+  <div class="swipe">swipe &rarr;</div>
+</div></body></html>

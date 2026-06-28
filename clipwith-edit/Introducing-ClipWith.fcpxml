@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fcpxml>
+<fcpxml version="1.9">
+  <resources>
+    <format id="r0" name="FFVideoFormatRateUndefined" frameDuration="1001/30000s" width="1080" height="1920" colorSpace="1-1-1 (Rec. 709)"/>
+    <format id="rf0" name="FF_2160x3840" frameDuration="1001/30000s" width="2160" height="3840" colorSpace="1-1-1 (Rec. 709)"/>
+    <format id="rf2" name="FF_1728x3072" frameDuration="1001/30000s" width="1728" height="3072" colorSpace="1-1-1 (Rec. 709)"/>
+    <asset id="a0" name="01_shot1_hook.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf0" duration="390390/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/01_shot1_hook.mp4"/>
+    </asset>
+    <asset id="a1" name="02_shot2_tanner-intro.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf0" duration="276276/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/02_shot2_tanner-intro.mp4"/>
+    </asset>
+    <asset id="a2" name="03_shot3_elijah-intro.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf2" duration="141141/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/03_shot3_elijah-intro.mp4"/>
+    </asset>
+    <asset id="a3" name="04_shot4_disrupt-200b.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf0" duration="435435/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/04_shot4_disrupt-200b.mp4"/>
+    </asset>
+    <asset id="a4" name="05_shot5_editing-industry.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf0" duration="47047/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/05_shot5_editing-industry.mp4"/>
+    </asset>
+    <asset id="a5" name="06_shot6_everybody-creator.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf0" duration="134134/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/06_shot6_everybody-creator.mp4"/>
+    </asset>
+    <asset id="a6" name="07_shot7_record-capcut.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf0" duration="204204/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/07_shot7_record-capcut.mp4"/>
+    </asset>
+    <asset id="a7" name="08_shot8_99pct-cant-edit.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf0" duration="226226/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/08_shot8_99pct-cant-edit.mp4"/>
+    </asset>
+    <asset id="a8" name="09_shot9_months-learning.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf0" duration="138138/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/09_shot9_months-learning.mp4"/>
+    </asset>
+    <asset id="a9" name="10_shot10_thousands-editor.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf0" duration="167167/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/10_shot10_thousands-editor.mp4"/>
+    </asset>
+    <asset id="a10" name="11_shot11_cheap-templates.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf0" duration="180180/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/11_shot11_cheap-templates.mp4"/>
+    </asset>
+    <asset id="a11" name="12_shot12_2500-200videos.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf0" duration="295295/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/12_shot12_2500-200videos.mp4"/>
+    </asset>
+    <asset id="a12" name="13_shot13_no-budget-100hrs.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf0" duration="139139/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/13_shot13_no-budget-100hrs.mp4"/>
+    </asset>
+    <asset id="a13" name="14_shot14_motivation-tanking.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf0" duration="171171/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/14_shot14_motivation-tanking.mp4"/>
+    </asset>
+    <asset id="a14" name="15_shot17_agentic-model.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf0" duration="96096/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/15_shot17_agentic-model.mp4"/>
+    </asset>
+    <asset id="a15" name="16_shot18a_no-more-menus.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf2" duration="216216/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/16_shot18a_no-more-menus.mp4"/>
+    </asset>
+    <asset id="a16" name="17_shot18b_handles-everything.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf2" duration="267267/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/17_shot18b_handles-everything.mp4"/>
+    </asset>
+    <asset id="a17" name="18_shot19_eliminated-excuse.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf2" duration="330330/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/18_shot19_eliminated-excuse.mp4"/>
+    </asset>
+    <asset id="a18" name="19_shot20_edited-by-clipwith.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf2" duration="180180/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/19_shot20_edited-by-clipwith.mp4"/>
+    </asset>
+    <asset id="a19" name="20_shot21-23_cta-outro.mp4" start="0s" hasVideo="1" hasAudio="1" format="rf2" duration="392392/30000s" audioSources="1" audioChannels="2">
+      <media-rep kind="original-media" src="file:///C:/Users/elija/OneDrive/Desktop/ai%20agent%20team/clipwith-edit/clips/20_shot21-23_cta-outro.mp4"/>
+    </asset>
+  </resources>
+  <library>
+    <event name="Introducing ClipWith">
+      <project name="Introducing ClipWith - rough assembly">
+        <sequence format="r0" duration="4428424/30000s" tcStart="0s" tcFormat="NDF" audioLayout="stereo" audioRate="48k">
+          <spine>
+          <asset-clip ref="a0" offset="0/30000s" name="01_shot1_hook.mp4" duration="390390/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a1" offset="390390/30000s" name="02_shot2_tanner-intro.mp4" duration="276276/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a2" offset="666666/30000s" name="03_shot3_elijah-intro.mp4" duration="141141/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a3" offset="807807/30000s" name="04_shot4_disrupt-200b.mp4" duration="435435/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a4" offset="1243242/30000s" name="05_shot5_editing-industry.mp4" duration="47047/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a5" offset="1290289/30000s" name="06_shot6_everybody-creator.mp4" duration="134134/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a6" offset="1424423/30000s" name="07_shot7_record-capcut.mp4" duration="204204/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a7" offset="1628627/30000s" name="08_shot8_99pct-cant-edit.mp4" duration="226226/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a8" offset="1854853/30000s" name="09_shot9_months-learning.mp4" duration="138138/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a9" offset="1992991/30000s" name="10_shot10_thousands-editor.mp4" duration="167167/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a10" offset="2160158/30000s" name="11_shot11_cheap-templates.mp4" duration="180180/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a11" offset="2340338/30000s" name="12_shot12_2500-200videos.mp4" duration="295295/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a12" offset="2635633/30000s" name="13_shot13_no-budget-100hrs.mp4" duration="139139/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a13" offset="2774772/30000s" name="14_shot14_motivation-tanking.mp4" duration="171171/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a14" offset="2945943/30000s" name="15_shot17_agentic-model.mp4" duration="96096/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a15" offset="3042039/30000s" name="16_shot18a_no-more-menus.mp4" duration="216216/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a16" offset="3258255/30000s" name="17_shot18b_handles-everything.mp4" duration="267267/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a17" offset="3525522/30000s" name="18_shot19_eliminated-excuse.mp4" duration="330330/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a18" offset="3855852/30000s" name="19_shot20_edited-by-clipwith.mp4" duration="180180/30000s" start="0s" tcFormat="NDF"/>
+          <asset-clip ref="a19" offset="4036032/30000s" name="20_shot21-23_cta-outro.mp4" duration="392392/30000s" start="0s" tcFormat="NDF"/>
+          </spine>
+        </sequence>
+      </project>
+    </event>
+  </library>
+</fcpxml>

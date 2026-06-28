@@ -1,0 +1,1 @@
+﻿Drop ALL your raw take files for the 'Introducing ClipWith' video into THIS folder. Duplicates are fine. The overnight run reads from here.

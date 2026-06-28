@@ -1,0 +1,56 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet"><style>
+*{margin:0;padding:0;box-sizing:border-box}
+.slide{position:relative;width:1080px;height:1350px;overflow:hidden;
+  background:var(--bg);color:var(--ink);padding:150px 96px;
+  display:flex;flex-direction:column;justify-content:center;
+  font-family:var(--fb),'Segoe UI',sans-serif}
+.brand{position:absolute;top:84px;left:96px;font:600 30px var(--fb);
+  color:var(--muted);letter-spacing:.02em}
+.swipe{position:absolute;bottom:78px;right:96px;font:500 30px var(--fb);
+  color:var(--muted);opacity:.9}
+.eyebrow{font:600 27px var(--fb);letter-spacing:.26em;text-transform:uppercase;
+  color:var(--eye);margin-bottom:30px}
+.h1{font-family:var(--fh);font-weight:var(--hw);color:var(--ink);letter-spacing:var(--ht)}
+.h1.xl{font-size:98px;line-height:1.04}
+.h1.lg{font-size:80px;line-height:1.07}
+.h1.md{font-size:68px;line-height:1.1}
+.ac{color:var(--accent)}
+b{color:var(--ink);font-weight:700}
+.emo{font-family:'Segoe UI Emoji'}
+.sub{font:400 40px/1.4 var(--fb);color:var(--muted);margin-top:36px;max-width:900px}
+.body{font:400 39px/1.45 var(--fb);color:var(--muted);margin-top:34px;max-width:900px}
+.footer{margin-top:60px;font:400 28px var(--fb);color:var(--muted)}
+.list{list-style:none;margin:46px 0 0}
+.list li{display:flex;align-items:center;gap:28px;font:400 38px/1.18 var(--fb);
+  color:var(--ink);padding:24px 0;border-bottom:1px solid var(--hair)}
+.list li:last-child{border-bottom:none}
+.list li i{font-style:normal;font-size:46px;width:64px;text-align:center;flex:none}
+.twocol{display:flex;gap:26px;margin-top:52px}
+.col{flex:1;background:var(--card);border:1px solid var(--cbd);border-radius:28px;padding:40px}
+.coltag{font:600 25px var(--fb);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.colval{font:600 40px/1.28 var(--fh);color:var(--ink);margin-top:18px}
+.col.hot{border-color:var(--accent);background:var(--asoft)}
+.col.hot .colval{color:var(--accent)}
+.cap{margin-top:40px;font:400 32px/1.42 var(--fb);color:var(--muted);max-width:900px}
+.repo{margin-top:50px;background:var(--card);border:1px solid var(--cbd);border-radius:30px;padding:48px}
+.rhead{font:400 42px var(--fb);color:var(--ink);display:flex;align-items:center;gap:14px}
+.rpill{font:600 23px var(--fb);border:1px solid var(--cbd);border-radius:30px;padding:5px 20px;color:var(--muted)}
+.rdesc{font:400 33px/1.45 var(--fb);color:var(--muted);margin-top:26px}
+.rmeta{display:flex;flex-wrap:wrap;gap:20px 36px;margin-top:34px;font:500 28px var(--fb);color:var(--muted)}
+.chart{margin-top:54px}
+.bar{display:flex;align-items:center;gap:24px;margin:26px 0}
+.blab{width:170px;font:600 32px var(--fb);color:var(--muted);text-transform:lowercase}
+.btrack{flex:1;display:flex;align-items:center}
+.bfill{height:54px;border-radius:12px;background:var(--barmute);min-width:14px}
+.bar.big .bfill{background:var(--accent)}
+.bval{width:230px;text-align:right;font:600 34px var(--fb);color:var(--muted)}
+.bar.big .bval{color:var(--ink)}
+.delta{font-family:var(--fh);font-weight:var(--hw);font-size:84px;color:var(--accent);margin-top:30px;letter-spacing:var(--ht)}
+.footer{margin-top:58px;font:400 28px var(--fb);color:var(--muted)}
+
+:root{
+    --bg:repeating-radial-gradient(circle at 100% 0%, transparent 0 90px, rgba(45,212,191,.20) 90px 92px), radial-gradient(72% 62% at 100% 0%, rgba(45,212,191,.26), transparent 56%), radial-gradient(80% 66% at 0% 100%, rgba(20,130,124,.20), transparent 56%), radial-gradient(125% 100% at 16% -8%, #0b2a31 0%, #08171c 50%, #04090b 100%);
+    --ink:#ffffff; --muted:#9fb6bb; --accent:#2dd4bf; --asoft:rgba(45,212,191,.13);
+    --onac:#04130f; --card:rgba(255,255,255,.05); --cbd:rgba(255,255,255,.13);
+    --hair:rgba(255,255,255,.10); --eye:#5eead4; --barmute:rgba(255,255,255,.18);
+    --fh:'Plus Jakarta Sans'; --fb:'Inter'; --hw:800; --ht:-.02em;}</style></head><body><div class="slide"><div class="brand">@elijahaifl</div><div class="eyebrow">what gets trimmed</div><h1 class="h1 md">the quiet token <span class="ac">drains</span> it kills:</h1><ul class="list"><li><i class="emo">&#128220;</i>endless logs &rarr; only the lines that matter</li><li><i class="emo">&#128193;</i>whole files &rarr; just the slice it needs</li><li><i class="emo">&#128451;</i>database dumps &rarr; the rows that count</li><li><i class="emo">&#128269;</i>bloated RAG chunks &rarr; the relevant bit</li><li><i class="emo">&#129520;</i>messy tool output &rarr; the signal</li></ul><div class="swipe">swipe &rarr;</div></div></body></html>

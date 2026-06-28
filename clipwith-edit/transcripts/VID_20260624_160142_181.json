@@ -1,0 +1,24 @@
+{
+  "sourceVideo": "VID_20260624_160142_181.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "the editing industry",
+  "totalWords": 3,
+  "estimatedDuration": 1.54,
+  "words": [
+    {
+      "word": "the",
+      "start": 0.3,
+      "end": 0.33
+    },
+    {
+      "word": "editing",
+      "start": 0.43,
+      "end": 1.1
+    },
+    {
+      "word": "industry",
+      "start": 1.1,
+      "end": 1.54
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "sourceVideo": "VID_20260624_160453_182.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "Everybody wants to be a creator, influencer, streamer, YouTuber, TikToker, whatever.",
+  "totalWords": 11,
+  "estimatedDuration": 4.44,
+  "words": [
+    {
+      "word": "Everybody",
+      "start": 0.3,
+      "end": 0.51
+    },
+    {
+      "word": "wants",
+      "start": 0.51,
+      "end": 0.68
+    },
+    {
+      "word": "to",
+      "start": 0.79,
+      "end": 0.9
+    },
+    {
+      "word": "be",
+      "start": 0.9,
+      "end": 1.01
+    },
+    {
+      "word": "a",
+      "start": 1.01,
+      "end": 1.05
+    },
+    {
+      "word": "creator,",
+      "start": 1.08,
+      "end": 1.55
+    },
+    {
+      "word": "influencer,",
+      "start": 1.57,
+      "end": 2.23
+    },
+    {
+      "word": "streamer,",
+      "start": 2.23,
+      "end": 2.8
+    },
+    {
+      "word": "YouTuber,",
+      "start": 2.84,
+      "end": 3.36
+    },
+    {
+      "word": "TikToker,",
+      "start": 3.36,
+      "end": 3.92
+    },
+    {
+      "word": "whatever.",
+      "start": 3.92,
+      "end": 4.44
+    }
+  ]
+}

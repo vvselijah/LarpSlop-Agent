@@ -128,3 +128,29 @@ Full detail + sources: `docs/plans/2026-06-13-capabilities-research-plan.md`,
 - **Tier C — skip:** **BettaFish/MiroFish** (China public-opinion analysis, GPL/AGPL, overlap owned tools);
   **Playwright MCP** (overlaps the wired Claude-in-Chrome + Firecrawl; only headless-unattended jobs would justify it);
   **Bright Data** (enterprise-priced vs Apify for the same data).
+
+## 2026-06-23 — "agentic DaVinci Resolve" color grading verdict (direct research, 0 workflow)
+
+Question: can Claude Code drive DaVinci Resolve to color-grade, on the **free** version, as a
+zero-theory preset shortcut? Decisive answer from primary sources:
+
+- **Agentic Resolve MCPs exist and support Claude Code** — `samuelgursky/davinci-resolve-mcp`
+  (most mature, has a `CLAUDE.md` + color-decision-guide, 32/341-tool modes), plus
+  `barckley75/resolve-claude-mcp`, `lordhoell/davinci-resolve-mcp` (440+ tools), `tooflex/davinci-resolve-mcp`.
+- **❌ Two hard walls for our use case:**
+  1. **All require Resolve _Studio_ ($295 one-time), NOT free.** The free edition blocks the external
+     `DaVinciResolveScript` API every MCP depends on — confirmed verbatim by the samuelgursky README:
+     *"The free edition does not support external scripting."* (Free = internal Lua console only; UIManager
+     GUIs are Studio-only since 19.1.)
+  2. **Even on Studio the API can't actually _grade_** — no color wheels, curves, qualifiers, power windows,
+     OFX, and it can't create/reorder nodes. It can only **apply pre-built looks**: `SetLUT`, `SetCDL`,
+     `ApplyGradeFromDRX` (replaces graph), `CopyGrades`, `ExportLUT`. So "agentic color" = "agentic
+     apply-a-preset" — the exact thing you can do yourself in free Resolve in one drag, zero theory.
+- **✅ Recommended free path (no Studio):** (A) drop a free cinematic **`.cube` LUT** on a single
+  adjustment clip in free Resolve (LUTs + adjustment clips both work in free) → save as PowerGrade for
+  1-click reuse; (B) **the agentic, hub-native path = `ffmpeg lut3d`** — a `.cube` is just text, ffmpeg
+  (already wired) bakes it onto any exported reel, fully Claude-scriptable, wire-able into `auto-clip`.
+  Claude can also generate/tune custom `.cube` LUTs. Insta360 caveat: if shooting **I-Log**, apply a
+  Log→709 _conversion_ LUT first, then the creative LUT; if shooting Standard, go straight to creative.
+- **Verdict:** SKIP the Studio MCP route for color alone — $295 buys almost nothing past the free LUT
+  workflow. Revisit only if Studio is bought for other reasons (then the MCP is a nice editing/render driver).

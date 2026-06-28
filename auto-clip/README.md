@@ -12,7 +12,8 @@ genuinely-missing pieces. Full design + caveats: `docs/plans/2026-06-13-auto-cli
 - ✅ **`facetrack.py`** — face-tracking 9:16 reframe for WIDE/multi-person sources (interviews). OpenCV Haar (frontal+profile, bundled — no download) **detection only**; locks onto one chosen speaker (largest/left/right, lock-and-hold through profile turns); FFmpeg `sendcmd` crop (audio kept). **Built + tested** on the Elijah/Derwin interview — both speakers, framing verified on-frame. v2 = LR-ASD active-speaker auto-switch.
 - ✅ **`caption.py`** — burn word-timed captions (pure FFmpeg/libass): **word-pop** karaoke (active word highlighted yellow) or `block` style, big bold lower-third, all-caps, **+ audio cleanup** (loudnorm/afftdn, on by default). **Built + tested** (6/6 `_cap.mp4`; word-pop highlight tracking speech + cleaned audio verified). Premium animated house style via `caption-engine` is the optional alternative.
 - ✅ **`tighten.py`** — remove dead air + disfluencies (um/uh) from a clip window using the word-level transcript: trims silences > `--max-gap` and drops conservative fillers; emits a tightened clip + a remapped 0-based transcript so `caption.py --clip` stays in sync. **Built + tested** (24.3s→22.9s; captions verified in-sync after fixing a word-overlap caption-stacking bug).
-- ✅ **`auto-clip` skill** (`.claude/skills/auto-clip/`) — orchestrates the full interactive pipeline (transcribe → agent-highlight → reframe/facetrack → [tighten] → **caption** → manifest).
+- ✅ **`color.py` + `colorkit/`** — NEW headless color stage (opt-in): auto color-correction (WB/exposure/contrast) + stylized film looks for stills AND multi-scene video. PySceneDetect shot-detect → **ONE constant correction per shot** (non-negotiable anti-flicker rule) → Stage-2 shot-match toward a hero → uniform creative LUT → concat. Canonical order **correct → match → stylize**. 5 `.cube` looks bundled (`neutral_correct`, `warm_interview`, `teal_orange`, `kodak_2383_style`, `fuji_style`). **Built + VERIFIED** on real footage (stills, single-clip, full multi-scene). Slots **after `tighten`, before `caption`** (grade the clean cut, then burn captions on top). Stops at `out/`, never publishes. Detail: `colorkit/README.md`.
+- ✅ **`auto-clip` skill** (`.claude/skills/auto-clip/`) — orchestrates the full interactive pipeline (transcribe → agent-highlight → reframe/facetrack → [tighten] → [color] → **caption** → manifest).
 - ✅ **Done (caption + cut polish):** word-pop karaoke captions, audio cleanup (loudnorm/afftdn), silence/filler trim.
 - ⏳ **Remaining (roadmap in `docs/plans/2026-06-14-interview-clip-enhancements-research.md`):** punch-in / zoom-on-emphasis + emoji pop-ups (next FFmpeg polish, no deps); **LR-ASD active-speaker auto-switch + multicam** (the real v2 brain — torch, gated, keep models OFF OneDrive); PySceneDetect shot cuts; background blur (MediaPipe Selfie, add-later); GPU torch-cu128 (Elijah-gated); `Daily Agent Refresh.bat` wiring.
 
@@ -23,6 +24,10 @@ genuinely-missing pieces. Full design + caveats: `docs/plans/2026-06-13-auto-cli
 
 Reused (do NOT rebuild): caption-engine, broll-inserter, platform-exporter, `build_cutlist.js`
 (editorial brain) + `PodcastEdit.tsx` (crop comp) from `..\abc wrap\`, and the FFmpeg 8.1 MCP for probe/audio.
+
+**Plus (new, opt-in):** a headless **color stage** (`color.py` + `colorkit/`) — auto color-correction + stylized
+film looks for stills and multi-scene video, constant-per-shot anti-flicker, canonical correct → match → stylize.
+It slots **after `tighten`, before `caption`**, stops at `out/`, and never publishes. Detail: `colorkit/README.md`.
 
 ## Transcribe usage
 ```

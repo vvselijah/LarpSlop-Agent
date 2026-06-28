@@ -1,0 +1,389 @@
+{
+  "sourceVideo": "VID_20260624_163635_206.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "This clip with AI handles motion graphics cuts, and then when I come back to you, say SFX . Clip with AI handles motion graphics cuts, clip with AI handles motion graphics cuts, captions , SFX, clip with AI handles motion graphics cuts , captions , and everything else. Clip with AI handles motion graphics cuts, captions, SFX, and everything else that you would need to do. Literally just ask. - There we go. - Yeah.",
+  "totalWords": 76,
+  "estimatedDuration": 49.14,
+  "words": [
+    {
+      "word": "This",
+      "start": 0.29,
+      "end": 0.71
+    },
+    {
+      "word": "clip",
+      "start": 0.71,
+      "end": 1.42
+    },
+    {
+      "word": "with",
+      "start": 1.42,
+      "end": 2.12
+    },
+    {
+      "word": "AI",
+      "start": 2.13,
+      "end": 2.49
+    },
+    {
+      "word": "handles",
+      "start": 2.49,
+      "end": 3.74
+    },
+    {
+      "word": "motion",
+      "start": 3.74,
+      "end": 4.81
+    },
+    {
+      "word": "graphics",
+      "start": 4.81,
+      "end": 6.24
+    },
+    {
+      "word": "cuts,",
+      "start": 6.24,
+      "end": 7.12
+    },
+    {
+      "word": "and",
+      "start": 7.12,
+      "end": 7.3
+    },
+    {
+      "word": "then",
+      "start": 7.3,
+      "end": 7.54
+    },
+    {
+      "word": "when",
+      "start": 7.54,
+      "end": 7.78
+    },
+    {
+      "word": "I",
+      "start": 7.78,
+      "end": 7.84
+    },
+    {
+      "word": "come",
+      "start": 7.84,
+      "end": 8.08
+    },
+    {
+      "word": "back",
+      "start": 8.08,
+      "end": 8.31
+    },
+    {
+      "word": "to",
+      "start": 8.32,
+      "end": 8.44
+    },
+    {
+      "word": "you,",
+      "start": 8.44,
+      "end": 8.73
+    },
+    {
+      "word": "say",
+      "start": 8.74,
+      "end": 8.98
+    },
+    {
+      "word": "SFX",
+      "start": 8.98,
+      "end": 9.47
+    },
+    {
+      "word": ".",
+      "start": 9.97,
+      "end": 9.97
+    },
+    {
+      "word": "Clip",
+      "start": 10.01,
+      "end": 11.05
+    },
+    {
+      "word": "with",
+      "start": 11.05,
+      "end": 12.11
+    },
+    {
+      "word": "AI",
+      "start": 12.11,
+      "end": 12.26
+    },
+    {
+      "word": "handles",
+      "start": 12.63,
+      "end": 14.52
+    },
+    {
+      "word": "motion",
+      "start": 14.52,
+      "end": 16.12
+    },
+    {
+      "word": "graphics",
+      "start": 16.12,
+      "end": 18.26
+    },
+    {
+      "word": "cuts,",
+      "start": 18.26,
+      "end": 19.9
+    },
+    {
+      "word": "clip",
+      "start": 19.9,
+      "end": 20.33
+    },
+    {
+      "word": "with",
+      "start": 20.33,
+      "end": 20.68
+    },
+    {
+      "word": "AI",
+      "start": 20.73,
+      "end": 20.97
+    },
+    {
+      "word": "handles",
+      "start": 21.33,
+      "end": 21.72
+    },
+    {
+      "word": "motion",
+      "start": 21.72,
+      "end": 22.36
+    },
+    {
+      "word": "graphics",
+      "start": 22.36,
+      "end": 23.15
+    },
+    {
+      "word": "cuts,",
+      "start": 23.22,
+      "end": 23.92
+    },
+    {
+      "word": "captions",
+      "start": 23.92,
+      "end": 24.44
+    },
+    {
+      "word": ",",
+      "start": 24.86,
+      "end": 25.1
+    },
+    {
+      "word": "SFX,",
+      "start": 25.1,
+      "end": 25.82
+    },
+    {
+      "word": "clip",
+      "start": 25.82,
+      "end": 26.36
+    },
+    {
+      "word": "with",
+      "start": 26.39,
+      "end": 26.98
+    },
+    {
+      "word": "AI",
+      "start": 27.27,
+      "end": 27.27
+    },
+    {
+      "word": "handles",
+      "start": 27.3,
+      "end": 28.28
+    },
+    {
+      "word": "motion",
+      "start": 28.28,
+      "end": 29.15
+    },
+    {
+      "word": "graphics",
+      "start": 29.15,
+      "end": 30.31
+    },
+    {
+      "word": "cuts",
+      "start": 30.31,
+      "end": 30.5
+    },
+    {
+      "word": ",",
+      "start": 31.45,
+      "end": 34.59
+    },
+    {
+      "word": "captions",
+      "start": 34.65,
+      "end": 36.33
+    },
+    {
+      "word": ",",
+      "start": 36.85,
+      "end": 37.03
+    },
+    {
+      "word": "and",
+      "start": 37.03,
+      "end": 37.2
+    },
+    {
+      "word": "everything",
+      "start": 37.2,
+      "end": 37.79
+    },
+    {
+      "word": "else.",
+      "start": 37.79,
+      "end": 38.21
+    },
+    {
+      "word": "Clip",
+      "start": 38.22,
+      "end": 38.49
+    },
+    {
+      "word": "with",
+      "start": 38.6,
+      "end": 38.76
+    },
+    {
+      "word": "AI",
+      "start": 38.76,
+      "end": 38.89
+    },
+    {
+      "word": "handles",
+      "start": 38.89,
+      "end": 39.37
+    },
+    {
+      "word": "motion",
+      "start": 39.37,
+      "end": 39.78
+    },
+    {
+      "word": "graphics",
+      "start": 39.78,
+      "end": 40.24
+    },
+    {
+      "word": "cuts,",
+      "start": 40.38,
+      "end": 40.72
+    },
+    {
+      "word": "captions,",
+      "start": 40.72,
+      "end": 41.43
+    },
+    {
+      "word": "SFX,",
+      "start": 41.79,
+      "end": 42.58
+    },
+    {
+      "word": "and",
+      "start": 42.58,
+      "end": 42.68
+    },
+    {
+      "word": "everything",
+      "start": 42.72,
+      "end": 43.06
+    },
+    {
+      "word": "else",
+      "start": 43.06,
+      "end": 43.25
+    },
+    {
+      "word": "that",
+      "start": 43.26,
+      "end": 43.42
+    },
+    {
+      "word": "you",
+      "start": 43.42,
+      "end": 43.48
+    },
+    {
+      "word": "would",
+      "start": 43.48,
+      "end": 43.79
+    },
+    {
+      "word": "need",
+      "start": 43.79,
+      "end": 43.97
+    },
+    {
+      "word": "to",
+      "start": 44.04,
+      "end": 44.16
+    },
+    {
+      "word": "do.",
+      "start": 44.16,
+      "end": 44.48
+    },
+    {
+      "word": "Literally",
+      "start": 44.48,
+      "end": 45.62
+    },
+    {
+      "word": "just",
+      "start": 45.83,
+      "end": 46.53
+    },
+    {
+      "word": "ask.",
+      "start": 46.53,
+      "end": 47.48
+    },
+    {
+      "word": "-",
+      "start": 47.48,
+      "end": 47.54
+    },
+    {
+      "word": "There",
+      "start": 47.54,
+      "end": 47.85
+    },
+    {
+      "word": "we",
+      "start": 47.86,
+      "end": 47.98
+    },
+    {
+      "word": "go.",
+      "start": 47.98,
+      "end": 48.32
+    },
+    {
+      "word": "-",
+      "start": 48.34,
+      "end": 48.48
+    },
+    {
+      "word": "Yeah.",
+      "start": 48.48,
+      "end": 49.14
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "sourceVideo": "VID_20260624_160854_185.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "And they spend months attempting to learn a skill . So they spend months attempting to learn a skill that takes people years to not even master.",
+  "totalWords": 27,
+  "estimatedDuration": 8.26,
+  "words": [
+    {
+      "word": "And",
+      "start": 0.23,
+      "end": 0.23
+    },
+    {
+      "word": "they",
+      "start": 0.29,
+      "end": 0.52
+    },
+    {
+      "word": "spend",
+      "start": 0.61,
+      "end": 0.91
+    },
+    {
+      "word": "months",
+      "start": 0.91,
+      "end": 1.37
+    },
+    {
+      "word": "attempting",
+      "start": 1.37,
+      "end": 2.11
+    },
+    {
+      "word": "to",
+      "start": 2.14,
+      "end": 2.28
+    },
+    {
+      "word": "learn",
+      "start": 2.28,
+      "end": 2.66
+    },
+    {
+      "word": "a",
+      "start": 2.66,
+      "end": 2.73
+    },
+    {
+      "word": "skill",
+      "start": 2.73,
+      "end": 2.82
+    },
+    {
+      "word": ".",
+      "start": 3.14,
+      "end": 3.16
+    },
+    {
+      "word": "So",
+      "start": 3.16,
+      "end": 3.28
+    },
+    {
+      "word": "they",
+      "start": 3.44,
+      "end": 3.53
+    },
+    {
+      "word": "spend",
+      "start": 3.53,
+      "end": 3.84
+    },
+    {
+      "word": "months",
+      "start": 3.84,
+      "end": 4.21
+    },
+    {
+      "word": "attempting",
+      "start": 4.21,
+      "end": 4.84
+    },
+    {
+      "word": "to",
+      "start": 4.86,
+      "end": 4.94
+    },
+    {
+      "word": "learn",
+      "start": 4.94,
+      "end": 5.16
+    },
+    {
+      "word": "a",
+      "start": 5.16,
+      "end": 5.22
+    },
+    {
+      "word": "skill",
+      "start": 5.22,
+      "end": 5.54
+    },
+    {
+      "word": "that",
+      "start": 5.54,
+      "end": 5.7
+    },
+    {
+      "word": "takes",
+      "start": 5.8,
+      "end": 5.96
+    },
+    {
+      "word": "people",
+      "start": 6.04,
+      "end": 6.24
+    },
+    {
+      "word": "years",
+      "start": 6.24,
+      "end": 6.7
+    },
+    {
+      "word": "to",
+      "start": 6.7,
+      "end": 6.85
+    },
+    {
+      "word": "not",
+      "start": 6.85,
+      "end": 7.08
+    },
+    {
+      "word": "even",
+      "start": 7.08,
+      "end": 7.4
+    },
+    {
+      "word": "master.",
+      "start": 7.4,
+      "end": 8.26
+    }
+  ]
+}

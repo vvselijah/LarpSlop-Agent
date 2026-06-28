@@ -1,0 +1,64 @@
+{
+  "sourceVideo": "VID_20260624_160647_184.mp4",
+  "audioSource": "rode_backup_wav",
+  "script": "The reality is 99% of creators don't know how to edit.",
+  "totalWords": 11,
+  "estimatedDuration": 7.51,
+  "words": [
+    {
+      "word": "The",
+      "start": 0.3,
+      "end": 0.5
+    },
+    {
+      "word": "reality",
+      "start": 0.5,
+      "end": 1.46
+    },
+    {
+      "word": "is",
+      "start": 1.66,
+      "end": 2
+    },
+    {
+      "word": "99%",
+      "start": 2.08,
+      "end": 3.84
+    },
+    {
+      "word": "of",
+      "start": 3.84,
+      "end": 4.11
+    },
+    {
+      "word": "creators",
+      "start": 4.67,
+      "end": 6.47
+    },
+    {
+      "word": "don't",
+      "start": 6.48,
+      "end": 6.76
+    },
+    {
+      "word": "know",
+      "start": 6.76,
+      "end": 6.98
+    },
+    {
+      "word": "how",
+      "start": 6.98,
+      "end": 7.15
+    },
+    {
+      "word": "to",
+      "start": 7.15,
+      "end": 7.26
+    },
+    {
+      "word": "edit.",
+      "start": 7.26,
+      "end": 7.51
+    }
+  ]
+}
