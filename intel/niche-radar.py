@@ -116,10 +116,14 @@ def scrape(hashtags, token, results_limit, results_type):
     try:
         tmp.write(body)
         tmp.close()
+        # Force UTF-8 decode: Apify returns UTF-8 (emoji captions); the Windows
+        # default cp1252 decode raises UnicodeDecodeError on bytes like 0x8d and
+        # silently empties stdout. errors="replace" tolerates any stray bytes.
         r = subprocess.run(
             ["curl.exe", "-s", "--max-time", str(CALL_TIMEOUT),
              "--data-binary", f"@{tmp.name}", "--config", "-"],
-            capture_output=True, text=True, input=cfg)
+            capture_output=True, text=True, encoding="utf-8", errors="replace",
+            input=cfg)
     finally:
         try:
             os.unlink(tmp.name)

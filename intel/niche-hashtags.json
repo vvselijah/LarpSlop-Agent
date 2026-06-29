@@ -1,17 +1,17 @@
 {
-  "_readme": "Niche -> Instagram hashtags for niche-radar.py (the DISCOVERY engine). ELIJAH: edit freely. Each niche lists bare hashtags (no '#', no URL) and a min_views floor that filters the scraped board. niche-radar uses a SCRAPER (Apify by default) because the official Graph API hashtag endpoints are App-Review-gated for this app (ig_hashtag_search returns error #10). The scraper returns TRUE view counts on arbitrary hashtag posts -- the thing business_discovery can't do. Discovered winning AUTHORS get auto-suggested into watchlist.json so the official competitor/viral radars then track them with true numbers. Keep the hashtag set MODEST: every hashtag scraped burns scraper credits (see _budget).",
+  "_readme": "Niche -> Instagram hashtags for niche-radar.py (the DISCOVERY engine). ELIJAH: edit freely. Bare hashtags (no '#', no URL). Seeded 2026-06-29 from YOUR last-month top hashtags (intel: ai/claude/founder/startup/business/cars + your explicit asks) MINUS the reach-spam tags (#fyp/#viral/#reels/#life) which return random global junk and waste credit. niche-radar SCRAPES these (official Graph API hashtag endpoints are App-Review-blocked for this app -> OAuthException #10), gets TRUE view counts, ranks per niche, and suggests winning NEW accounts into watchlist.json. Add/cut tags to taste; broad job-title tags (ceo/software/developer) are noisy on IG -- prune them if their results look off.",
   "_budget": {
     "provider": "apify",
-    "note": "Apify free plan = ~$5/mo platform credit. Scraping ~30 posts for one hashtag is cheap but not free; a weekly run over ~8-10 hashtags stays comfortably inside the free tier. Do NOT run this daily over a large set. Rotate hashtags or trim the list if you approach the cap. The old 30-hashtags/week limit was the Graph API cap and NO LONGER APPLIES -- the binding constraint now is scraper credit.",
+    "actor": "apify/instagram-hashtag-scraper (official, field-verified; the only actor whose INPUT is a hashtag AND output has view counts)",
+    "cost_model": "pay-per-result; Free tier $2.60/1,000 results, hard $5/mo credit (no rollover). ~30 results/hashtag = ~$0.08. resultsLimit is PER hashtag, so cost = results x (#hashtags). Keep total hashtags <= ~12 at 30 results to stay inside the free $5/mo.",
     "results_per_hashtag": 30,
-    "run_cadence": "weekly (via Weekly Agent Refresh.bat)"
+    "run_cadence": "weekly (via Weekly Agent Refresh.bat)",
+    "cheaper_option_if_scaling": "apidojo/instagram-scraper is ~5x cheaper (~$0.50/1k, 4.86 stars) but community-maintained + uses hashtag-EXPLORE URLs and possibly different field names -- NOT wired (would need a verified per-actor input/field branch). Only worth it if the hashtag list grows past the free tier.",
+    "free_local_verdict": "There is NO free/local/OSS path that returns hashtag view counts without an Instagram LOGIN (= ban risk to @elijahaifl). Never run instaloader/instagrapi/gallery-dl on the real account. Apify scrapes logged-off (zero account risk).",
+    "bright_data_note": "Bright Data offers ~5k free credits/mo (would make this $0) BUT the hub docs contradict each other (CONTENT-INTEL-PROTOCOL='Winner' vs AGENT-TEAM-BLUEPRINT='Tier C skip'). Unresolved -- Elijah to decide before adopting; higher switching cost (different API/auth) than the actor swap above."
   },
-  "money-finance": {
-    "hashtags": ["personalfinance", "investingtips", "sidehustle", "moneytips"],
-    "min_views": 50000
-  },
-  "ai-entrepreneur": {
-    "hashtags": ["aitools", "aiautomation", "aiagents", "buildinpublic"],
-    "min_views": 50000
+  "ai-founder": {
+    "hashtags": ["ai", "aiagents", "claude", "founder", "startup", "saas", "buildinpublic", "ceo", "software", "developer"],
+    "min_views": 10000
   }
 }
