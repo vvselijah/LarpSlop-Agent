@@ -33,6 +33,35 @@ Two independent engines, both free and keyless. Full strategy: `../CONTENT-INTEL
 
 Both are safe to add to the daily 7 AM scheduled task (alongside `ig-dashboard`).
 
+## C. Viral pipeline — what wins, WHY, and who to track next
+
+Three engines that answer "show me the top posts in my niche and how to replicate
+them." Run together (in this order) by `Weekly Agent Refresh.bat`:
+
+1. **`niche-radar.py` (DISCOVERY)** — finds top posts in a *niche you don't track
+   yet* by scraping hashtags. The official Graph API hashtag endpoints
+   (`ig_hashtag_search`/`top_media`) are **App-Review-gated for this app**
+   (live-probed 2026-06-29 → `OAuthException #10`), so this is the one engine that
+   uses a **scraper** (Apify `instagram-hashtag-scraper`) — which returns **true
+   view counts** on arbitrary posts. Config: **`niche-hashtags.json`** (niche →
+   bare hashtags + `min_views`; **Elijah edits freely**). Reads `APIFY_TOKEN` from a
+   Windows env var (`setx APIFY_TOKEN "…"`); fed to curl over stdin, never on argv.
+   Writes `niche-report.md` + `data/niche.json`. **Costs Apify credit** (free tier
+   ≈ $5/mo, ~$0.08 per 30-post hashtag) — see the `_budget` block in the config.
+   `python niche-radar.py --dry-run` shows the cost with **no API call**; if
+   `APIFY_TOKEN` is unset it skips itself cleanly so the rest of the chain still runs.
+2. **`viral-radar.py` (TRACKING)** — ranks the winners among the accounts you
+   *already* name in `watchlist.json` via the official `business_discovery` (true
+   views, no scraper). Writes `viral-report.md` + `data/viral.json`.
+3. **`viral_teardown.py` (WHY)** — reads **both** leaderboards above and writes a
+   keyless "why it works" teardown card per top post (hook / format / retention /
+   replicable angle) to `viral-teardown.md`. `--self-test` runs offline.
+
+**The hybrid loop:** niche-radar discovers winning *new authors* and lists them
+under "Suggested watchlist additions"; add the good ones to `watchlist.json` and the
+official radars then track them with true numbers next run. All three are read-only
+w.r.t. Instagram and never publish.
+
 ## How this fits the bigger protocol
 
 | Signal | Source | Status |
@@ -41,7 +70,7 @@ Both are safe to add to the daily 7 AM scheduled task (alongside `ig-dashboard`)
 | Top ad creatives per niche/keyword | `meta-ads` MCP `ads_library_search` (live-verified) | ✅ live |
 | Own-account ground truth | `ig-dashboard/` + `team/stats.md` | ✅ live |
 | Trend velocity (what's breaking out) | `trend-radar.py` (Wikipedia + GDELT + HN, keyless) | ✅ live |
-| IG hashtag/trending-audio surfaces | Apify IG Hashtag Scraper (free tier) | ⏳ needs Apify account |
+| IG hashtag top posts (true views) | `niche-radar.py` (Apify IG Hashtag Scraper) | ✅ built — ⏳ needs `APIFY_TOKEN` |
 | TikTok trends/sounds, YouTube-at-scale | Bright Data MCP (5k free credits) or Apify | ⏳ needs account |
 
 Standout breakouts worth keeping should be saved to the vault as hook notes

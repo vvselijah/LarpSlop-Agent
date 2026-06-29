@@ -1,0 +1,17 @@
+{
+  "_readme": "Niche -> Instagram hashtags for niche-radar.py (the DISCOVERY engine). ELIJAH: edit freely. Each niche lists bare hashtags (no '#', no URL) and a min_views floor that filters the scraped board. niche-radar uses a SCRAPER (Apify by default) because the official Graph API hashtag endpoints are App-Review-gated for this app (ig_hashtag_search returns error #10). The scraper returns TRUE view counts on arbitrary hashtag posts -- the thing business_discovery can't do. Discovered winning AUTHORS get auto-suggested into watchlist.json so the official competitor/viral radars then track them with true numbers. Keep the hashtag set MODEST: every hashtag scraped burns scraper credits (see _budget).",
+  "_budget": {
+    "provider": "apify",
+    "note": "Apify free plan = ~$5/mo platform credit. Scraping ~30 posts for one hashtag is cheap but not free; a weekly run over ~8-10 hashtags stays comfortably inside the free tier. Do NOT run this daily over a large set. Rotate hashtags or trim the list if you approach the cap. The old 30-hashtags/week limit was the Graph API cap and NO LONGER APPLIES -- the binding constraint now is scraper credit.",
+    "results_per_hashtag": 30,
+    "run_cadence": "weekly (via Weekly Agent Refresh.bat)"
+  },
+  "money-finance": {
+    "hashtags": ["personalfinance", "investingtips", "sidehustle", "moneytips"],
+    "min_views": 50000
+  },
+  "ai-entrepreneur": {
+    "hashtags": ["aitools", "aiautomation", "aiagents", "buildinpublic"],
+    "min_views": 50000
+  }
+}

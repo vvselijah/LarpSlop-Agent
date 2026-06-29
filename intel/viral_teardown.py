@@ -9,8 +9,12 @@ viral-radar answers "WHAT is winning", this answers "WHY it works + how to steal
 DATA SOURCE (read-only, in priority order):
   1. intel/viral-report.md  — the rich per-post leaderboard viral-radar writes
      (views, eng-rate, median-ratio, account, date, media_type, caption, permalink).
-     This is the primary source: viral.json only stores per-ACCOUNT median history,
+     This is a primary source: viral.json only stores per-ACCOUNT median history,
      not per-POST detail, so the markdown report is where the per-post signal lives.
+  1b. intel/niche-report.md — the DISCOVERY leaderboard niche-radar writes (scraped
+     hashtag winners, same line format). Read alongside viral-report.md when present;
+     posts are merged and de-duped by permalink, so the teardown covers both the
+     tracked-account winners AND the freshly-discovered ones.
   2. intel/data/viral.json  — optional cross-reference for an account's follower
      count + median views (adds "punching above weight" context to each card).
 
@@ -24,7 +28,7 @@ files above and writes exactly ONE new file (intel/viral-teardown.md). It never 
 viral.json, viral-report.md, or any other engine's data.
 
 Usage:
-  python viral_teardown.py            # parse viral-report.md -> write viral-teardown.md
+  python viral_teardown.py            # parse viral-report.md + niche-report.md -> teardown
   python viral_teardown.py --top 6    # cap the number of posts torn down (default 8)
   python viral_teardown.py --stdout    # also echo the teardown to stdout
   python viral_teardown.py --self-test # run built-in tests, write nothing, exit
@@ -39,6 +43,7 @@ from pathlib import Path
 
 BASE = Path(__file__).resolve().parent
 REPORT = BASE / "viral-report.md"
+NICHE_REPORT = BASE / "niche-report.md"
 STORE = BASE / "data" / "viral.json"
 OUT = BASE / "viral-teardown.md"
 
@@ -204,8 +209,8 @@ def enrich(post, store):
 def render(posts, generated):
     out = [
         "# Viral teardown — Claude-as-analyst 'why it works' board",
-        f"_Generated {generated} from `intel/viral-report.md` (read-only). "
-        "viral-radar found WHAT wins; this is WHY + how to steal it._",
+        f"_Generated {generated} from `intel/viral-report.md` + `intel/niche-report.md` "
+        "(read-only). viral-radar/niche-radar found WHAT wins; this is WHY + how to steal it._",
         "",
         "Each card is a transparent FIRST PASS: the hook/retention/format calls come from "
         "a keyless caption-text rubric and should be **reviewed and sharpened by Claude** "
@@ -312,15 +317,21 @@ def main(argv=None):
     if args.self_test:
         return 0 if _self_test() else 1
 
-    if not REPORT.exists():
-        log(f"FATAL: {REPORT.name} not found — run viral-radar.py first to produce the leaderboard.")
+    sources = [p for p in (REPORT, NICHE_REPORT) if p.exists()]
+    if not sources:
+        log(f"FATAL: neither {REPORT.name} nor {NICHE_REPORT.name} found — "
+            "run viral-radar.py and/or niche-radar.py first to produce a leaderboard.")
         return 2
 
-    text = REPORT.read_text(encoding="utf-8")
+    # Merge both leaderboards; parse_report de-dupes by permalink across the
+    # combined text, so a post that appears in both reports is torn down once.
+    text = "\n".join(p.read_text(encoding="utf-8") for p in sources)
     posts = parse_report(text)
     if not posts:
-        log("No parseable post lines in viral-report.md (was the last pull empty / over the floor?).")
+        log(f"No parseable post lines in {', '.join(p.name for p in sources)} "
+            "(was the last pull empty / over the floor?).")
         return 3
+    log(f"parsed {len(posts)} unique post(s) from: {', '.join(p.name for p in sources)}")
 
     store = {}
     if STORE.exists():
