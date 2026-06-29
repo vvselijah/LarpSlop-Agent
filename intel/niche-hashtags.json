@@ -1,5 +1,5 @@
 {
-  "_readme": "Niche -> Instagram hashtags for niche-radar.py (the DISCOVERY engine). ELIJAH: edit freely. Bare hashtags (no '#', no URL). Seeded 2026-06-29 from YOUR last-month top hashtags (intel: ai/claude/founder/startup/business/cars + your explicit asks) MINUS the reach-spam tags (#fyp/#viral/#reels/#life) which return random global junk and waste credit. niche-radar SCRAPES these (official Graph API hashtag endpoints are App-Review-blocked for this app -> OAuthException #10), gets TRUE view counts, ranks per niche, and suggests winning NEW accounts into watchlist.json. Add/cut tags to taste; broad job-title tags (ceo/software/developer) are noisy on IG -- prune them if their results look off.",
+  "_readme": "Niche -> Instagram hashtags for niche-radar.py (the DISCOVERY engine). ELIJAH: edit freely. Bare hashtags (no '#', no URL). Seeded 2026-06-29 from YOUR last-month top hashtags (intel: ai/claude/founder/startup/business/cars + your explicit asks) MINUS the reach-spam tags (#fyp/#viral/#reels/#life) which return random global junk and waste credit. niche-radar SCRAPES these (official Graph API hashtag endpoints are App-Review-blocked for this app -> OAuthException #10), gets TRUE view counts, ranks per niche, and suggests winning NEW accounts into watchlist.json. Add/cut tags to taste. LEARNED 2026-06-29 from a live run: #saas is poisoned (in Hindi 'saas' = mother-in-law -> dominated by saas-bahu comedy/drama, NOT software), and #ceo/#software/#developer pull broad multilingual noise -- all dropped in favor of higher-signal builder tags (aitools/indiehackers/vibecoding/saasfounder). Watch for similar topic-collisions when adding tags; view counts can't filter wrong-topic content, only tag choice can.",
   "_budget": {
     "provider": "apify",
     "actor": "apify/instagram-hashtag-scraper (official, field-verified; the only actor whose INPUT is a hashtag AND output has view counts)",
@@ -11,7 +11,7 @@
     "bright_data_note": "Bright Data offers ~5k free credits/mo (would make this $0) BUT the hub docs contradict each other (CONTENT-INTEL-PROTOCOL='Winner' vs AGENT-TEAM-BLUEPRINT='Tier C skip'). Unresolved -- Elijah to decide before adopting; higher switching cost (different API/auth) than the actor swap above."
   },
   "ai-founder": {
-    "hashtags": ["ai", "aiagents", "claude", "founder", "startup", "saas", "buildinpublic", "ceo", "software", "developer"],
+    "hashtags": ["ai", "claude", "aiagents", "aitools", "founder", "startup", "buildinpublic", "indiehackers", "vibecoding", "saasfounder"],
     "min_views": 10000
   }
 }
